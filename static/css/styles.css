@@ -135,9 +135,6 @@ button[type="submit"]:hover {
 
 /* Dưới 768px: điện thoại */
 @media (max-width: 768px) {
-  body {
-    padding: 24px 12px;
-  }
 
   .container {
     padding: 28px;
@@ -271,7 +268,7 @@ button[type="submit"]:hover {
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: #1e88e5;
+    background-color: #008c91;
     position: absolute;
     top: 50px;
     left: 0;
@@ -288,6 +285,31 @@ button[type="submit"]:hover {
   }
 }
 
+/*Darkmode responsive*/
+.nav-links li button.darkmode-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  padding: 0px 10px;
+}
+
+@media (min-width: 769px) {
+  .nav-links li button.darkmode-btn {
+    display: none;
+  }
+}
+
+/*Darkmode button desktop*/
+@media (max-width: 768px) {
+  #darkModeButton-desktop {
+    display: none;
+  }
+}
+
 /*Button tối/sáng*/
 .darkmode-btn {
   background: none;
@@ -295,7 +317,7 @@ button[type="submit"]:hover {
   font-size: 24px;
   cursor: pointer;
   color: white;
-  padding: 6px 6px;
+  padding: 6px 10px;
   border-radius: 6px;
   transition: background-color 0.3s ease;
 }

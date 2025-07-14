@@ -55,27 +55,32 @@ imageInput.addEventListener('change', function () {
   }
 });
 
-//Chế độ tối/sáng
-  const darkModeBtn = document.getElementById('darkModeButton');
+// Darkmode
+  const darkModeBtnDesktop = document.getElementById('darkModeButton-desktop');
+  const darkModeBtnMobile = document.getElementById('darkModeButton');
 
   function setDarkMode(enabled) {
     if (enabled) {
       document.body.classList.add('dark-mode');
       localStorage.setItem('theme', 'dark');
-      darkModeBtn.textContent = '🌝'; // đổi thành icon sáng
+      darkModeBtnDesktop.textContent = '🌝';
+      darkModeBtnMobile.textContent = '🌝';
     } else {
       document.body.classList.remove('dark-mode');
       localStorage.setItem('theme', 'light');
-      darkModeBtn.textContent = '🌚'; // đổi lại icon tối
+      darkModeBtnDesktop.textContent = '🌚';
+      darkModeBtnMobile.textContent = '🌚';
     }
   }
 
-  darkModeBtn.addEventListener('click', () => {
+  function toggleDarkMode() {
     const isDark = document.body.classList.contains('dark-mode');
     setDarkMode(!isDark);
-  });
+  }
 
-  // Load trạng thái từ localStorage
+  darkModeBtnDesktop.addEventListener('click', toggleDarkMode);
+  darkModeBtnMobile.addEventListener('click', toggleDarkMode);
+
   window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setDarkMode(savedTheme === 'dark');
