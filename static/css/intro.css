@@ -27,6 +27,7 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   animation: fadeIn 0.5s ease-in-out;
   flex: 1 0 auto; 
+  text-align: justify;
 }
 
 /* Tiêu đề */
@@ -39,67 +40,6 @@ h1 {
   line-height: 1.4;
 }
 
-/* Form */
-form {
-  display: flex;
-  /*flex-direction: column;*/
-  gap: 16px;
-  max-width: 100%;
-  align-items:center;
-}
-
-/* Input file */
-input[type="file"] {
-  border: 2px dashed #b2dfdb;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-}
-
-input[type="file"]:hover {
-  background-color: #e0f2f1;
-}
-
-/* Nút submit */
-button[type="submit"] {
-  width: 200px;
-  height: auto;    
-  margin-left: auto; 
-  margin-right: auto; 
-
-  padding: 12px;
-  font-size: 24px;
-  font-weight: 600;
-  color: white;
-  background: #009688;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-button[type="submit"]:hover {
-  transform: scale(1.03);
-  /*box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);*/
-  background: linear-gradient(to right, #00bcd4, #009688);
-}
-
-/* Kết quả */
-#result {
-  margin-top: 24px;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #e0f2f1;
-  color: #2c2c2c;
-  font-size: 24px;
-  display: none; /* ban đầu ẩn */
-  word-wrap: break-word;
-}
-
 /* Animation */
 @keyframes fadeIn {
   from {
@@ -109,77 +49,6 @@ button[type="submit"]:hover {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/*Hiện ảnh*/
-#preview {
-  text-align: justify;
-}
-
-#previewImage {
-  max-width: 90%;
-  /*width: 600px;*/
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  display: none;
-  object-fit: cover;
-  transition: all 0.3s ease;
-  /*display: block;*/ 
-  margin-top: 24px;    
-  margin-left: auto; 
-  margin-right: auto; 
-}
-
-/* Responsive */
-
-/* Dưới 768px: điện thoại */
-@media (max-width: 768px) {
-
-  .container {
-    padding: 28px;
-  }
-
-  h1 {
-    font-size: 22px;
-  }
-
-  button[type="submit"] {
-    font-size: 18px;
-  }
-
-    #result {
-    font-size: 18px;
-  }
-
-  input[type="file"] {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-
-/* Dưới 480px: điện thoại nhỏ */
-@media (max-width: 480px) {
-  .container {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 20px;
-  }
-
-    button[type="submit"] {
-    font-size: 15px;
-  }
-
-  #result {
-    font-size: 15px;
-  }
-
-    input[type="file"] {
-    font-size: 12px;
-    padding: 10px;
   }
 }
 
@@ -264,7 +133,7 @@ button[type="submit"]:hover {
   transform: translateY(8px);
 }
 
-/* Responsive */
+/* Navbar responsive */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -286,7 +155,7 @@ button[type="submit"]:hover {
   }
 }
 
-/*Darkmode responsive*/
+/*Darkmode button responsive*/
 .nav-links li button.darkmode-btn {
   background: none;
   border: none;
@@ -327,19 +196,17 @@ button[type="submit"]:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Chế độ tối */
 .darkmode-toggle {
   cursor: pointer;
   font-size: 20px;
 }
 
-/* Toàn bộ nền và màu chữ */
+/* Chế độ tối */
 body.dark-mode {
   background: #444; 
   color: #e0e0e0;      
 }
 
-/* Vùng container nội dung chính */
 body.dark-mode .container {
   background-color: #2c2c2c;
 }
@@ -348,7 +215,6 @@ body.dark-mode h1 {
   color: #80dbe3; 
 }
 
-/* Input upload file */
 body.dark-mode input[type="file"] {
   background-color: #555;
   color: #ffffff;
@@ -428,7 +294,7 @@ body.dark-mode .footer-links li a:hover {
   color: #009688;
 }
 
-/* Responsive */
+/* Footer Responsive */
 @media (min-width: 600px) {
   .footer p {
     flex: 1;
@@ -466,4 +332,75 @@ body.dark-mode .footer-links li a:hover {
 /*Trang đã chọn*/
 #disable {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*Intro*/
+.intro-section {
+  margin-bottom: 32px;
+  width: 90%;
+  align-content: center;
+  margin-left:auto;
+  margin-right:auto ;
+}
+
+.intro-section h2 {
+  color: #009688;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.intro-section p,
+.intro-section ul {
+  line-height: 1.6;
+  font-size: 20px;
+}
+
+.intro-section ul {
+  padding-left: 20px;
+}
+
+/*Intro darkmode*/
+body.dark-mode .intro-section h2 {
+  color: #00bcd4;
+}
+
+/* Responsive */
+
+/* Dưới 768px: điện thoại */
+@media (max-width: 768px) {
+
+  .container {
+    padding: 28px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .intro-section p, .intro-section ul {
+    font-size: 18px;
+  }
+
+  .intro-section h2 {
+    font-size: 20px
+  }
+}
+
+/* Dưới 480px: điện thoại nhỏ */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .intro-section p, .intro-section ul {
+    font-size: 16px;
+  }
+
+  .intro-section h2 {
+    font-size:18px;
+  }
 }

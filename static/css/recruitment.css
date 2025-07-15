@@ -327,19 +327,17 @@ button[type="submit"]:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Chế độ tối */
 .darkmode-toggle {
   cursor: pointer;
   font-size: 20px;
 }
 
-/* Toàn bộ nền và màu chữ */
+/*Chế độ tối*/
 body.dark-mode {
   background: #444; 
   color: #e0e0e0;      
 }
 
-/* Vùng container nội dung chính */
 body.dark-mode .container {
   background-color: #2c2c2c;
 }
