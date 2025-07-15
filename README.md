@@ -1,9 +1,8 @@
 # SmartBuild AI – Demo
 
-Demo hệ thống tư vấn vật liệu chống thấm & cửa bằng AI, bao gồm:
+Demo hệ thống tư vấn vật liệu chống thấm bằng AI, bao gồm:
 * **Flask backend** (Python)
 * **Computer Vision mẫu** (YOLOv8 giả lập)
-* **Cookie first‑party** để cá nhân hoá
 * **Triển khai Docker + Nginx**
 
 ## Cài đặt nhanh
