@@ -75,5 +75,18 @@ def api_analyze():
 def send_static(path):
     return send_from_directory(app.static_folder, path)
 
+# Page khác
+@app.route("/intro")
+def intro():
+    return render_template("intro.html") 
+
+@app.route("/recruitment")
+def recruitment():
+    return render_template("recruitment.html") 
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html") 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

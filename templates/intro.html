@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmartBuild AI Demo</title>
-  <link rel="stylesheet" href="/static/css/styles.css" />
+  <title>SmartBuild AI Demo - Giới thiệu</title>
+  <link rel="stylesheet" href="/static/css/intro.css" />
 </head>
 <body>
    <!-- Thanh điều hướng -->
@@ -18,8 +18,8 @@
     </label>
 
     <ul class="nav-links">
-      <li><a href="/" id="disable">TRANG CHỦ</a></li>
-      <li><a href="/intro">GIỚI THIỆU</a></li>
+      <li><a href="/">TRANG CHỦ</a></li>
+      <li><a href="/intro" id="disable">GIỚI THIỆU</a></li>
       <li><a href="/recruitment">TUYỂN DỤNG</a></li>
       <li><a href="/contact">LIÊN HỆ</a></li>
       <li><button id="darkModeButton" class="darkmode-btn">🌚</button></li>
@@ -31,17 +31,14 @@
   </nav>
 
   <div class="container">
-    <h1>SmartBuild AI: Tư vấn vật liệu chống thấm</h1>
+    <h1>Giới thiệu về SmartBuild AI</h1>
 
     <form id="uploadForm">
       <input type="file" name="image" id="image" accept="image/*" required />
       <button type="submit">Phân tích</button>
     </form>
 
-    <!-- Hiển thị ảnh -->
-    <div id="preview">
-      <img id="previewImage" src="" alt="Xem trước ảnh"/>
-    </div>
+
 
     <div id="result"></div>
   </div>
