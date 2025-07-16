@@ -30,21 +30,97 @@
   </div>
   </nav>
 
-  <div class="container">
-    <h1>SmartBuild AI: Tư vấn vật liệu chống thấm</h1>
+    <!--Banner-->
+<section class="banner">
+  <div class="banner-overlay">
+    <div class="banner-flex">
+      <div class="banner-text">
+        <h1>Welcome to SmartBuild AI</h1>
+        <p>Thực tập cùng SmartBuild AI – cơ hội trải nghiệm dự án thực tế, học hỏi từ đội ngũ chuyên gia và đóng góp vào giải pháp AI thông minh!</p>
+      </div>
+      <div class="banner-action">
+        <button onclick="document.getElementById('job-list').scrollIntoView({ behavior: 'smooth' })" class="banner-button">Let's go</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <form id="uploadForm">
-      <input type="file" name="image" id="image" accept="image/*" required />
-      <button type="submit">Phân tích</button>
-    </form>
+<div class="container">
+  <h1>Cơ hội nghề nghiệp tại SmartBuild AI</h1>
 
-    <!-- Hiển thị ảnh -->
-    <div id="preview">
-      <img id="previewImage" src="" alt="Xem trước ảnh"/>
+<!--Flash-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flash-msg">
+      {% for msg in messages %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+  <section class="recruitment-section" id="job-list">
+  <p>Hiện tại, SmartBuild AI đang mở tuyển một số vị trí thực tập sinh như AI, DevOps, WebDev và Cybersecurity. Đây là cơ hội để bạn tham gia vào một dự án công nghệ thực tế, học hỏi cùng đội ngũ chuyên gia và đóng góp vào các sản phẩm AI ứng dụng trong lĩnh vực xây dựng. Chúng tôi luôn chào đón những bạn trẻ nhiệt huyết, có tinh thần học hỏi và yêu thích công nghệ.</p>
+    <p>Thời gian thực tập tối thiểu 3 tháng, với lịch làm việc cố định từ 9h00 đến 15h00, thứ Hai đến thứ Sáu hàng tuần. Mỗi thực tập sinh sẽ được phân công mentor hướng dẫn cụ thể, có quyền truy cập vào các tài nguyên chuyên môn nội bộ và được tham gia trực tiếp vào quá trình xây dựng, triển khai sản phẩm thực tế của công ty.
+  </p>
+  <p>Chính sách trợ cấp thực tập có thể được xem xét và áp dụng tùy theo năng lực và mức độ đóng góp. Chúng tôi đánh giá cao sự chuyên nghiệp, tinh thần trách nhiệm và khả năng làm việc nhóm của các bạn, và xem đó là yếu tố quan trọng để đồng hành cùng SmartBuild AI trong chặng đường phát triển công nghệ phục vụ ngành xây dựng.</p>
+</p>
+</section>
+
+  <div class="job-listings">
+    <div class="job">
+      <h2>Thực tập sinh DevOps</h2>
+      <p>Yêu cầu: Có kiến thức cơ bản về Linux, Git, Docker hoặc CI/CD. Hiểu sơ lược về quản lý server hoặc cloud (AWS/GCP là lợi thế). Có tư duy hệ thống, chủ động học hỏi và tinh thần hỗ trợ nhóm.</p>
+      <form method="POST" class="apply-form" enctype="multipart/form-data">
+        <input type="file" name="cv-devops" accept="application/pdf" required>
+        <button type="submit">Nộp CV</button>
+      </form>
     </div>
 
-    <div id="result"></div>
+    <div class="job">
+      <h2>Thực tập sinh AI/ML</h2>
+      <p>Yêu cầu: Nắm vững Python và các thư viện như NumPy, pandas, scikit-learn. Có kiến thức về học máy, xử lý ảnh là điểm cộng. Từng làm đồ án liên quan đến AI hoặc có tinh thần tự nghiên cứu.</p>
+      <form method="POST" class="apply-form" enctype="multipart/form-data">
+        <input type="file" name="cv-ai" accept="application/pdf" required>
+        <button type="submit">Nộp CV</button>
+      </form>
+    </div>
+
+    <div class="job">
+      <h2>Thực tập sinh Web Frontend</h2>
+      <p>Yêu cầu: Thành thạo HTML, CSS, JavaScript; biết sử dụng thư viện như Bootstrap hoặc Tailwind là lợi thế. Biết làm responsive và có tư duy thiết kế giao diện rõ ràng, hiện đại. Ưu tiên có kinh nghiệm làm việc với Git, Figma, hoặc dự án web cá nhân.</p>
+      <form method="POST" class="apply-form" enctype="multipart/form-data">
+        <input type="file" name="cv-frontend" accept="application/pdf" required>
+        <button type="submit">Nộp CV</button>
+      </form>
+    </div>
+
+    <div class="job">
+      <h2>Thực tập sinh Web Backend</h2>
+      <p>Yêu cầu: Thành thạo Python và có kinh nghiệm với framework Flask. Hiểu về API (REST), routing và kết nối cơ sở dữ liệu (SQLAlchemy hoặc SQLite). Có tư duy xử lý logic backend rõ ràng. Ưu tiên nếu từng làm đồ án hoặc project backend sử dụng Flask.</p>
+      <form method="POST" class="apply-form" enctype="multipart/form-data">
+        <input type="file" name="cv-backend" accept="application/pdf" required>
+        <button type="submit">Nộp CV</button>
+      </form>
+    </div>
+
+    <div class="job">
+      <h2>Thực tập sinh An ninh mạng</h2>
+      <p>Yêu cầu: Có kiến thức nền tảng về mạng máy tính và bảo mật cơ bản. Quan tâm đến kiểm thử xâm nhập, mã độc hoặc phân tích lỗ hổng. Ưu tiên sinh viên chuyên ngành An toàn thông tin.</p>
+      <form method="POST" class="apply-form" enctype="multipart/form-data">
+        <input type="file" name="cv-security" accept="application/pdf" required>
+        <button type="submit">Nộp CV</button>
+      </form>
+    </div>
   </div>
+
+  <section class="recruitment-section"></section>
+  <section class="recruitment-section">
+<p>Chúng tôi luôn trân trọng những hồ sơ chất lượng từ các bạn trẻ đang tìm kiếm cơ hội phát triển bản thân trong môi trường công nghệ thực tế. Nếu bạn quan tâm đến một trong các vị trí đang tuyển dụng và mong muốn trở thành một phần của đội ngũ SmartBuild AI, hãy gửi CV của bạn cho chúng tôi ngay hôm nay. Rất mong được đón nhận những hồ sơ tiềm năng và đồng hành cùng bạn trên hành trình xây dựng các giải pháp công nghệ ứng dụng trong ngành xây dựng.</p>
+</section>
+
+</div>
+
 
     <footer class="footer">
     <div class="footer-container">
@@ -59,7 +135,38 @@
     </div>
   </footer>
   
-  <script src="/static/js/script.js"></script>
+  <script>
+  // Darkmode
+  const darkModeBtnDesktop = document.getElementById('darkModeButton-desktop');
+  const darkModeBtnMobile = document.getElementById('darkModeButton');
+
+  function setDarkMode(enabled) {
+    if (enabled) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      darkModeBtnDesktop.textContent = '🌝';
+      darkModeBtnMobile.textContent = '🌝';
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      darkModeBtnDesktop.textContent = '🌚';
+      darkModeBtnMobile.textContent = '🌚';
+    }
+  }
+
+  function toggleDarkMode() {
+    const isDark = document.body.classList.contains('dark-mode');
+    setDarkMode(!isDark);
+  }
+
+  darkModeBtnDesktop.addEventListener('click', toggleDarkMode);
+  darkModeBtnMobile.addEventListener('click', toggleDarkMode);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setDarkMode(savedTheme === 'dark');
+  });
+  </script>
 
 </body>
 </html>

@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SmartBuild AI Demo - Giới thiệu</title>
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <link rel="stylesheet" href="/static/css/intro.css" />
 </head>
 <body>
@@ -30,42 +34,135 @@
   </div>
   </nav>
 
+<!--Banner-->
+<section class="banner">
+  <div class="banner-overlay">
+    <div class="banner-flex">
+      <div class="banner-text">
+        <h1>Welcome to SmartBuild AI</h1>
+        <p>Bạn đang tìm kiếm vật liệu xây dựng phù hợp cho công trình của mình? Liên hệ ngay với chúng tôi để được tư vấn và hỗ trợ chi tiết.</p>
+      </div>
+      <div class="banner-action">
+        <a href="/contact" class="banner-button">Contact</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <div class="container">
   <h1>Giới thiệu về SmartBuild AI</h1>
 
   <section class="intro-section">
     <h2>Về chúng tôi</h2>
     <p>
-      <strong>SmartBuild AI</strong> là một công ty công nghệ tiên phong trong việc ứng dụng trí tuệ nhân tạo (AI) vào lĩnh vực xây dựng, thiết kế và chăm sóc sắc đẹp. Với sứ mệnh số hóa ngành công nghiệp truyền thống, chúng tôi hướng đến việc tối ưu hoá trải nghiệm người dùng thông qua các sản phẩm thông minh và tự động hoá cao.
+      <strong>Công ty THHH Thương mại và Xây dựng Việt Tinh</strong> được thành lập từ năm 2003, là đại lý nhập khẩu, tiêu thụ, phân phối và cung cấp nguyên liệu hóa chất từ các nhà cung ứng trong và ngoài nước. Đồng thời cung cấp kỹ thuật và phục vụ thi công những công trình hóa chất. Từ khi thành lập đến nay, chúng tôi đã thiết lập được mối quan hệ vững chắc với các nhà cung ứng lớn cũng như khách hàng trong và ngoài nước. Hiện nay, công ty chúng tôi đã trở thành cầu nối quan trọng trong lĩnh vực nguyên liệu hóa chất tại Việt Nam và cũng là một trong những nhà thầu các công trình hóa chất tại Việt Nam.
+    </p>
+    <img src="/static/img/intro2.jpg" alt="Công ty TNHH TM & XD Việt Tinh" class="intro-image">
+    <p>Công ty chúng tôi với khả năng tài chính vững chắc, đội ngũ thi công chuyên nghiệp luôn cung cấp cho khách hàng những công trình chất lượng, đạt yêu cầu. Cùng với các chuyên viên phục vụ chuyên tâm, nhiệt tình và kinh nghiệm phong phú, hình thức mua bán linh hoạt, giao hàng nhanh chóng, hỗ trợ tư vấn những thắc mắc của quý khách hàng mọi lúc mọi nơi, chiếm được sự tin tưởng và ủng hộ của các nhà cung ứng cũng như khách hàng trong và ngoài nước, nhờ vậy đội ngũ nghiệp vụ công ty chúng tôi được thuận lợi trong việc phát triển, trưởng thành theo thời gian.
+    </p>
+    <img src="/static/img/intro1.jpg" alt="Công ty TNHH TM & XD Việt Tinh" class="intro-image">
+    <p>Ngoài việc kinh doanh nguyên liệu hóa chất và thi công công trình ra, công ty chúng tôi vì nhu cầu của khách hàng chúng tôi đã thiết lập nhà xưởng, nhà kho để tồn hàng,theo nhu cầu của khách hàng mà phục vụ. Hiện nay, việc cung ứng nguyên liệu hóa chất đã trở thành một trong những nghiệp vụ quan trọng của công ty chúng tôi.
+    </p>
+    <div class="image-row">
+    <img src="/static/img/intro3.png" alt="Công ty TNHH TM & XD Việt Tinh" class="image-box">
+    <img src="/static/img/intro6.jpg" alt="Công ty TNHH TM & XD Việt Tinh" class="image-box">
+    </div>
+    <p>Chúng tôi tiên phong trong việc ứng dụng trí tuệ nhân tạo (AI) vào lĩnh vực xây dựng, mở ra hướng đi mới cho ngành công nghiệp vốn mang tính truyền thống. Với sứ mệnh số hóa và hiện đại hóa quy trình, chúng tôi không ngừng nỗ lực mang đến những giải pháp thông minh, tự động hóa cao nhằm tối ưu hóa trải nghiệm người dùng và nâng cao hiệu quả trong từng giai đoạn của dự án xây dựng.
     </p>
   </section>
 
   <section class="intro-section">
     <h2>Dự án SmartBuild AI</h2>
     <p>
-      Dự án <strong>SmartBuild AI</strong> tập trung phát triển nền tảng tích hợp AI nhằm nhận diện da, phát hiện bất thường và tư vấn sản phẩm chăm sóc phù hợp. Hệ thống sử dụng công nghệ xử lý ảnh kết hợp học máy để phân tích tình trạng da một cách chính xác, nhanh chóng và thuận tiện cho người dùng.
+      Dự án <strong>SmartBuild AI</strong> tập trung phát triển nền tảng ứng dụng web tích hợp AI nhằm nhận diện các vấn đề trong công trình xây dựng, phát hiện các bất thường và đề xuất giải pháp khắc phục hiệu quả. Dựa trên công nghệ xử lý ảnh kết hợp với học máy, hệ thống có khả năng phân tích tình trạng công trình một cách chính xác, nhanh chóng và tiện lợi, giúp người dùng phát hiện kịp thời các hư hỏng như vết nứt, bong tróc hay dấu hiệu xuống cấp.
     </p>
     <p>
-      Ngoài ra, SmartBuild AI còn cung cấp các giải pháp gợi ý sản phẩm, kết hợp với công cụ bán hàng trực tuyến, mang đến trải nghiệm toàn diện từ tư vấn đến mua sắm – hoàn toàn dựa trên dữ liệu và công nghệ AI.
+      Bên cạnh chức năng nhận diện, SmartBuild AI còn cung cấp các gợi ý về vật liệu xây dựng phù hợp, tích hợp công cụ chatbot AI tư vấn tự động 24/7 và hỗ trợ qua hotline bán hàng, mang lại trải nghiệm toàn diện. Dự án sử dụng backend Flask (Python) để xử lý logic nghiệp vụ và cung cấp API cho giao diện người dùng, tích hợp mô hình thị giác máy tính YOLOv8 giả lập để nhận diện hình ảnh công trình, đồng thời được triển khai bằng Docker kết hợp với Nginx nhằm đảm bảo hiệu suất, tính bảo mật và khả năng mở rộng hệ thống.
     </p>
   </section>
 
   <section class="intro-section">
-    <h2>Tầm nhìn & Sứ mệnh</h2>
-    <ul>
-      <li>🌐 Tầm nhìn: Trở thành đơn vị tiên phong trong việc tích hợp AI vào ngành chăm sóc cá nhân và xây dựng thông minh.</li>
-      <li>🎯 Sứ mệnh: Ứng dụng AI để nâng cao chất lượng cuộc sống thông qua công nghệ, sự chính xác và cá nhân hóa.</li>
-    </ul>
+    <h2>Các thành viên của dự án</h2>
+    <section class="team-section">
+  <div class="swiper team-swiper">
+    <div class="swiper-wrapper">
+
+      <!-- Thành viên 1 -->
+      <div class="swiper-slide member-card">
+        <img src="/static/img/team1.webp" alt="Thành viên 1" />
+        <div class="member-info">
+        <h3>Đặng Chí Thành</h3>
+        <h4>DevOps Intern</h4>
+        <p>Dang Chi Thanh assists with deployment automation. His work helps improve the efficiency of development operations.</p>
+        </div>
+      </div>
+
+      <!-- Thành viên 2 -->
+      <div class="swiper-slide member-card">
+        <img src="/static/img/team5.jpg" alt="Thành viên 2" />
+        <div class="member-info">
+        <h3>Kao Thơ Nhã</h3>
+        <h4>AI Intern</h4>
+        <p>Kao Tho Nha contributes to training machine learning models and building smart features. Her passion supports the development of AI-based solutions.</p>
+        </div>
+      </div>
+
+      <!-- Thành viên 3 -->
+      <div class="swiper-slide member-card">
+        <img src="/static/img/team4.jpg" alt="Thành viên 3" />
+        <div class="member-info">
+        <h3>Nguyễn Phúc Nhi</h3>
+        <h4>Cybersecurity Intern</h4>
+        <p>Nguyen Phuc Nhi helps detect security risks and ensure data protection. Her attention to detail strengthens the platform's safety.</p>
+        </div>
+      </div>
+
+      <!-- Thành viên 4 -->
+      <div class="swiper-slide member-card">
+        <img src="/static/img/team2.jpg" alt="Thành viên 3" />
+        <div class="member-info">
+        <h3>Lê Quỳnh Như</h3>
+        <h4>AI Intern</h4>
+        <p>Le Quynh Nhu supports the development of AI models and data preparation workflows. Her dedication contribute to the improvement of intelligent features.</p>
+        </div>
+      </div>
+
+      <!-- Thành viên 5 -->
+      <div class="swiper-slide member-card">
+        <img src="/static/img/team3.jpg" alt="Thành viên 3" />
+        <div class="member-info">
+        <h3>Nguyễn Thành Nhân</h3>
+        <h4>DevOps Intern</h4>
+        <p>Nguyen Thanh Nhan assists in managing internal infrastructure. His reliability and system-oriented mindset help maintain platform stability.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Nút điều hướng -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- Thanh pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
   </section>
 
   <section class="intro-section">
-    <h2>Giá trị cốt lõi</h2>
-    <ul>
-      <li>🤖 Đổi mới công nghệ</li>
-      <li>👥 Lấy người dùng làm trung tâm</li>
-      <li>📊 Dữ liệu dẫn đường</li>
-      <li>🌱 Phát triển bền vững</li>
-    </ul>
+    <h2>Open-source</h2>
+    <p>SmartBuild AI tự hào chia sẻ dự án mã nguồn mở trên GitHub nhằm đóng góp cho cộng đồng lập trình và nghiên cứu. Chúng tôi hoan nghênh mọi sự hợp tác và khuyến khích các nhà phát triển khám phá, sử dụng và đóng góp vào dự án.
+    </p>
+    <img src="/static/img/social_link.png" alt="Link GitHub" class="intro-image" />
+<ul class="social-links">
+  <li>
+    <img src="/static/img/github_darkmode.webp" alt="GitHub Icon">
+    <img src="/static/img/github.png" alt="GitHub Icon">
+    <a href="https://github.com/Phucnhii/SMARTBUILD-python" target="_blank">Truy cập GitHub của chúng tôi 😊</a>
+  </li>
+</ul>
   </section>
 </div>
 
@@ -84,7 +181,7 @@
   </footer>
   
   <script>
-    // Darkmode
+  // Darkmode
   const darkModeBtnDesktop = document.getElementById('darkModeButton-desktop');
   const darkModeBtnMobile = document.getElementById('darkModeButton');
 
@@ -115,6 +212,26 @@
     setDarkMode(savedTheme === 'dark');
   });
   </script>
+
+  <!--Swiper thành viên-->
+  <script>
+const swiper = new Swiper(".team-swiper", {
+  slidesPerView: 1, // mỗi slide chiếm 100%
+  spaceBetween: 20,
+  loop: true,
+
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+});
+</script>
+
 
 </body>
 </html>
