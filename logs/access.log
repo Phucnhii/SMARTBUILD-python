@@ -1,8 +1,0 @@
-2025-07-16 13:09:11,657 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:5000
- * Running on http://192.168.20.106:5000
-2025-07-16 13:09:11,657 - [33mPress CTRL+C to quit[0m
-2025-07-16 13:09:11,659 -  * Restarting with stat
-2025-07-16 13:09:12,944 -  * Debugger is active!
-2025-07-16 13:09:12,948 -  * Debugger PIN: 331-156-670
