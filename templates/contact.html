@@ -30,21 +30,264 @@
   </div>
   </nav>
 
-  <div class="container">
-    <h1>SmartBuild AI: Tư vấn vật liệu chống thấm</h1>
-
-    <form id="uploadForm">
-      <input type="file" name="image" id="image" accept="image/*" required />
-      <button type="submit">Phân tích</button>
-    </form>
-
-    <!-- Hiển thị ảnh -->
-    <div id="preview">
-      <img id="previewImage" src="" alt="Xem trước ảnh"/>
+  <!--Banner-->
+<section class="banner">
+  <div class="banner-overlay">
+    <div class="banner-flex">
+      <div class="banner-text">
+        <h1>Welcome to SmartBuild AI</h1>
+        <p>Liên hệ ngay để nhận tư vấn giải pháp và sản phẩm phù hợp nhất với tình trạng công trình của bạn từ đội ngũ chuyên gia!</p>
+      </div>
+      <div class="banner-action">
+        <button onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })" class="banner-button">Let's go</button>
+      </div>
     </div>
-
-    <div id="result"></div>
   </div>
+</section>
+
+<div class="container">
+  <h1>Liên hệ với chúng tôi</h1>
+  
+  <form id="contact-form" class="contact-form" method="post" enctype="multipart/form-data">
+    <div class="form-column">
+      
+      <div class="form-group">
+        <label for="last-name">Họ <span class="required">*</span></label>
+        <input type="text" id="last-name" name="last-name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="first-name">Tên</label>
+        <input type="text" id="first-name" name="first-name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email <span class="required">*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Số điện thoại</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+    </div>
+    
+    <div class="form-column">
+      <div class="form-group">
+        <label for="country">Quốc gia <span class="required">*</span></label>
+        <select id="country" name="country" required>
+          <option value="">Chọn quốc gia</option>
+          <option value="AF">Afghanistan</option>
+          <option value="AL">Albani</option>
+          <option value="DZ">Algeria</option>
+          <option value="DE">Đức</option>
+          <option value="AR">Argentina</option>
+          <option value="AU">Úc</option>
+          <option value="BD">Bangladesh</option>
+          <option value="BE">Bỉ</option>
+          <option value="BR">Brazil</option>
+          <option value="CA">Canada</option>
+          <option value="CL">Chile</option>
+          <option value="CN">Trung Quốc</option>
+          <option value="CO">Colombia</option>
+          <option value="CU">Cuba</option>
+          <option value="DK">Đan Mạch</option>
+          <option value="EG">Ai Cập</option>
+          <option value="FR">Pháp</option>
+          <option value="GR">Hy Lạp</option>
+          <option value="HK">Hồng Kông</option>
+          <option value="IN">Ấn Độ</option>
+          <option value="ID">Indonesia</option>
+          <option value="IR">Iran</option>
+          <option value="IQ">Iraq</option>
+          <option value="IE">Ireland</option>
+          <option value="IL">Israel</option>
+          <option value="IT">Ý</option>
+          <option value="JP">Nhật Bản</option>
+          <option value="KZ">Kazakhstan</option>
+          <option value="KR">Hàn Quốc</option>
+          <option value="LA">Lào</option>
+          <option value="MY">Malaysia</option>
+          <option value="MX">Mexico</option>
+          <option value="MM">Myanmar</option>
+          <option value="NL">Hà Lan</option>
+          <option value="NZ">New Zealand</option>
+          <option value="NO">Na Uy</option>
+          <option value="PH">Philippines</option>
+          <option value="PL">Ba Lan</option>
+          <option value="PT">Bồ Đào Nha</option>
+          <option value="RU">Nga</option>
+          <option value="SA">Ả Rập Saudi</option>
+          <option value="SG">Singapore</option>
+          <option value="ZA">Nam Phi</option>
+          <option value="ES">Tây Ban Nha</option>
+          <option value="SE">Thụy Điển</option>
+          <option value="CH">Thụy Sĩ</option>
+          <option value="TH">Thái Lan</option>
+          <option value="TW">Đài Loan</option>
+          <option value="TR">Thổ Nhĩ Kỳ</option>
+          <option value="UA">Ukraina</option>
+          <option value="AE">UAE</option>
+          <option value="GB">Anh</option>
+          <option value="US">Mỹ</option>
+          <option value="VN">Việt Nam</option>
+          <option value="other">Quốc gia khác</option>
+
+        </select>
+      </div>
+      
+<div class="form-group">
+  <label for="problem">Vấn đề gặp phải <span class="required">*</span></label>
+  <select id="problem" name="problem" required>
+    <option value="">Chọn vấn đề</option>
+    
+    <!-- Nhóm vấn đề về thấm nước -->
+    <optgroup label="Vấn đề thấm nước">
+      <option value="wall_leak">Thấm tường</option>
+      <option value="roof_leak">Thấm mái</option>
+      <option value="basement_leak">Thấm tầng hầm</option>
+      <option value="bathroom_leak">Thấm nhà vệ sinh</option>
+      <option value="balcony_leak">Thấm ban công</option>
+    </optgroup>
+    
+    <!-- Nhóm vấn đề về nứt -->
+    <optgroup label="Vấn đề nứt">
+      <option value="concrete_crack">Nứt bê tông</option>
+      <option value="wall_crack">Nứt tường</option>
+      <option value="floor_crack">Nứt sàn</option>
+      <option value="foundation_crack">Nứt móng</option>
+    </optgroup>
+    
+    <!-- Nhóm vấn đề ăn mòn -->
+    <optgroup label="Vấn đề ăn mòn">
+      <option value="steel_corrosion">Ăn mòn thép</option>
+      <option value="rebar_corrosion">Ăn mòn cốt thép</option>
+      <option value="metal_corrosion">Ăn mòn kim loại</option>
+    </optgroup>
+    
+    <!-- Nhóm vấn đề khác -->
+    <optgroup label="Vấn đề khác">
+      <option value="peeling_paint">Bong tróc sơn</option>
+      <option value="efflorescence">Hiện tượng rêu mốc</option>
+      <option value="thermal_leak">Thất thoát nhiệt</option>
+      <option value="sound_leak">Cách âm kém</option>
+    </optgroup>
+    
+    <!-- Nhóm vật liệu quan tâm -->
+    <optgroup label="Vật liệu quan tâm">
+      <option value="waterproof_paint">Sơn chống thấm</option>
+      <option value="anti_rust_paint">Sơn chống rỉ</option>
+      <option value="sealant">Keo chống thấm</option>
+      <option value="waterproof_membrane">Màng chống thấm</option>
+      <option value="crack_filler">Vật liệu trám nứt</option>
+      <option value="concrete_repair">Vật liệu sửa chữa bê tông</option>
+      <option value="thermal_insulation">Vật liệu cách nhiệt</option>
+      <option value="sound_insulation">Vật liệu cách âm</option>
+    </optgroup>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="construction_type">Loại công trình <span class="required">*</span></label>
+  <select id="construction_type" name="construction_type" required>
+    <option value="">Chọn loại công trình</option>
+    
+    <!-- Công trình dân dụng -->
+    <optgroup label="Công trình dân dụng">
+      <option value="apartment">Chung cư/Căn hộ</option>
+      <option value="house">Nhà phố/Biệt thự</option>
+      <option value="villa">Biệt thự</option>
+      <option value="office">Văn phòng</option>
+      <option value="hotel">Khách sạn/Nhà hàng</option>
+      <option value="school">Trường học</option>
+      <option value="hospital">Bệnh viện</option>
+    </optgroup>
+    
+    <!-- Công trình công nghiệp -->
+    <optgroup label="Công trình công nghiệp">
+      <option value="factory">Nhà máy/Xưởng sản xuất</option>
+      <option value="warehouse">Kho bãi</option>
+      <option value="industrial_park">Khu công nghiệp</option>
+    </optgroup>
+    
+    <!-- Công trình hạ tầng -->
+    <optgroup label="Công trình hạ tầng">
+      <option value="bridge">Cầu</option>
+      <option value="tunnel">Hầm</option>
+      <option value="road">Đường bộ</option>
+      <option value="parking">Bãi đỗ xe</option>
+      <option value="underground">Công trình ngầm</option>
+    </optgroup>
+    
+    <!-- Công trình đặc biệt -->
+    <optgroup label="Công trình đặc biệt">
+      <option value="historical">Di tích lịch sử</option>
+      <option value="religious">Công trình tôn giáo</option>
+      <option value="swimming_pool">Hồ bơi</option>
+      <option value="stadium">Sân vận động</option>
+    </optgroup>
+  </select>
+
+  <!-- Phần yêu cầu cụ thể -->
+  <div class="form-group">
+    <label for="request_type">Bạn cần hỗ trợ gì? <span class="required">*</span></label>
+    <select id="request_type" name="request_type" required>
+      <option value="">Chọn loại hỗ trợ</option>
+      <option value="consultation">Tư vấn giải pháp</option>
+      <option value="product">Yêu cầu báo giá vật liệu</option>
+      <option value="both">Tư vấn và báo giá vật liệu</option>
+      <option value="other">Yêu cầu khác</option>
+    </select>
+  </div>
+
+</div>
+    </div>
+    
+<div class="form-column">
+  <!-- Phần upload hình ảnh công trình -->
+  <div class="form-group">
+    <label for="construction_images">Hình ảnh công trình/vấn đề <span class="required">*</span></label>
+    <div class="upload-instruction">
+      <p>Vui lòng upload hình ảnh rõ nét về công trình hoặc vấn đề gặp phải (tối đa 5 ảnh):</p>
+      <input type="file" id="construction_images" name="construction_images" accept="image/*" multiple required>
+      <div class="image-preview" id="imagePreview"></div>
+    </div>
+  </div>
+  
+  <!-- Phần mô tả chi tiết -->
+  <div class="form-group full-width">
+    <label for="problem_description">Mô tả chi tiết vấn đề <span class="required">*</span></label>
+    <textarea 
+      id="problem_description" 
+      name="problem_description" 
+      rows="5" 
+      required
+      placeholder="Vui lòng mô tả chi tiết cụ thể vị trí gặp vấn đề, thời gian phát hiện, diễn biến của vấn đề và các giải pháp đã thử (nếu có)."></textarea>
+  </div>
+  
+</div>
+
+<div class="form-footer hide-on-mobile"></div>
+<button type="submit" class="submit-btn">Gửi yêu cầu</button>
+  </form>
+
+  <div class="form-footer">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flash-msg">
+      {% for msg in messages %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</div>
+  
+  <div class="form-footer">
+    <p>Biểu mẫu được bảo vệ, đồng thời <a href="#">Chính sách quyền riêng tư</a> và <a href="#">Điều khoản</a> được áp dụng.</p>
+  </div>
+</div>
+
 
     <footer class="footer">
     <div class="footer-container">
@@ -58,8 +301,39 @@
       </ul>
     </div>
   </footer>
-  
-  <script src="/static/js/script.js"></script>
+
+  <script>
+  // Darkmode
+  const darkModeBtnDesktop = document.getElementById('darkModeButton-desktop');
+  const darkModeBtnMobile = document.getElementById('darkModeButton');
+
+  function setDarkMode(enabled) {
+    if (enabled) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      darkModeBtnDesktop.textContent = '🌝';
+      darkModeBtnMobile.textContent = '🌝';
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      darkModeBtnDesktop.textContent = '🌚';
+      darkModeBtnMobile.textContent = '🌚';
+    }
+  }
+
+  function toggleDarkMode() {
+    const isDark = document.body.classList.contains('dark-mode');
+    setDarkMode(!isDark);
+  }
+
+  darkModeBtnDesktop.addEventListener('click', toggleDarkMode);
+  darkModeBtnMobile.addEventListener('click', toggleDarkMode);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setDarkMode(savedTheme === 'dark');
+  });
+  </script>
 
 </body>
 </html>
