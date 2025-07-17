@@ -39,7 +39,7 @@
         <p>Liên hệ ngay để nhận tư vấn giải pháp và sản phẩm phù hợp nhất với tình trạng công trình của bạn từ đội ngũ chuyên gia!</p>
       </div>
       <div class="banner-action">
-        <button onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })" class="banner-button">Let's go</button>
+        <button id="scrollButton" class="banner-button">Let's go</button>
       </div>
     </div>
   </div>
@@ -283,6 +283,7 @@
 {% endwith %}
 </div>
   
+<!--Suy nghĩ tới việc dùng capcha (HCapcha)-->
   <div class="form-footer">
     <p>Biểu mẫu được bảo vệ, đồng thời <a href="#">Chính sách quyền riêng tư</a> và <a href="#">Điều khoản</a> được áp dụng.</p>
   </div>
@@ -302,38 +303,7 @@
     </div>
   </footer>
 
-  <script>
-  // Darkmode
-  const darkModeBtnDesktop = document.getElementById('darkModeButton-desktop');
-  const darkModeBtnMobile = document.getElementById('darkModeButton');
-
-  function setDarkMode(enabled) {
-    if (enabled) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('theme', 'dark');
-      darkModeBtnDesktop.textContent = '🌝';
-      darkModeBtnMobile.textContent = '🌝';
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('theme', 'light');
-      darkModeBtnDesktop.textContent = '🌚';
-      darkModeBtnMobile.textContent = '🌚';
-    }
-  }
-
-  function toggleDarkMode() {
-    const isDark = document.body.classList.contains('dark-mode');
-    setDarkMode(!isDark);
-  }
-
-  darkModeBtnDesktop.addEventListener('click', toggleDarkMode);
-  darkModeBtnMobile.addEventListener('click', toggleDarkMode);
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setDarkMode(savedTheme === 'dark');
-  });
-  </script>
+  <script src="/static/js/contact.js"></script>
 
 </body>
 </html>
