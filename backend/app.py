@@ -7,6 +7,7 @@ from model import analyze
 import logging
 from werkzeug.exceptions import RequestEntityTooLarge
 import csv
+from gemini_api import call_gemini 
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(filename='logs/access.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -94,6 +95,23 @@ def api_analyze():
 
         return jsonify(result)
     return jsonify({"error": "File type not allowed"}), 400
+
+@app.route("/api/chatbot", methods=["POST"])
+def api_chatbot():
+    data = request.get_json()
+    if not data or "message" not in data:
+        return jsonify({"error": "No message provided"}), 400
+
+    user_message = data["message"]
+    logging.info(f"Chatbot message: {user_message}, IP: {request.remote_addr}")
+
+    try:
+        # Gọi Gemini API
+        bot_response = call_gemini(user_message)
+        return jsonify({"response": bot_response})
+    except Exception as e:
+        logging.error(f"Gemini API error: {str(e)}")
+        return jsonify({"error": "Failed to get response from Gemini API"}), 500
 
 # Serve static files (only dev – production nên qua nginx)
 @app.route("/static/<path:path>")

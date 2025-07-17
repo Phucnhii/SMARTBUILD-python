@@ -85,5 +85,3 @@ imageInput.addEventListener('change', function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setDarkMode(savedTheme === 'dark');
   });
-
-
