@@ -42,7 +42,7 @@
   background: #009688;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
-  overflow: hidden; /* ✅ Quan trọng: cắt nội dung tràn như nút "Gửi" */
+  overflow: hidden; /* Cắt nội dung tràn như nút "Gửi" */
   
   flex-direction: column;
 }

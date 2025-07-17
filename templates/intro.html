@@ -8,6 +8,7 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="/static/css/chatbot.css?v=1.0.2" />
   <link rel="stylesheet" href="/static/css/intro.css" />
 </head>
 <body>
@@ -62,7 +63,7 @@
     <p>Công ty chúng tôi với khả năng tài chính vững chắc, đội ngũ thi công chuyên nghiệp luôn cung cấp cho khách hàng những công trình chất lượng, đạt yêu cầu. Cùng với các chuyên viên phục vụ chuyên tâm, nhiệt tình và kinh nghiệm phong phú, hình thức mua bán linh hoạt, giao hàng nhanh chóng, hỗ trợ tư vấn những thắc mắc của quý khách hàng mọi lúc mọi nơi, chiếm được sự tin tưởng và ủng hộ của các nhà cung ứng cũng như khách hàng trong và ngoài nước, nhờ vậy đội ngũ nghiệp vụ công ty chúng tôi được thuận lợi trong việc phát triển, trưởng thành theo thời gian.
     </p>
     <img src="/static/img/intro1.jpg" alt="Công ty TNHH TM & XD Việt Tinh" class="intro-image">
-    <p>Ngoài việc kinh doanh nguyên liệu hóa chất và thi công công trình ra, công ty chúng tôi vì nhu cầu của khách hàng chúng tôi đã thiết lập nhà xưởng, nhà kho để tồn hàng,theo nhu cầu của khách hàng mà phục vụ. Hiện nay, việc cung ứng nguyên liệu hóa chất đã trở thành một trong những nghiệp vụ quan trọng của công ty chúng tôi.
+    <p>Ngoài việc kinh doanh nguyên liệu hóa chất và thi công công trình ra, công ty chúng tôi vì nhu cầu của khách hàng chúng tôi đã thiết lập nhà xưởng, nhà kho để tồn hàng, theo nhu cầu của khách hàng mà phục vụ. Hiện nay, việc cung ứng nguyên liệu hóa chất đã trở thành một trong những nghiệp vụ quan trọng của công ty chúng tôi.
     </p>
     <div class="image-row">
     <img src="/static/img/intro3.png" alt="Công ty TNHH TM & XD Việt Tinh" class="image-box">
@@ -152,7 +153,7 @@
   </section>
 
   <section class="intro-section">
-    <h2>Open-source</h2>
+    <h2>Open Source</h2>
     <p>SmartBuild AI tự hào chia sẻ dự án mã nguồn mở trên GitHub nhằm đóng góp cho cộng đồng lập trình và nghiên cứu. Chúng tôi hoan nghênh mọi sự hợp tác và khuyến khích các nhà phát triển khám phá, sử dụng và đóng góp vào dự án.
     </p>
     <img src="/static/img/social_link.png" alt="Link GitHub" class="intro-image" />
@@ -179,59 +180,29 @@
       </ul>
     </div>
   </footer>
-  
-  <script>
-  // Darkmode
-  const darkModeBtnDesktop = document.getElementById('darkModeButton-desktop');
-  const darkModeBtnMobile = document.getElementById('darkModeButton');
 
-  function setDarkMode(enabled) {
-    if (enabled) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('theme', 'dark');
-      darkModeBtnDesktop.textContent = '🌝';
-      darkModeBtnMobile.textContent = '🌝';
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('theme', 'light');
-      darkModeBtnDesktop.textContent = '🌚';
-      darkModeBtnMobile.textContent = '🌚';
-    }
-  }
+ <!-- Chatbot Icon -->
+<div id="chatbot-icon">
+  <img src="/static/img/chatbot-icon-robot.png" alt="Chatbot Icon" />
+</div>
 
-  function toggleDarkMode() {
-    const isDark = document.body.classList.contains('dark-mode');
-    setDarkMode(!isDark);
-  }
-
-  darkModeBtnDesktop.addEventListener('click', toggleDarkMode);
-  darkModeBtnMobile.addEventListener('click', toggleDarkMode);
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setDarkMode(savedTheme === 'dark');
-  });
-  </script>
-
-  <!--Swiper thành viên-->
-  <script>
-const swiper = new Swiper(".team-swiper", {
-  slidesPerView: 1, // mỗi slide chiếm 100%
-  spaceBetween: 20,
-  loop: true,
-
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-});
-</script>
-
+<!-- Chatbot Popup -->
+<div id="chatbot-popup">
+  <div class="chatbot-header">
+    <span>SmartBuild AI Chatbot</span>
+    <button id="chatbot-close">&times;</button>
+  </div>
+  <div id="chatbot-messages"></div>
+  <form class="chatbot-form" id="chatbot-form">
+    <input type="text" id="chatbot-input" placeholder="Nhập câu hỏi..." autocomplete="off" />
+    <!-- <button type="submit">send</button> -->
+ <button type="submit" class="send-button" title="Gửi">
+  <img src="/static/img/chatbot-iconsend.png" alt="Send Icon" class="send-icon" />
+</button>
+  </form>
+</div>
+<script src="/static/js/chatbot.js"></script>
+<script src="/static/js/intro.js"></script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SmartBuild AI Demo - Giới thiệu</title>
+  <link rel="stylesheet" href="/static/css/chatbot.css?v=1.0.2" />
   <link rel="stylesheet" href="/static/css/contact.css" />
 </head>
 <body>
@@ -39,7 +40,7 @@
         <p>Liên hệ ngay để nhận tư vấn giải pháp và sản phẩm phù hợp nhất với tình trạng công trình của bạn từ đội ngũ chuyên gia!</p>
       </div>
       <div class="banner-action">
-        <button onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })" class="banner-button">Let's go</button>
+        <button id="scrollButton" class="banner-button">Let's go</button>
       </div>
     </div>
   </div>
@@ -283,6 +284,7 @@
 {% endwith %}
 </div>
   
+<!--Suy nghĩ tới việc dùng capcha (HCapcha)-->
   <div class="form-footer">
     <p>Biểu mẫu được bảo vệ, đồng thời <a href="#">Chính sách quyền riêng tư</a> và <a href="#">Điều khoản</a> được áp dụng.</p>
   </div>
@@ -302,38 +304,28 @@
     </div>
   </footer>
 
-  <script>
-  // Darkmode
-  const darkModeBtnDesktop = document.getElementById('darkModeButton-desktop');
-  const darkModeBtnMobile = document.getElementById('darkModeButton');
+ <!-- Chatbot Icon -->
+<div id="chatbot-icon">
+  <img src="/static/img/chatbot-icon-robot.png" alt="Chatbot Icon" />
+</div>
 
-  function setDarkMode(enabled) {
-    if (enabled) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('theme', 'dark');
-      darkModeBtnDesktop.textContent = '🌝';
-      darkModeBtnMobile.textContent = '🌝';
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('theme', 'light');
-      darkModeBtnDesktop.textContent = '🌚';
-      darkModeBtnMobile.textContent = '🌚';
-    }
-  }
-
-  function toggleDarkMode() {
-    const isDark = document.body.classList.contains('dark-mode');
-    setDarkMode(!isDark);
-  }
-
-  darkModeBtnDesktop.addEventListener('click', toggleDarkMode);
-  darkModeBtnMobile.addEventListener('click', toggleDarkMode);
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setDarkMode(savedTheme === 'dark');
-  });
-  </script>
+<!-- Chatbot Popup -->
+<div id="chatbot-popup">
+  <div class="chatbot-header">
+    <span>SmartBuild AI Chatbot</span>
+    <button id="chatbot-close">&times;</button>
+  </div>
+  <div id="chatbot-messages"></div>
+  <form class="chatbot-form" id="chatbot-form">
+    <input type="text" id="chatbot-input" placeholder="Nhập câu hỏi..." autocomplete="off" />
+    <!-- <button type="submit">send</button> -->
+ <button type="submit" class="send-button" title="Gửi">
+  <img src="/static/img/chatbot-iconsend.png" alt="Send Icon" class="send-icon" />
+</button>
+  </form>
+</div>
+<script src="/static/js/chatbot.js"></script>
+  <script src="/static/js/contact.js"></script>
 
 </body>
 </html>

@@ -470,6 +470,12 @@ body.dark-mode .intro-section h2 {
   object-fit: contain;
 }
 
+.social-links a {
+  color: #006f62;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 /*Banner*/
 
 .banner-button {
@@ -487,7 +493,7 @@ body.dark-mode .intro-section h2 {
   border: none;
   border-radius: 22px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .banner-button:hover {
@@ -537,6 +543,11 @@ body.dark-mode .intro-section h2 {
   font-size: 40px;
   margin-bottom: 16px;
   color: #80dbe3;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.banner-text h1:hover {
+  transform: scale(1.03);
 }
 
 .banner-text p {
@@ -607,15 +618,6 @@ body.dark-mode .intro-section h2 {
 .banner-flex {
   gap: 20px;
 }
-}
-
-/*Banner darkmode*/
-body.dark-mode .banner-text h1 {
-  color: #009688;
-}
-
-body.dark-mode .banner-button {
-  background: #009688;
 }
 
 /*Swiper thành viên*/
@@ -833,6 +835,12 @@ body.dark-mode .member-card h4 {
 
 body.dark-mode .member-card {
   background: #444;
+}
+
+/*Social link dark-mode*/
+
+.dark-mode .social-links a {
+  color: #80dbe3;
 }
 
 

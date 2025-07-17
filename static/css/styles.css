@@ -23,10 +23,15 @@ body {
   max-width: 1250px;
   background-color: white;
   padding: 32px;
-  /*border-radius: 16px;*/
+  border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   animation: fadeIn 0.5s ease-in-out;
   flex: 1 0 auto; 
+  margin-top: 32px;
+}
+
+.con2 {
+  margin-bottom: 32px;
 }
 
 /* Tiêu đề */
@@ -80,7 +85,7 @@ button[type="submit"] {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 button[type="submit"]:hover {
@@ -140,6 +145,11 @@ button[type="submit"]:hover {
 
   .container {
     padding: 28px;
+    margin-top: 26px;
+  }
+
+  .con2 {
+    margin-bottom: 26px;
   }
 
   h1 {
@@ -164,6 +174,11 @@ button[type="submit"]:hover {
 @media (max-width: 480px) {
   .container {
     padding: 20px;
+    margin-top: 18px;
+  }
+
+  .con2 {
+    margin-bottom: 18px;
   }
 
   h1 {
@@ -360,7 +375,7 @@ body.dark-mode input[type="file"]:hover {
 
 body.dark-mode button[type="submit"] {
   background:  #00bcd4;
-  transition: background 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 body.dark-mode button[type="submit"]:hover {
@@ -484,7 +499,7 @@ body.dark-mode .footer-links li a:hover {
   border: none;
   border-radius: 22px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .banner-button:hover {
@@ -534,6 +549,11 @@ body.dark-mode .footer-links li a:hover {
   font-size: 40px;
   margin-bottom: 16px;
   color: #80dbe3;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.banner-text h1:hover {
+  transform: scale(1.03);
 }
 
 .banner-text p {
@@ -606,11 +626,208 @@ body.dark-mode .footer-links li a:hover {
 }
 }
 
-/*Banner darkmode*/
-body.dark-mode .banner-text h1 {
-  color: #009688;
+/* Phần giới thiệu và hướng dẫn sử dụng */
+
+.steps-container {
+  margin: 40px 0;
 }
 
-body.dark-mode .banner-button {
-  background: #009688;
+.step-card {
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  height: 300px;
+  align-items: center;
+  display: flex;
+  align-items: center;   
+  justify-content: center;
+}
+
+.step1 {
+  position: relative;
+  background-image: url('/static/img/intro1.jpg'); 
+  background-size: cover;
+  background-position: center;
+}
+
+.step2 {
+  position: relative;
+  background-image: url('/static/img/index2.jpg'); 
+  background-size: cover;
+  background-position: center;
+}
+
+.step3 {
+  position: relative;
+  background-image: url('/static/img/index1.webp'); 
+  background-size: cover;
+  background-position: center;
+}
+
+.step-card:hover {
+  transform: scale(1.03); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+  z-index: 10; 
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.step-category {
+  font-weight: bold;
+  color: #e0e0e0;
+  font-size: 32px;
+}
+
+.step-content {
+  padding: 12px;
+  line-height: 1.6;
+  font-size: 28px;
+  color: #e0e0e0;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.4); /* nền đen mờ 40% */
+  border-radius: 8px;
+  width: 65%;
+  text-align: center;
+}
+
+.contact-cta {
+  background-color: #e0f2f1;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-top: 40px;
+  border-left: 4px solid #009688;
+}
+
+.contact-cta a {
+  color: #006f62;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .step-content {
+    padding-left: 0;
+    font-size: 18px;
+  }
+  
+  .step-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  
+
+  .step-category {
+    font-size: 20px;
+}
+}
+
+.intro-section {
+  width: 100%;
+  align-content: center;
+  margin-left:auto;
+  margin-right:auto ;
+  text-align: justify;
+}
+
+.intro-section h2 {
+  color: #009688;
+  margin-bottom: 8px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.intro-section p,
+.intro-section ul {
+  line-height: 1.6;
+  font-size: 20px;
+}
+
+.intro-section ul {
+  padding-left: 20px;
+}
+
+/*Hướng dẫn darkmode*/
+body.dark-mode .intro-section h2 {
+  color: #00bcd4;
+}
+
+.dark-mode .contact-cta {
+  background-color: #444;
+  border-left: 4px solid #00bcd4;
+}
+
+.dark-mode .contact-cta a {
+  color: #80dbe3;
+}
+
+.dark-mode .step-category {
+  color: #333333;
+}
+
+.dark-mode .step-content {
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0.4); /* nền trắng mờ 40% */
+
+}
+
+/* Responsive */
+
+/* Dưới 768px: điện thoại */
+@media (max-width: 768px) {
+
+  .intro-section p, .intro-section ul {
+    font-size: 18px;
+  }
+
+  .intro-section h2 {
+    font-size: 20px
+  }
+
+  .step-card {
+  height: 250px;
+}
+
+  .step-content {
+    font-size: 20px;
+  }
+
+  .step-category {
+    font-size: 24px;
+}
+}
+
+/* Dưới 480px: điện thoại nhỏ */
+@media (max-width: 480px) {
+
+  .intro-section p, .intro-section ul {
+    font-size: 16px;
+  }
+
+  .intro-section h2 {
+    font-size: 18px;
+  }
+
+  .step-content {
+    font-size: 16px;
+  }
+
+  .step-category {
+    font-size: 18px;
+}
+
+  .step-header {
+    margin-bottom: 4px;
+}
+
+.step-card {
+  height: 175px;
+}
 }

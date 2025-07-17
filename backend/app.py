@@ -52,11 +52,33 @@ def validate_images(images, max_files=5):
 
 # ---------- Routes ----------
 
+@app.after_request
+def apply_security_headers(response):
+    # Set first‑party cookie nếu chưa có
+    if not request.cookies.get("sb_uid"):
+        response.set_cookie(
+            "sb_uid",
+            os.urandom(8).hex(),
+            max_age=30 * 24 * 60 * 60,
+            secure=True,
+            httponly=True,
+            samesite="Strict",
+        )
+    
+    # Các headers bảo mật
+    response.headers.update({
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; font-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+        "Referrer-Policy": "no-referrer",
+    })
+    return response
+
 @app.route("/")
 def index():
     resp = make_response(render_template("index.html"))
-    # Set first‑party cookie nếu chưa có
-    if not request.cookies.get("sb_uid"):
+
+    """if not request.cookies.get("sb_uid"):
         resp.set_cookie(
             "sb_uid",
             os.urandom(8).hex(),
@@ -71,7 +93,7 @@ def index():
         "X-Frame-Options": "DENY",
         "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'",
         "Referrer-Policy": "no-referrer",
-    })
+    })"""
     return resp
 
 @app.route("/api/analyze", methods=["POST"])

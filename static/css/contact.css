@@ -80,7 +80,7 @@ button[type="submit"] {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 button[type="submit"]:hover {
@@ -360,7 +360,7 @@ body.dark-mode input[type="file"]:hover {
 
 body.dark-mode button[type="submit"] {
   background:  #00bcd4;
-  transition: background 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 body.dark-mode button[type="submit"]:hover {
@@ -471,7 +471,7 @@ body.dark-mode .footer-links li a:hover {
 
 .banner-button {
   width: 125px;
-  height: auto;    
+  height: 56px;   
   margin-left: auto; 
   margin-right: auto; 
   display:inline-block;
@@ -484,7 +484,7 @@ body.dark-mode .footer-links li a:hover {
   border: none;
   border-radius: 22px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .banner-button:hover {
@@ -534,6 +534,11 @@ body.dark-mode .footer-links li a:hover {
   font-size: 40px;
   margin-bottom: 16px;
   color: #80dbe3;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.banner-text h1:hover {
+  transform: scale(1.03);
 }
 
 .banner-text p {
@@ -570,7 +575,8 @@ body.dark-mode .footer-links li a:hover {
 }
 
 .banner-button {
-  width: 100px;  
+  width: 100px;
+  height: 46.4px;    
   padding: 10px;
   font-size: 20px;
   font-weight: 700;
@@ -594,7 +600,8 @@ body.dark-mode .footer-links li a:hover {
 }
 
 .banner-button {
-  width: 90px;  
+  width: 90px; 
+  height: 40px; 
   padding: 8px;
   font-size: 18px;
   font-weight: 700;
@@ -604,16 +611,6 @@ body.dark-mode .footer-links li a:hover {
 .banner-flex {
   gap: 20px;
 }
-}
-
-/*Banner darkmode*/
-body.dark-mode .banner-text h1 {
-  color: #009688;
-}
-
-body.dark-mode .banner-button {
-  background:
-  #009688;
 }
 
 /*Liên hệ*/

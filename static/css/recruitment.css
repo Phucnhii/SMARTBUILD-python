@@ -80,7 +80,7 @@ button[type="submit"] {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 button[type="submit"]:hover {
@@ -360,7 +360,7 @@ body.dark-mode input[type="file"]:hover {
 
 body.dark-mode button[type="submit"] {
   background:  #00bcd4;
-  transition: background 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 body.dark-mode button[type="submit"]:hover {
@@ -484,7 +484,7 @@ body.dark-mode .footer-links li a:hover {
   border: none;
   border-radius: 22px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .banner-button:hover {
@@ -534,6 +534,11 @@ body.dark-mode .footer-links li a:hover {
   font-size: 40px;
   margin-bottom: 16px;
   color: #80dbe3;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.banner-text h1:hover {
+  transform: scale(1.03);
 }
 
 .banner-text p {
@@ -608,14 +613,7 @@ body.dark-mode .footer-links li a:hover {
 }
 }
 
-/*Banner darkmode*/
-body.dark-mode .banner-text h1 {
-  color: #009688;
-}
-
-body.dark-mode .banner-button {
-  background: #009688;
-}
+/*Job darkmode*/
 
 body.dark-mode .job h3 {
   color: #00bcd4;
@@ -683,7 +681,7 @@ body.dark-mode .job p {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .apply-form button:hover {
@@ -701,7 +699,7 @@ body.dark-mode .job p {
 
 body.dark-mode .apply-form button {
   background:  #00bcd4;
-  transition: background 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 body.dark-mode .job h2 {
