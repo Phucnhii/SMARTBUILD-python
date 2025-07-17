@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const loadingDiv = document.createElement('div');
       loadingDiv.classList.add('chat-message', 'ai-message');
       loadingDiv.innerHTML = `
-        <img src="/static/images/robot.png" class="avatar">
+        <img src="/static/img/robot.png" class="avatar">
         <div class="message-text">
           <div class="typing">
             <span></span>
@@ -71,7 +71,7 @@ function appendMessage(sender, text) {
   if (sender === 'AI') {
     msgDiv.classList.add('ai-message');
     msgDiv.innerHTML = `
-      <img src="/static/images/robot.png" class="avatar">
+      <img src="/static/img/ava-robot.png" class="avatar">
       <div class="message-text">${text}</div>
     `;
   } else {
@@ -80,7 +80,7 @@ function appendMessage(sender, text) {
       <div class="message-text">${text}</div>
     `;
     // Nếu muốn avatar user, thêm dòng dưới và css .avatar-user
-    msgDiv.innerHTML = `<img src="/static/images/ava-user.jpeg" class="avatar-user"><div class="message-text">${text}</div>`;
+    msgDiv.innerHTML = `<img src="/static/img/ava-user.jpeg" class="avatar-user"><div class="message-text">${text}</div>`;
   }
 
   const chatbotMessages = document.getElementById('chatbot-messages');

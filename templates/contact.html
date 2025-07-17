@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SmartBuild AI Demo - Giới thiệu</title>
+  <link rel="stylesheet" href="/static/css/chatbot.css?v=1.0.2" />
   <link rel="stylesheet" href="/static/css/contact.css" />
 </head>
 <body>
@@ -303,6 +304,27 @@
     </div>
   </footer>
 
+ <!-- Chatbot Icon -->
+<div id="chatbot-icon">
+  <img src="/static/img/chatbot-icon-robot.png" alt="Chatbot Icon" />
+</div>
+
+<!-- Chatbot Popup -->
+<div id="chatbot-popup">
+  <div class="chatbot-header">
+    <span>SmartBuild AI Chatbot</span>
+    <button id="chatbot-close">&times;</button>
+  </div>
+  <div id="chatbot-messages"></div>
+  <form class="chatbot-form" id="chatbot-form">
+    <input type="text" id="chatbot-input" placeholder="Nhập câu hỏi..." autocomplete="off" />
+    <!-- <button type="submit">send</button> -->
+ <button type="submit" class="send-button" title="Gửi">
+  <img src="/static/img/chatbot-iconsend.png" alt="Send Icon" class="send-icon" />
+</button>
+  </form>
+</div>
+<script src="/static/js/chatbot.js"></script>
   <script src="/static/js/contact.js"></script>
 
 </body>
