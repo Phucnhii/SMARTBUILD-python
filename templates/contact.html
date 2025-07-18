@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SmartBuild AI Demo - Giới thiệu</title>
+  <script src="https://unpkg.com/friendly-challenge@0.9.9/widget.min.js" async defer></script>
   <link rel="stylesheet" href="/static/css/chatbot.css?v=1.0.2" />
   <link rel="stylesheet" href="/static/css/contact.css" />
 </head>
@@ -48,6 +49,16 @@
 
 <div class="container">
   <h1>Liên hệ với chúng tôi</h1>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flash-msg">
+      {% for msg in messages %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
   
   <form id="contact-form" class="contact-form" method="post" enctype="multipart/form-data">
     <div class="form-column">
@@ -268,25 +279,17 @@
   
 </div>
 
-<div class="form-footer hide-on-mobile"></div>
+<!-- FriendlyCaptcha widget -->
+<!--<div class="form-footer hide-on-mobile"></div>-->
+<div class="form-footer center"> 
+<div class="frc-captcha" data-sitekey="FCMKTP5JABF9BL61"></div>
 <button type="submit" class="submit-btn">Gửi yêu cầu</button>
-  </form>
-
-  <div class="form-footer">
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class="flash-msg">
-      {% for msg in messages %}
-        <li>{{ msg }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
 </div>
+  </form>
   
-<!--Suy nghĩ tới việc dùng capcha (HCapcha)-->
+<!--FriendlyCaptcha-->
   <div class="form-footer">
-    <p>Biểu mẫu được bảo vệ, đồng thời <a href="#">Chính sách quyền riêng tư</a> và <a href="#">Điều khoản</a> được áp dụng.</p>
+    <p>Biểu mẫu được bảo vệ bởi <strong>FriendlyCaptcha</strong>, đồng thời <a href="https://friendlycaptcha.com/legal/privacy-end-users/" target="_blank" rel="noopener noreferrer">Chính sách quyền riêng tư</a> và <a href="https://friendlycaptcha.com/legal/terms/" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ</a> được áp dụng.</p>
   </div>
 </div>
 
