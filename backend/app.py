@@ -8,6 +8,9 @@ import logging
 from werkzeug.exceptions import RequestEntityTooLarge
 import csv
 from gemini_api import call_gemini 
+import requests
+
+FRIENDLYCAPTCHA_SECRET = 'A1BG94I05O1DE7Q1GCATIUQA67NR30J7V2VPNBOA38NTKTGT74JAQSN5J6' # 'YOUR_SECRET_KEY'
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(filename='logs/access.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -69,7 +72,7 @@ def apply_security_headers(response):
     response.headers.update({
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
-        "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; font-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+        "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.friendlycaptcha.com; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://js.friendlycaptcha.com; worker-src blob:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
         "Referrer-Policy": "no-referrer",
     })
     return response
@@ -77,23 +80,6 @@ def apply_security_headers(response):
 @app.route("/")
 def index():
     resp = make_response(render_template("index.html"))
-
-    """if not request.cookies.get("sb_uid"):
-        resp.set_cookie(
-            "sb_uid",
-            os.urandom(8).hex(),
-            max_age=30 * 24 * 60 * 60,  # 30 ngày
-            secure=True,
-            httponly=True,
-            samesite="Strict",
-        )
-    # Headers ATTT
-    resp.headers.update({
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "DENY",
-        "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'",
-        "Referrer-Policy": "no-referrer",
-    })"""
     return resp
 
 @app.route("/api/analyze", methods=["POST"])
@@ -181,6 +167,26 @@ def handle_file_too_large(e):
 def contact():
     if request.method == "POST":
         try:
+            # Xác thực CAPTCHA
+            solution = request.form.get('frc-captcha-solution')
+            if not solution:
+                flash("Vui lòng hoàn thành CAPTCHA", "error")
+                return redirect(url_for("contact"))
+
+            # Gửi request đến FriendlyCaptcha để xác thực
+            verify_response = requests.post(
+                'https://api.friendlycaptcha.com/api/v1/siteverify',
+                data={
+                    'secret': FRIENDLYCAPTCHA_SECRET,
+                    'solution': solution
+                }
+            )
+
+            verify_result = verify_response.json()
+            if not verify_result.get("success"):
+                flash("CAPTCHA không hợp lệ. Vui lòng thử lại.", "error")
+                return redirect(url_for("contact"))
+
             # Lấy dữ liệu từ form
             form_data = {
                 'last_name': request.form.get('last-name'),
