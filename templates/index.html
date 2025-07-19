@@ -127,9 +127,23 @@
 <!-- Chatbot Popup -->
 <div id="chatbot-popup">
   <div class="chatbot-header">
+  <div class="chatbot-title">
     <span>SmartBuild AI Chatbot</span>
-    <button id="chatbot-close">&times;</button>
+    <button id="new-chat-btn" title="Cuộc trò chuyện mới">+</button>
   </div>
+  <button id="chatbot-close">&times;</button>
+  </div>
+    <!-- Confirm new chat -->
+  <div id="new-chat-confirm">
+    <p>Bạn có muốn bắt đầu cuộc trò chuyện mới không?</p>
+    <button id="confirm-new-chat-yes">Bắt đầu mới</button>
+    <button id="confirm-new-chat-no">Tiếp tục</button>
+  </div>
+  <div id="reconnect-confirm" style="display:none; padding: 10px; text-align: center;">
+  <p>Bạn có muốn tiếp tục cuộc trò chuyện trước đó không?</p>
+  <button id="reconnect-yes">Tiếp tục</button>
+  <button id="reconnect-no">Bắt đầu mới</button>
+</div>
   <div id="chatbot-messages"></div>
   <form class="chatbot-form" id="chatbot-form">
     <input type="text" id="chatbot-input" placeholder="Nhập câu hỏi..." autocomplete="off" />
