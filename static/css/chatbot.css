@@ -39,12 +39,13 @@
   z-index: 1001;
   width: 400px;
   max-width: 90vw;
+  max-height: 90vh;
   background: #009688;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
   overflow: hidden; /* Cắt nội dung tràn như nút "Gửi" */
-  
   flex-direction: column;
+  /* display: flex; */
 }
 
 /* Header */
@@ -396,3 +397,73 @@ body.dark-mode .ai-message .message-text {
 body.dark-mode .typing span {
   background: white;
 }
+/* Tablet: width từ 481px đến 768px */
+@media screen and (max-width: 768px) {
+  #chatbot-popup {
+    width: 320px;
+    right: 20px;
+    bottom: 90px;
+  }
+
+  #chatbot-popup #chatbot-messages {
+    height: 350px;
+  }
+
+  .chatbot-form button[type="submit"] {
+    width: 80px;
+  }
+
+  .chatbot-form .send-icon {
+    width: 40px;
+    height: 26px;
+  }
+
+  .message-text {
+    font-size: 14px;
+  }
+}
+
+/* Mobile: width từ 480px trở xuống */
+@media screen and (max-width: 480px) {
+  #chatbot-popup {
+    width: 90vw;
+    right: 5%;
+    bottom: 80px;
+  }
+
+  #chatbot-popup #chatbot-messages {
+    height: 300px;
+    padding: 12px;
+  }
+
+  .chatbot-form button[type="submit"] {
+    width: 70px;
+  }
+
+  .chatbot-form .send-icon {
+    width: 36px;
+    height: 24px;
+  }
+
+  .message-text {
+    max-width: 90%;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  #chatbot-popup .chatbot-header {
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+
+  #chatbot-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  #chatbot-icon img {
+    width: 64px;
+    height: 64px;
+  }
+}
+
