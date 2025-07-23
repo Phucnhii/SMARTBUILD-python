@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý CV - SmartBuild Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .cv-card {
+            transition: transform 0.2s;
+        }
+
+        .cv-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-badge {
+            font-size: 0.8em;
+        }
+
+        .position-badge {
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/admin">
+                <i class="fas fa-tools"></i> SmartBuild Admin
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/admin">
+                    <i class="fas fa-dashboard"></i> Dashboard
+                </a>
+                <a class="nav-link" href="/">
+                    <i class="fas fa-home"></i> Trang chủ
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-4">
+                    <i class="fas fa-file-pdf"></i> Quản lý CV
+                </h1>
+
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show"
+                    role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="GET" class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Vị trí:</label>
+                                <select name="position" class="form-select">
+                                    <option value="">Tất cả vị trí</option>
+                                    {% for pos in positions %}
+                                    <option value="{{ pos }}" {{ 'selected' if pos==current_position }}>
+                                        {{ pos.replace('cv-', '').upper() }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Trạng thái:</label>
+                                <select name="status" class="form-select">
+                                    <option value="all" {{ 'selected' if current_status=='all' }}>Tất cả</option>
+                                    <option value="received" {{ 'selected' if current_status=='received' }}>Đã nhận
+                                    </option>
+                                    <option value="reviewed" {{ 'selected' if current_status=='reviewed' }}>Đã xem
+                                    </option>
+                                    <option value="shortlisted" {{ 'selected' if current_status=='shortlisted' }}>
+                                        Shortlist</option>
+                                    <option value="rejected" {{ 'selected' if current_status=='rejected' }}>Từ chối
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">&nbsp;</label>
+                                <div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-filter"></i> Lọc
+                                    </button>
+                                    <a href="/admin/cvs" class="btn btn-secondary">
+                                        <i class="fas fa-refresh"></i> Reset
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CV List -->
+        <div class="row">
+            {% if cvs %}
+            {% for cv in cvs %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card cv-card h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary position-badge">
+                            {{ cv.position.replace('cv-', '').upper() }}
+                        </span>
+                        <span class="badge 
+                                {% if cv.status == 'received' %}bg-info
+                                {% elif cv.status == 'reviewed' %}bg-warning
+                                {% elif cv.status == 'shortlisted' %}bg-success
+                                {% else %}bg-danger{% endif %} status-badge">
+                            {% if cv.status == 'received' %}Đã nhận
+                            {% elif cv.status == 'reviewed' %}Đã xem
+                            {% elif cv.status == 'shortlisted' %}Shortlist
+                            {% else %}Từ chối{% endif %}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-file-pdf text-danger"></i>
+                            {{ cv.original_filename }}
+                        </h6>
+
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i>
+                                {{ cv.submitted_at.strftime('%d/%m/%Y %H:%M') }}
+                            </small>
+                        </div>
+
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-hdd"></i>
+                                {{ "%.1f"|format(cv.file_size / 1024) }} KB
+                            </small>
+                        </div>
+
+                        <div class="mb-3">
+                            <small class="text-muted">
+                                <i class="fas fa-map-marker-alt"></i>
+                                IP: {{ cv.ip_address }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="d-grid gap-2">
+                            <!-- Download Button -->
+                            <a href="/download/cv/{{ cv.file_id }}" class="btn btn-success btn-sm">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+
+                            <!-- Status Update -->
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
+                                    <i class="fas fa-edit"></i> Cập nhật
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <form method="POST" action="/admin/cv/{{ cv._id }}/status" class="d-inline">
+                                            <input type="hidden" name="status" value="reviewed">
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-eye text-warning"></i> Đã xem
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form method="POST" action="/admin/cv/{{ cv._id }}/status" class="d-inline">
+                                            <input type="hidden" name="status" value="shortlisted">
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-star text-success"></i> Shortlist
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form method="POST" action="/admin/cv/{{ cv._id }}/status" class="d-inline">
+                                            <input type="hidden" name="status" value="rejected">
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-times text-danger"></i> Từ chối
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="col-md-12">
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle fa-2x mb-3"></i>
+                    <h5>Chưa có CV nào</h5>
+                    <p class="mb-0">Chưa có CV nào được nộp hoặc không có CV nào phù hợp với bộ lọc hiện tại.</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Summary -->
+        {% if cvs %}
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="alert alert-light">
+                    <i class="fas fa-info-circle"></i>
+                    Hiển thị <strong>{{ cvs|length }}</strong> CV
+                    {% if current_position %} cho vị trí <strong>{{ current_position.replace('cv-', '').upper()
+                        }}</strong>{% endif %}
+                    {% if current_status and current_status != 'all' %} với trạng thái <strong>{{ current_status
+                        }}</strong>{% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
