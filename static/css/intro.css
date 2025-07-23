@@ -862,5 +862,151 @@ body.dark-mode .member-card {
   color: #80dbe3;
 }
 
+/*Update navbar with change language button*/
+/* Desktop layout */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Ẩn hamburger ở desktop */
+.nav-toggle,
+.nav-toggle-label {
+  display: none;
+}
+
+/* Hiện other-button (darkmode + lang) ở desktop */
+.other-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Ẩn darkmode/lang trong menu khi desktop */
+.lang-switch-mobile,
+#darkModeButton {
+  display: none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 999px) {
+  /* Hamburger hiện ra */
+  .nav-toggle-label {
+    display: flex;
+  }
+
+  /* Ẩn nhóm button bên phải */
+  .other-button {
+    display: none;
+  }
+
+  /* Hiện darkmode/lang trong menu */
+  .lang-switch-mobile,
+  #darkModeButton {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #008c91;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    padding: 12px 16px;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label + .nav-links {
+    display: flex;
+  }
+}
+
+/*Change language*/
+
+/* Ngôn ngữ - Desktop */
+.lang-switcher-desktop {
+  font-size: 24px;
+  cursor: pointer;
+  padding: 3px 5px 3px 5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  border: none;
+}
+
+/* Ngôn ngữ - Mobile */
+.lang-switcher {
+  font-size: 24px;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  border: none;
+}
+
+.lang-switcher-desktop option {
+  transition: all 0.3s ease;
+  background-color: white;
+  color:#009688;
+}
+
+.lang-switcher-desktop:focus {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.lang-switcher option {
+  transition: all 0.3s ease;
+  background-color: white;
+  color:#009688;
+}
+
+.lang-switcher:focus {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/*Language Darkmode*/
+.dark-mode .lang-switcher-desktop option {
+  background-color: #444;
+  color:#00bcd4;
+}
+
+.dark-mode .lang-switcher-desktop:focus {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .lang-switcher option {
+  background-color: #444;
+  color:#00bcd4;
+}
+
+.dark-mode .lang-switcher:focus {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Ẩn mobile khi desktop */
+@media (min-width: 1001px) {
+  .lang-switch-mobile {
+    display: none;
+  }
+}
+
+/* Ẩn desktop khi mobile */
+@media (max-width: 1000px) {
+  .lang-switcher-desktop {
+    display: none;
+  }
+
+  select {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}
 
 

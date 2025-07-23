@@ -8,9 +8,8 @@
   <link rel="stylesheet" href="/static/css/styles.css" />
 </head>
 <body>
-   <!-- Thanh điều hướng -->
-  <nav class="navbar">  
-    <div class="nav-container">
+<nav class="navbar">  
+  <div class="nav-container">
     <div class="nav-logo">🦾 SmartBuild AI</div>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
@@ -23,13 +22,28 @@
       <li><a href="/intro">GIỚI THIỆU</a></li>
       <li><a href="/recruitment">TUYỂN DỤNG</a></li>
       <li><a href="/contact">LIÊN HỆ</a></li>
+
+      <li class="lang-switch-mobile">
+        <select id="languageSwitcherMobile" class="lang-switcher">
+          <option value="/index-vi">🇻🇳</option>
+          <option value="/index-en">🇺🇸</option>
+          <option value="/index-zh">🇨🇳</option>
+        </select>
+      </li>
       <li><button id="darkModeButton" class="darkmode-btn">🌚</button></li>
     </ul>
 
-    <button id="darkModeButton-desktop" class="darkmode-btn">🌚</button>
-
+    <div class="other-button">
+      <select id="languageSwitcherDesktop" class="lang-switcher-desktop">
+        <option value="/index-vi">🇻🇳</option>
+        <option value="/index-en">🇺🇸</option>
+        <option value="/index-zh">🇨🇳</option>
+      </select>
+      <button id="darkModeButton-desktop" class="darkmode-btn">🌚</button>
+    </div>
   </div>
-  </nav>
+</nav>
+
 
   <!--Banner-->
 <section class="banner">

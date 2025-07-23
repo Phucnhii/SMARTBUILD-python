@@ -85,3 +85,12 @@ imageInput.addEventListener('change', function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setDarkMode(savedTheme === 'dark');
   });
+
+  /*Change language button*/ 
+  document.getElementById('languageSwitcherMobile').addEventListener('change', function () {
+    window.location.href = this.value;
+  });
+
+  document.getElementById('languageSwitcherDesktop').addEventListener('change', function () {
+    window.location.href = this.value;
+  });
