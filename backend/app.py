@@ -10,7 +10,7 @@ import csv
 from gemini_api import call_gemini 
 import requests
 
-FRIENDLYCAPTCHA_SECRET = '' 
+FRIENDLYCAPTCHA_SECRET = 'A1BG94I05O1DE7Q1GCATIUQA67NR30J7V2VPNBOA38NTKTGT74JAQSN5J6' # 'YOUR_SECRET_KEY'
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(filename='logs/access.log', level=logging.INFO, format='%(asctime)s - %(message)s')
