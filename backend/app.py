@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, make_response, send_from_directory,flash, url_for, redirect
 from werkzeug.utils import secure_filename
 import os
-from datetime import timedelta
+from datetime import timedelta, datetime
 import cv2
 from model import analyze
 import logging
@@ -9,8 +9,29 @@ from werkzeug.exceptions import RequestEntityTooLarge
 import csv
 from gemini_api import call_gemini 
 import requests
+from dotenv import load_dotenv
+from connect_database import get_database
+from gridfs import GridFS
+from bson import ObjectId
+import io
+from admin import admin_bp, setup_download_routes
 
-FRIENDLYCAPTCHA_SECRET = 'A1BG94I05O1DE7Q1GCATIUQA67NR30J7V2VPNBOA38NTKTGT74JAQSN5J6' # 'YOUR_SECRET_KEY'
+load_dotenv()
+# Lấy biến môi trường FRIENDLYCAPTCHA_SECRET
+FRIENDLYCAPTCHA_SECRET = os.getenv('FRIENDLYCAPTCHA_SECRET')
+
+# Kiểm tra kết nối MongoDB khi khởi động app
+try:
+    db = get_database()
+    fs = GridFS(db)  # Khởi tạo GridFS global
+    # Test ping để đảm bảo kết nối thành công
+    db.command('ping')
+    logging.info("✅ MongoDB connection successful")
+    print("✅ Connected to MongoDB Atlas - Database: SmartBuild_AI")
+except Exception as e:
+    logging.error(f"❌ MongoDB connection failed: {str(e)}")
+    print(f"❌ MongoDB connection failed: {str(e)}")
+    # App vẫn có thể chạy nhưng sẽ không lưu được vào MongoDB
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(filename='logs/access.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -22,6 +43,12 @@ MAX_CONTENT_LENGTH = 2 * 1024 * 1024  # 2 MB
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = MAX_CONTENT_LENGTH
+
+# Đăng ký Blueprint admin
+app.register_blueprint(admin_bp)
+
+# Setup download routes
+setup_download_routes(app)
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -143,14 +170,37 @@ def recruitment():
 
                 if file and allowed_cv_file(file.filename):
                     filename = secure_filename(file.filename)
-                    folder = os.path.join(UPLOAD_CV_FOLDER, position)
-                    os.makedirs(folder, exist_ok=True)
-                    save_path = os.path.join(folder, filename)
-                    file.save(save_path)
+                    try:
+                        fs = GridFS(db)  # khởi tạo GridFS
 
-                    logging.info(f"CV submitted: {filename} for {position}, IP: {request.remote_addr}")
+                        # Lưu file vào GridFS
+                        file_id = fs.put(file.stream, filename=filename, content_type=file.content_type)
+
+                        # Tạo metadata
+                        cv_data = {
+                            'position': position,
+                            'original_filename': file.filename,
+                            'saved_filename': filename,
+                            'file_id': file_id,  # ID GridFS
+                            'file_size': file.content_length or 0,
+                            'ip_address': request.remote_addr,
+                            'submitted_at': datetime.utcnow(),
+                            'status': 'received',
+                            'user_agent': request.headers.get('User-Agent', ''),
+                        }
+
+                        result = db.cv_submissions.insert_one(cv_data)
+                        logging.info(f"✅ CV uploaded to GridFS - ID: {file_id}")
+                        logging.info(f"✅ CV metadata saved to MongoDB - ID: {result.inserted_id}")
+
+                    except Exception as e:
+                        logging.error(f"❌ Failed to upload CV: {str(e)}")
+                        flash("Đã có lỗi xảy ra khi lưu hồ sơ.")
+                        return redirect(url_for("recruitment"))
+
                     flash(f"Đã nhận hồ sơ cho vị trí {position.replace('cv-', '').upper()}.")
                     return redirect(url_for("recruitment"))
+
                 else:
                     flash("Chỉ chấp nhận file PDF.")
                     return redirect(url_for("recruitment"))
