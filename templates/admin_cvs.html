@@ -107,6 +107,13 @@
                                     <a href="/admin/cvs" class="btn btn-secondary">
                                         <i class="fas fa-refresh"></i> Reset
                                     </a>
+                                    <button type="button" class="btn btn-danger" id="bulkDeleteBtn"
+                                        style="display: none;" onclick="bulkDeleteCVs()">
+                                        <i class="fas fa-trash"></i> Xóa đã chọn
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="toggleSelectAll()">
+                                        <i class="fas fa-check-square"></i> Chọn tất cả
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -122,9 +129,13 @@
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card cv-card h-100">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span class="badge bg-primary position-badge">
-                            {{ cv.position.replace('cv-', '').upper() }}
-                        </span>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="checkbox" class="form-check-input cv-checkbox" value="{{ cv._id }}"
+                                onchange="toggleBulkDeleteBtn()">
+                            <span class="badge bg-primary position-badge">
+                                {{ cv.position.replace('cv-', '').upper() }}
+                            </span>
+                        </div>
                         <span class="badge 
                                 {% if cv.status == 'received' %}bg-info
                                 {% elif cv.status == 'reviewed' %}bg-warning
@@ -202,6 +213,17 @@
                                             </button>
                                         </form>
                                     </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <form method="POST" action="/admin/cv/{{ cv._id }}/delete" class="d-inline"
+                                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa CV này không? Hành động này không thể hoàn tác.')">
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="fas fa-trash"></i> Xóa CV
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -237,7 +259,64 @@
         {% endif %}
     </div>
 
+    <!-- Bulk Delete Form (hidden) -->
+    <form id="bulkDeleteForm" method="POST" action="/admin/cvs/bulk-delete" style="display: none;">
+        <!-- CV IDs will be added here by JavaScript -->
+    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleBulkDeleteBtn() {
+            const checkboxes = document.querySelectorAll('.cv-checkbox:checked');
+            const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+
+            if (checkboxes.length > 0) {
+                bulkDeleteBtn.style.display = 'inline-block';
+                bulkDeleteBtn.textContent = `Xóa đã chọn (${checkboxes.length})`;
+            } else {
+                bulkDeleteBtn.style.display = 'none';
+            }
+        }
+
+        function bulkDeleteCVs() {
+            const checkboxes = document.querySelectorAll('.cv-checkbox:checked');
+
+            if (checkboxes.length === 0) {
+                alert('Vui lòng chọn ít nhất một CV để xóa');
+                return;
+            }
+
+            if (!confirm(`Bạn có chắc chắn muốn xóa ${checkboxes.length} CV đã chọn không? Hành động này không thể hoàn tác.`)) {
+                return;
+            }
+
+            const form = document.getElementById('bulkDeleteForm');
+            form.innerHTML = ''; // Clear previous inputs
+
+            checkboxes.forEach(checkbox => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'cv_ids';
+                input.value = checkbox.value;
+                form.appendChild(input);
+            });
+
+            form.submit();
+        }
+
+        // Select All functionality
+        function toggleSelectAll() {
+            const selectAllBtn = document.getElementById('selectAllBtn');
+            const checkboxes = document.querySelectorAll('.cv-checkbox');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = !allChecked;
+            });
+
+            toggleBulkDeleteBtn();
+        }
+    </script>
 </body>
 
 </html>

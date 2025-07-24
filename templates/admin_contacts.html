@@ -164,9 +164,18 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <label class="form-label">Tổng số contact:</label>
                     <p class="h5 text-primary">{{ contacts|length }} contact(s)</p>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">&nbsp;</label>
+                    <div>
+                        <button type="button" class="btn btn-danger w-100" id="bulkDeleteContactBtn"
+                            style="display: none;" onclick="bulkDeleteContacts()">
+                            <i class="fas fa-trash"></i> Xóa đã chọn
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -178,10 +187,14 @@
             <div class="contact-header">
                 <div class="row">
                     <div class="col-md-8">
-                        <h5>
-                            <i class="fas fa-user"></i>
-                            {{ contact.first_name }} {{ contact.last_name }}
-                        </h5>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <input type="checkbox" class="form-check-input contact-checkbox" value="{{ contact._id }}"
+                                onchange="toggleBulkDeleteContactBtn()">
+                            <h5 class="mb-0">
+                                <i class="fas fa-user"></i>
+                                {{ contact.first_name }} {{ contact.last_name }}
+                            </h5>
+                        </div>
                         <p class="mb-1">
                             <i class="fas fa-envelope"></i> {{ contact.email }}
                             {% if contact.phone %}
@@ -236,20 +249,32 @@
                         </div>
 
                         <!-- Status Update Form -->
-                        <div style="min-width: 200px;">
-                            <form method="POST" action="/admin/contact/{{ contact._id }}/status" class="d-flex gap-2">
-                                <select name="status" class="form-select form-select-sm">
-                                    <option value="pending" {% if contact.status=='pending' %}selected{% endif %}>
-                                        Pending</option>
-                                    <option value="processing" {% if contact.status=='processing' %}selected{% endif %}>
-                                        Processing</option>
-                                    <option value="completed" {% if contact.status=='completed' %}selected{% endif %}>
-                                        Completed</option>
-                                    <option value="rejected" {% if contact.status=='rejected' %}selected{% endif %}>
-                                        Rejected</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-save"></i>
+                        <div style="min-width: 250px;">
+                            <div class="d-flex gap-2 mb-2">
+                                <form method="POST" action="/admin/contact/{{ contact._id }}/status"
+                                    class="d-flex gap-2 flex-grow-1">
+                                    <select name="status" class="form-select form-select-sm">
+                                        <option value="pending" {% if contact.status=='pending' %}selected{% endif %}>
+                                            Pending</option>
+                                        <option value="processing" {% if contact.status=='processing' %}selected{% endif
+                                            %}>
+                                            Processing</option>
+                                        <option value="completed" {% if contact.status=='completed' %}selected{% endif
+                                            %}>
+                                            Completed</option>
+                                        <option value="rejected" {% if contact.status=='rejected' %}selected{% endif %}>
+                                            Rejected</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- Delete Button -->
+                            <form method="POST" action="/admin/contact/{{ contact._id }}/delete"
+                                onsubmit="return confirm('Bạn có chắc chắn muốn xóa contact này không? Tất cả ảnh cũng sẽ bị xóa. Hành động này không thể hoàn tác.')">
+                                <button type="submit" class="btn btn-danger btn-sm w-100">
+                                    <i class="fas fa-trash"></i> Xóa Contact
                                 </button>
                             </form>
                         </div>

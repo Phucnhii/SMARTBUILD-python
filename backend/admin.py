@@ -135,6 +135,92 @@ def update_cv_status(cv_id):
         flash(f"Lỗi cập nhật trạng thái: {str(e)}", "error")
         return redirect(url_for('admin.admin_cvs'))
 
+@admin_bp.route("/cv/<cv_id>/delete", methods=["POST"])
+def delete_cv(cv_id):
+    """Xóa CV"""
+    try:
+        if db is None:
+            flash("Lỗi kết nối database", "error")
+            return redirect(url_for('admin.admin_cvs'))
+            
+        # Lấy thông tin CV trước khi xóa
+        cv_info = db.cv_submissions.find_one({'_id': ObjectId(cv_id)})
+        
+        if not cv_info:
+            flash("Không tìm thấy CV", "error")
+            return redirect(url_for('admin.admin_cvs'))
+            
+        # Xóa file từ GridFS
+        try:
+            if fs_recruitment and cv_info.get('file_id'):
+                fs_recruitment.delete(cv_info['file_id'])
+                logging.info(f"Deleted GridFS file: {cv_info['file_id']}")
+        except Exception as e:
+            logging.error(f"Failed to delete GridFS file: {str(e)}")
+            
+        # Xóa metadata từ MongoDB
+        result = db.cv_submissions.delete_one({'_id': ObjectId(cv_id)})
+        
+        if result.deleted_count > 0:
+            flash(f"Đã xóa CV của {cv_info.get('original_filename', 'N/A')}", "success")
+            logging.info(f"Deleted CV: {cv_info.get('original_filename')} - Position: {cv_info.get('position')}")
+        else:
+            flash("Không thể xóa CV", "error")
+            
+        return redirect(url_for('admin.admin_cvs'))
+        
+    except Exception as e:
+        flash(f"Lỗi xóa CV: {str(e)}", "error")
+        return redirect(url_for('admin.admin_cvs'))
+
+@admin_bp.route("/cvs/bulk-delete", methods=["POST"])
+def bulk_delete_cvs():
+    """Xóa nhiều CV cùng lúc"""
+    try:
+        if db is None:
+            flash("Lỗi kết nối database", "error")
+            return redirect(url_for('admin.admin_cvs'))
+            
+        cv_ids = request.form.getlist('cv_ids')
+        
+        if not cv_ids:
+            flash("Vui lòng chọn ít nhất một CV để xóa", "error")
+            return redirect(url_for('admin.admin_cvs'))
+            
+        deleted_count = 0
+        deleted_files = 0
+        
+        for cv_id in cv_ids:
+            try:
+                # Lấy thông tin CV
+                cv_info = db.cv_submissions.find_one({'_id': ObjectId(cv_id)})
+                
+                if cv_info:
+                    # Xóa file từ GridFS
+                    if fs_recruitment and cv_info.get('file_id'):
+                        try:
+                            fs_recruitment.delete(cv_info['file_id'])
+                            deleted_files += 1
+                        except Exception as e:
+                            logging.error(f"Failed to delete GridFS file {cv_info['file_id']}: {str(e)}")
+                    
+                    # Xóa metadata
+                    result = db.cv_submissions.delete_one({'_id': ObjectId(cv_id)})
+                    if result.deleted_count > 0:
+                        deleted_count += 1
+                        
+            except Exception as e:
+                logging.error(f"Failed to delete CV {cv_id}: {str(e)}")
+                
+        flash(f"Đã xóa {deleted_count} CV và {deleted_files} file", "success")
+        logging.info(f"Bulk deleted {deleted_count} CVs and {deleted_files} files")
+        
+        return redirect(url_for('admin.admin_cvs'))
+        
+    except Exception as e:
+        flash(f"Lỗi xóa CV hàng loạt: {str(e)}", "error")
+        return redirect(url_for('admin.admin_cvs'))
+
 @admin_bp.route("/contacts")
 def admin_contacts():
     """Trang quản lý Contact Submissions"""
@@ -201,6 +287,96 @@ def update_contact_status(contact_id):
         
     except Exception as e:
         flash(f"Lỗi cập nhật trạng thái: {str(e)}", "error")
+        return redirect(url_for('admin.admin_contacts'))
+
+@admin_bp.route("/contact/<contact_id>/delete", methods=["POST"])
+def delete_contact(contact_id):
+    """Xóa Contact submission"""
+    try:
+        if db is None:
+            flash("Lỗi kết nối database", "error")
+            return redirect(url_for('admin.admin_contacts'))
+            
+        # Lấy thông tin contact trước khi xóa
+        contact_info = db.contact_submissions.find_one({'_id': ObjectId(contact_id)})
+        
+        if not contact_info:
+            flash("Không tìm thấy contact", "error")
+            return redirect(url_for('admin.admin_contacts'))
+            
+        # Xóa các ảnh từ GridFS
+        deleted_images = 0
+        if fs_contact and contact_info.get('image_ids'):
+            for image_id in contact_info['image_ids']:
+                try:
+                    fs_contact.delete(image_id)
+                    deleted_images += 1
+                    logging.info(f"Deleted GridFS image: {image_id}")
+                except Exception as e:
+                    logging.error(f"Failed to delete GridFS image {image_id}: {str(e)}")
+                    
+        # Xóa contact submission từ MongoDB
+        result = db.contact_submissions.delete_one({'_id': ObjectId(contact_id)})
+        
+        if result.deleted_count > 0:
+            flash(f"Đã xóa contact của {contact_info.get('email', 'N/A')} (bao gồm {deleted_images} ảnh)", "success")
+            logging.info(f"Deleted contact: {contact_info.get('email')} - {deleted_images} images deleted")
+        else:
+            flash("Không thể xóa contact", "error")
+            
+        return redirect(url_for('admin.admin_contacts'))
+        
+    except Exception as e:
+        flash(f"Lỗi xóa contact: {str(e)}", "error")
+        return redirect(url_for('admin.admin_contacts'))
+
+@admin_bp.route("/contacts/bulk-delete", methods=["POST"])
+def bulk_delete_contacts():
+    """Xóa nhiều contact cùng lúc"""
+    try:
+        if db is None:
+            flash("Lỗi kết nối database", "error")
+            return redirect(url_for('admin.admin_contacts'))
+            
+        contact_ids = request.form.getlist('contact_ids')
+        
+        if not contact_ids:
+            flash("Vui lòng chọn ít nhất một contact để xóa", "error")
+            return redirect(url_for('admin.admin_contacts'))
+            
+        deleted_count = 0
+        deleted_images = 0
+        
+        for contact_id in contact_ids:
+            try:
+                # Lấy thông tin contact
+                contact_info = db.contact_submissions.find_one({'_id': ObjectId(contact_id)})
+                
+                if contact_info:
+                    # Xóa ảnh từ GridFS
+                    if fs_contact and contact_info.get('image_ids'):
+                        for image_id in contact_info['image_ids']:
+                            try:
+                                fs_contact.delete(image_id)
+                                deleted_images += 1
+                            except Exception as e:
+                                logging.error(f"Failed to delete GridFS image {image_id}: {str(e)}")
+                    
+                    # Xóa contact submission
+                    result = db.contact_submissions.delete_one({'_id': ObjectId(contact_id)})
+                    if result.deleted_count > 0:
+                        deleted_count += 1
+                        
+            except Exception as e:
+                logging.error(f"Failed to delete contact {contact_id}: {str(e)}")
+                
+        flash(f"Đã xóa {deleted_count} contact và {deleted_images} ảnh", "success")
+        logging.info(f"Bulk deleted {deleted_count} contacts and {deleted_images} images")
+        
+        return redirect(url_for('admin.admin_contacts'))
+        
+    except Exception as e:
+        flash(f"Lỗi xóa contact hàng loạt: {str(e)}", "error")
         return redirect(url_for('admin.admin_contacts'))
 
 @admin_bp.route("/stats")
