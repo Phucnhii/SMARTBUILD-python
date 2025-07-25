@@ -109,88 +109,41 @@ def index():
     resp = make_response(render_template("index.html"))
     return resp
 
-@app.route("/api/analyze", methods=["POST"])
-def api_analyze():
-    if "image" not in request.files:
-        return jsonify({"error": "No file part"}), 400
-    file = request.files["image"]
-    if file.filename == "":
-        return jsonify({"error": "No selected file"}), 400
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        save_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        file.save(save_path)
-
-        logging.info(f"User uploaded file: {filename}, IP: {request.remote_addr}")
-
-        # Gọi model AI
-        result = analyze(save_path)
-        # Xoá file tạm
-        os.remove(save_path)
-
-        return jsonify(result)
-    return jsonify({"error": "File type not allowed"}), 400
-
-@app.route("/api/chatbot", methods=["POST"])
-def api_chatbot():
-    data = request.get_json()
-    if not data or "message" not in data:
-        return jsonify({"error": "No message provided"}), 400
-
-    user_message = data["message"]
-    logging.info(f"Chatbot message: {user_message}, IP: {request.remote_addr}")
-
+# Route để serve ảnh contact từ GridFS
+@app.route("/contact/image/<file_id>")
+def serve_contact_image(file_id):
     try:
-        # Gọi Gemini API
-        bot_response = call_gemini(user_message)
-        return jsonify({"response": bot_response})
+        # Lấy file từ GridFS
+        grid_out = fs_contact.get(ObjectId(file_id))
+        
+        # Tạo response với đúng content type
+        response = make_response(grid_out.read())
+        response.headers['Content-Type'] = grid_out.content_type or 'image/jpeg'
+        response.headers['Content-Disposition'] = f'inline; filename="{grid_out.filename}"'
+        
+        return response
     except Exception as e:
-        logging.error(f"Gemini API error: {str(e)}")
-        return jsonify({"error": "Failed to get response from Gemini API"}), 500
+        logging.error(f"Failed to serve contact image {file_id}: {str(e)}")
+        return jsonify({"error": "Image not found"}), 404
 
-# Serve static files (only dev – production nên qua nginx)
-@app.route("/static/<path:path>")
-def send_static(path):
-    return send_from_directory(app.static_folder, path)
+# API để lấy danh sách contact submissions (cho admin)
+@app.route("/api/contacts")
+def api_contacts():
+    try:
+        contacts = list(db.contact_submissions.find().sort("submitted_at", -1))
+        
+        # Convert ObjectId to string để JSON serialize được
+        for contact in contacts:
+            contact['_id'] = str(contact['_id'])
+            contact['image_ids'] = [str(img_id) for img_id in contact.get('image_ids', [])]
+            contact['submitted_at'] = contact['submitted_at'].isoformat()
+            
+        return jsonify(contacts)
+    except Exception as e:
+        logging.error(f"Failed to get contacts: {str(e)}")
+        return jsonify({"error": "Failed to get contacts"}), 500 
 
-# Page khác
-@app.route("/intro")
-def intro():
-    return render_template("intro.html") 
-
-@app.route("/recruitment", methods=["GET", "POST"])
-def recruitment():
-    if request.method == "POST":
-        for position in ['cv-devops', 'cv-ai', 'cv-frontend', 'cv-backend', 'cv-security']:
-            if position in request.files:
-                file = request.files[position]
-                if file.filename == "":
-                    flash("Vui lòng chọn file PDF.")
-                    return redirect(url_for("recruitment"))
-
-                if file and allowed_cv_file(file.filename):
-                    filename = secure_filename(file.filename)
-                    folder = os.path.join(UPLOAD_CV_FOLDER, position)
-                    os.makedirs(folder, exist_ok=True)
-                    save_path = os.path.join(folder, filename)
-                    file.save(save_path)
-
-                    logging.info(f"CV submitted: {filename} for {position}, IP: {request.remote_addr}")
-                    flash(f"Đã nhận hồ sơ cho vị trí {position.replace('cv-', '').upper()}.")
-                    return redirect(url_for("recruitment"))
-                else:
-                    flash("Chỉ chấp nhận file PDF.")
-                    return redirect(url_for("recruitment"))
-
-    return render_template("recruitment.html")
-
-
-@app.errorhandler(RequestEntityTooLarge)
-def handle_file_too_large(e):
-    flash("Ảnh tải lên vượt quá giới hạn 2MB.", "error")
-    return redirect(url_for('contact'))
-
-@app.route("/contact", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         try:
@@ -376,14 +329,36 @@ def recruitment():
 
                 if file and allowed_cv_file(file.filename):
                     filename = secure_filename(file.filename)
-                    folder = os.path.join(UPLOAD_CV_FOLDER, position)
-                    os.makedirs(folder, exist_ok=True)
-                    save_path = os.path.join(folder, filename)
-                    file.save(save_path)
+                    try:
+                        # Sử dụng fs_recruitment đã khởi tạo sẵn
+                        # Lưu file vào GridFS
+                        file_id = fs_recruitment.put(file.stream, filename=filename, content_type=file.content_type)
 
-                    logging.info(f"CV submitted: {filename} for {position}, IP: {request.remote_addr}")
+                        # Tạo metadata
+                        cv_data = {
+                            'position': position,
+                            'original_filename': file.filename,
+                            'saved_filename': filename,
+                            'file_id': file_id,  # ID GridFS
+                            'file_size': file.content_length or 0,
+                            'ip_address': request.remote_addr,
+                            'submitted_at': datetime.utcnow(),
+                            'status': 'received',
+                            'user_agent': request.headers.get('User-Agent', ''),
+                        }
+
+                        result = db.cv_submissions.insert_one(cv_data)
+                        logging.info(f"✅ CV uploaded to GridFS - ID: {file_id}")
+                        logging.info(f"✅ CV metadata saved to MongoDB - ID: {result.inserted_id}")
+
+                    except Exception as e:
+                        logging.error(f"❌ Failed to upload CV: {str(e)}")
+                        flash("Đã có lỗi xảy ra khi lưu hồ sơ.")
+                        return redirect(url_for("recruitment"))
+
                     flash(f"Đã nhận hồ sơ cho vị trí {position.replace('cv-', '').upper()}.")
                     return redirect(url_for("recruitment"))
+
                 else:
                     flash("Chỉ chấp nhận file PDF.")
                     return redirect(url_for("recruitment"))
