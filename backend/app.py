@@ -391,13 +391,43 @@ def login():
             verify_result = verify_response.json()
             if not verify_result.get("success"):
                 flash("CAPTCHA không hợp lệ. Vui lòng thử lại.", "error")
-                return redirect(url_for("contact"))
+                return redirect(url_for("login"))
             
         except Exception as e:
             flash(f"Lỗi hệ thống: {str(e)}", "error")
             return redirect(url_for("login"))
         
     return render_template("login.html") 
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        try:
+            # Xác thực CAPTCHA
+            solution = request.form.get('frc-captcha-solution')
+            if not solution:
+                flash("Vui lòng hoàn thành CAPTCHA", "error")
+                return redirect(url_for("signup"))
+
+            # Gửi request đến FriendlyCaptcha để xác thực
+            verify_response = requests.post(
+                'https://api.friendlycaptcha.com/api/v1/siteverify',
+                data={
+                    'secret': FRIENDLYCAPTCHA_SECRET,
+                    'solution': solution
+                }
+            )
+
+            verify_result = verify_response.json()
+            if not verify_result.get("success"):
+                flash("CAPTCHA không hợp lệ. Vui lòng thử lại.", "error")
+                return redirect(url_for("signup"))
+            
+        except Exception as e:
+            flash(f"Lỗi hệ thống: {str(e)}", "error")
+            return redirect(url_for("signup"))
+        
+    return render_template("signup.html") 
 
 @app.errorhandler(RequestEntityTooLarge)
 def handle_file_too_large(e):
