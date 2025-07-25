@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnomaBuild - Sản phẩm</title>
+  <link rel="stylesheet" href="/static/css/chatbot.css?v=1.0.2" />
+  <link rel="stylesheet" href="/static/css/product.css" />
+</head>
+<body>
+ 
+  <nav class="navbar">  
+  <div class="nav-container">
+    <div class="nav-logo">🦾AnomaBuild</div>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+
+    <ul class="nav-links">
+      <li><a href="/">TRANG CHỦ</a></li>
+      <li><a href="/intro">GIỚI THIỆU</a></li>
+      <li><a href="/recruitment">TUYỂN DỤNG</a></li>
+      <li><a href="/product" id="disable">SẢN PHẨM</a></li>
+
+      <li class="lang-switch-mobile">
+        <select id="languageSwitcherMobile" class="lang-switcher">
+          <option value="/index-vi">🇻🇳</option>
+          <option value="/index-en">🇺🇸</option>
+          <option value="/index-zh">🇨🇳</option>
+        </select>
+      </li>
+      <li><button id="darkModeButton" class="darkmode-btn">🌚</button></li>
+      <li class="login-mobile" id="login-mobile">
+        <a href="/login">Đăng nhập👤</a>
+      </li>
+    </ul>
+
+    <div class="other-button">
+      <a href="/login" class="login-desktop">Đăng nhập👤</a>
+      <select id="languageSwitcherDesktop" class="lang-switcher-desktop">
+        <option value="/index-vi">🇻🇳</option>
+        <option value="/index-en">🇺🇸</option>
+        <option value="/index-zh">🇨🇳</option>
+      </select>
+      <button id="darkModeButton-desktop" class="darkmode-btn">🌚</button>
+    </div>
+  </div>
+</nav>
+
+  <!--Banner-->
+<section class="banner">
+  <div class="banner-overlay">
+    <div class="banner-flex">
+      <div class="banner-text">
+        <h1>Welcome to AnomaBuild</h1>
+        <p>Liên hệ ngay để nhận tư vấn giải pháp và sản phẩm phù hợp nhất với tình trạng công trình của bạn từ đội ngũ chuyên gia!</p>
+      </div>
+      <div class="banner-action">
+        <a href="/" id="scrollButton" class="banner-button">Liên hệ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <h1>Sản phẩm của chúng tôi</h1>
+
+</div>
+
+    <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2025 AnomaBuild – Mọi quyền được bảo lưu.</p>
+
+      <ul class="footer-links">      
+        <li><a href="/">TRANG CHỦ</a></li>
+        <li><a href="/intro">GIỚI THIỆU</a></li>
+        <li><a href="/recruitment">TUYỂN DỤNG</a></li>
+        <li><a href="/product">SẢN PHẨM</a></li>
+      </ul>
+    </div>
+  </footer>
+
+ <!-- Chatbot Icon -->
+<div id="chatbot-icon">
+  <img src="/static/img/chatbot-icon-robot.png" alt="Chatbot Icon" />
+</div>
+
+<!-- Chatbot Popup -->
+<div id="chatbot-popup">
+  <div class="chatbot-header">
+   <div class="chatbot-title">
+    <span>AnomaBuild AI Chatbot</span>
+    <button id="new-chat-btn" title="Cuộc trò chuyện mới">+</button>
+  </div>
+  <button id="chatbot-close">&times;</button>
+  </div>
+    <!-- Confirm new chat -->
+  <div id="new-chat-confirm">
+    <p>Bạn có muốn bắt đầu cuộc trò chuyện mới không?</p>
+    <button id="confirm-new-chat-yes">Bắt đầu mới</button>
+    <button id="confirm-new-chat-no">Tiếp tục</button>
+  </div>
+  <div id="reconnect-confirm" style="display:none; padding: 10px; text-align: center;">
+  <p>Bạn có muốn tiếp tục cuộc trò chuyện trước đó không?</p>
+  <button id="reconnect-yes">Tiếp tục</button>
+  <button id="reconnect-no">Bắt đầu mới</button>
+</div>
+  <div id="chatbot-messages"></div>
+  <form class="chatbot-form" id="chatbot-form">
+    <input type="text" id="chatbot-input" placeholder="Nhập câu hỏi..." autocomplete="off" />
+    <!-- <button type="submit">send</button> -->
+ <button type="submit" class="send-button" title="Gửi">
+  <img src="/static/img/chatbot-iconsend.png" alt="Send Icon" class="send-icon" />
+</button>
+  </form>
+</div>
+<script src="/static/js/chatbot.js"></script>
+  <script src="/static/js/product.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnomaBuild - Đăng nhập</title>
+  <script src="https://unpkg.com/lottie-web@5.10.2/build/player/lottie.min.js"></script>
+  <script src="https://unpkg.com/friendly-challenge@0.9.9/widget.min.js" async defer></script>
+  <link rel="stylesheet" href="/static/css/login.css" />
+</head>
+<body>
+
+  <div class="container">
+    <!-- Cột trái: Branding -->
+    <div class="branding">
+      <div class="branding-content">
+        <h1>Chào mừng đến với AnomaBuild</h1>
+        <p>Công cụ nhận diện thông minh cho kỹ sư xây dựng</p>
+        <!--<img src="/static/img/login2.png" alt="AI Building" />-->
+        <div id="lottie-branding" style="width: 100%; max-width: 400px;"></div>
+      </div>
+    </div>
+
+    <!-- Cột phải: Form login -->
+    <div class="login-form">
+      <div class="form-wrapper">
+
+        <div class="form-actions">
+          <button id="closeBtn" class="close-btn">🗙</button>
+        </div>
+
+        <h2>Đăng nhập</h2>
+        <p class="welcome-msg">Chào mừng trở lại! Hãy đăng nhập để tiếp tục❤️</p>
+
+        <form method="POST" action="/login" class="login-input">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="password">Mật khẩu</label>
+          <input type="password" id="password" name="password" required />
+
+          <div class="options">
+            <label><input type="checkbox" /> Ghi nhớ</label>
+            <a href="/forgot-password">Quên mật khẩu?</a>
+          </div>
+
+          <!-- FriendlyCaptcha widget -->
+          <div class="captcha-con">
+          <div class="frc-captcha" data-sitekey="FCMKTP5JABF9BL61"></div>
+          </div>
+          <button type="submit" class="login-btn">Đăng nhập</button>
+        </form>
+
+          <!--FriendlyCaptcha-->
+          <p class="captcha-msg">Biểu mẫu được bảo vệ bởi <strong>FriendlyCaptcha</strong>, đồng thời <a href="https://friendlycaptcha.com/legal/privacy-end-users/" target="_blank" rel="noopener noreferrer">Chính sách quyền riêng tư</a> và <a href="https://friendlycaptcha.com/legal/terms/" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ</a> được áp dụng.</p>
+
+        <p class="register-msg">
+          Chưa có tài khoản? <a href="/register">Đăng ký ngay</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+<script src="/static/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  color: #333;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Branding Section */
+.branding {
+  flex: 1;
+  /*background: linear-gradient(to bottom right, #006f62, #2196f3);*/
+  /*background: linear-gradient(to right, #0a0f1c, #00334e);*/
+  background: linear-gradient(to right, #009688, #00bcd4);
+  color: #e0f2f1;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.branding-content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.branding h1 {
+  font-size: 40px;
+  margin-bottom: 16px;
+  color: #e0f1f2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.branding h1:hover {
+  transform: scale(1.03);
+}
+
+.branding h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.branding p {
+  font-size: 24px;
+  margin-bottom: -32px;
+}
+
+/* Login Form Section */
+.login-form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #f0f4f8, #e0f7fa);
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.form-wrapper h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  color: #009688;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+/*.form-wrapper h2:hover {
+  color: #00bcd4;
+  transform: scale(1.03);
+}*/
+
+.welcome-msg {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+label {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  color: #2c2c2c;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #009688;
+  outline: none;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.options a {
+  color: #009688;
+  text-decoration: none;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+.login-btn {
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  background: linear-gradient(to right, #009688, #00bcd4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.login-btn:hover {
+  transform: scale(1.03);
+}
+
+.register-msg {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: center;
+  color: #333333;
+}
+
+.register-msg a {
+  color: #009688;
+  text-decoration: none;
+}
+
+.register-msg a:hover {
+  text-decoration: underline;
+}
+
+/*Capcha*/
+.frc-captcha {
+  transform: scale(0.70);      
+  transform-origin: top center;  
+  border-radius: 8px;
+  color: #666666;
+}
+
+.frc-captcha a {
+  color:#009688;
+}
+
+.captcha-con {
+  display: flex;
+  align-items: center;  
+  justify-content: center;
+  margin: 0 0;
+}
+
+.captcha-msg {
+  margin-top: 16px;
+  font-size: 12px;
+  text-align: center;
+  color: #333333;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .branding {
+    display: flex;
+  }
+}
+
+@media (max-width: 1024px) {
+.branding h1 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.branding h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.branding p {
+  font-size: 18px;
+  margin-bottom: -24px;
+}
+
+/* Login Form Section */
+.form-wrapper {
+  padding: 30px;
+}
+
+.form-wrapper h2 {
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.welcome-msg {
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+
+label {
+  margin-bottom: 3.5px;
+  font-size: 12px;
+}
+
+input[type="email"],
+input[type="password"] {
+  margin-bottom: 10px;
+}
+
+.options {
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.register-msg {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.captcha-msg {
+  font-size: 10px;
+  margin-top: 12px;
+}
+}
+
+body {
+  opacity: 0;
+  animation: fadeInBody 1s ease forwards;
+}
+
+@keyframes fadeInBody {
+  to {
+    opacity: 1;
+  }
+}
+
+.form-wrapper {
+  animation: fadeSlideUp 1.2s ease;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-wrapper:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.login-input a, button, input {
+  transition: all 0.3s ease;
+}
+
+/*Nút quay lại và thoát*/
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color:  #009688;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 6px 10px;
+}
+
+.close-btn:hover {
+  color: #006f62;
+  transform: scale(1.1);
+}
+
+/* Responsive */
+
+/* Dưới 768px: điện thoại */
+@media (max-width: 768px) {
+
+.frc-captcha {
+  transform: scale(0.60);  
+  transform-origin: center center;        
+}
+
+/* Login Form Section */
+.form-wrapper {
+  padding: 25px;
+}
+
+.form-wrapper h2 {
+  margin-bottom: 10px;
+}
+
+.welcome-msg {
+  margin-bottom: 8px;
+}
+
+label {
+  margin-bottom: 3px;
+}
+
+input[type="email"],
+input[type="password"] {
+  margin-bottom: 8px;
+}
+
+.options {
+  margin-bottom: 4px;
+}
+
+.register-msg {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.captcha-msg {
+  margin-top: 8px;
+}
+}
+
+
+/* Dưới 480px: điện thoại nhỏ */
+@media (max-width: 480px) {
+
+.frc-captcha {
+  transform: scale(0.50); 
+  transform-origin: center center;         
+}
+
+.form-wrapper {
+  width: 100%;
+}
+
+.captcha-msg {
+  font-size: 8px;
+}
+
+.options {
+  margin-bottom: 0;
+}
+}
+
+/* Branding Animation */
+.branding-content {
+  text-align: center;
+  padding: 20px;
+}
+
+#lottie-branding {
+  margin: 0 auto;
+}

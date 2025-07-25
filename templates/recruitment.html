@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmartBuild AI Demo - Tuyển dụng</title>
+  <title>AnomaBuild - Tuyển dụng</title>
   <link rel="stylesheet" href="/static/css/chatbot.css?v=1.0.2" />
   <link rel="stylesheet" href="/static/css/recruitment.css" />
 </head>
@@ -11,7 +11,7 @@
 
 <nav class="navbar">  
   <div class="nav-container">
-    <div class="nav-logo">🦾 SmartBuild AI</div>
+    <div class="nav-logo">🦾AnomaBuild</div>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
     <label for="nav-toggle" class="nav-toggle-label">
@@ -22,7 +22,7 @@
       <li><a href="/">TRANG CHỦ</a></li>
       <li><a href="/intro">GIỚI THIỆU</a></li>
       <li><a href="/recruitment" id="disable">TUYỂN DỤNG</a></li>
-      <li><a href="/contact">LIÊN HỆ</a></li>
+      <li><a href="/product">SẢN PHẨM</a></li>
 
       <li class="lang-switch-mobile">
         <select id="languageSwitcherMobile" class="lang-switcher">
@@ -32,9 +32,13 @@
         </select>
       </li>
       <li><button id="darkModeButton" class="darkmode-btn">🌚</button></li>
+      <li class="login-mobile" id="login-mobile">
+        <a href="/login">Đăng nhập👤</a>
+      </li>
     </ul>
 
     <div class="other-button">
+      <a href="/login" class="login-desktop">Đăng nhập👤</a>
       <select id="languageSwitcherDesktop" class="lang-switcher-desktop">
         <option value="/index-vi">🇻🇳</option>
         <option value="/index-en">🇺🇸</option>
@@ -50,18 +54,18 @@
   <div class="banner-overlay">
     <div class="banner-flex">
       <div class="banner-text">
-        <h1>Welcome to SmartBuild AI</h1>
-        <p>Thực tập cùng SmartBuild AI – cơ hội trải nghiệm dự án thực tế, học hỏi từ đội ngũ chuyên gia và đóng góp vào giải pháp AI thông minh!</p>
+        <h1>Welcome to AnomaBuild</h1>
+        <p>Thực tập cùng AnomaBuild – cơ hội trải nghiệm dự án thực tế, học hỏi từ đội ngũ chuyên gia và đóng góp vào giải pháp AI thông minh!</p>
       </div>
       <div class="banner-action">
-        <button id="scrollButton" class="banner-button">Let's go</button>
+        <a id="scrollButton" class="banner-button">Nộp CV</a>
       </div>
     </div>
   </div>
 </section>
 
 <div class="container">
-  <h1>Cơ hội nghề nghiệp tại SmartBuild AI</h1>
+  <h1>Cơ hội nghề nghiệp tại AnomaBuild</h1>
 
 <!--Flash-->
 {% with messages = get_flashed_messages() %}
@@ -75,10 +79,10 @@
 {% endwith %}
 
   <section class="recruitment-section" id="job-list">
-  <p>Hiện tại, SmartBuild AI đang mở tuyển một số vị trí thực tập sinh như AI, DevOps, WebDev và Cybersecurity. Đây là cơ hội để bạn tham gia vào một dự án công nghệ thực tế, học hỏi cùng đội ngũ chuyên gia và đóng góp vào các sản phẩm AI ứng dụng trong lĩnh vực xây dựng. Chúng tôi luôn chào đón những bạn trẻ nhiệt huyết, có tinh thần học hỏi và yêu thích công nghệ.</p>
+  <p>Hiện tại, AnomaBuild đang mở tuyển một số vị trí thực tập sinh như AI, DevOps, WebDev và Cybersecurity. Đây là cơ hội để bạn tham gia vào một dự án công nghệ thực tế, học hỏi cùng đội ngũ chuyên gia và đóng góp vào các sản phẩm AI ứng dụng trong lĩnh vực xây dựng. Chúng tôi luôn chào đón những bạn trẻ nhiệt huyết, có tinh thần học hỏi và yêu thích công nghệ.</p>
     <p>Thời gian thực tập tối thiểu 3 tháng, với lịch làm việc cố định từ 9h00 đến 15h00, thứ Hai đến thứ Sáu hàng tuần. Mỗi thực tập sinh sẽ được phân công mentor hướng dẫn cụ thể, có quyền truy cập vào các tài nguyên chuyên môn nội bộ và được tham gia trực tiếp vào quá trình xây dựng, triển khai sản phẩm thực tế của công ty.
   </p>
-  <p>Chính sách trợ cấp thực tập có thể được xem xét và áp dụng tùy theo năng lực và mức độ đóng góp. Chúng tôi đánh giá cao sự chuyên nghiệp, tinh thần trách nhiệm và khả năng làm việc nhóm của các bạn, và xem đó là yếu tố quan trọng để đồng hành cùng SmartBuild AI trong chặng đường phát triển công nghệ phục vụ ngành xây dựng.</p>
+  <p>Chính sách trợ cấp thực tập có thể được xem xét và áp dụng tùy theo năng lực và mức độ đóng góp. Chúng tôi đánh giá cao sự chuyên nghiệp, tinh thần trách nhiệm và khả năng làm việc nhóm của các bạn, và xem đó là yếu tố quan trọng để đồng hành cùng AnomaBuild trong chặng đường phát triển công nghệ phục vụ ngành xây dựng.</p>
 </p>
 </section>
 
@@ -131,7 +135,7 @@
 
   <section class="recruitment-section"></section>
   <section class="recruitment-section">
-<p>Chúng tôi luôn trân trọng những hồ sơ chất lượng từ các bạn trẻ đang tìm kiếm cơ hội phát triển bản thân trong môi trường công nghệ thực tế. Nếu bạn quan tâm đến một trong các vị trí đang tuyển dụng và mong muốn trở thành một phần của đội ngũ SmartBuild AI, hãy gửi CV của bạn cho chúng tôi ngay hôm nay. Rất mong được đón nhận những hồ sơ tiềm năng và đồng hành cùng bạn trên hành trình xây dựng các giải pháp công nghệ ứng dụng trong ngành xây dựng.</p>
+<p>Chúng tôi luôn trân trọng những hồ sơ chất lượng từ các bạn trẻ đang tìm kiếm cơ hội phát triển bản thân trong môi trường công nghệ thực tế. Nếu bạn quan tâm đến một trong các vị trí đang tuyển dụng và mong muốn trở thành một phần của đội ngũ AnomaBuild, hãy gửi CV của bạn cho chúng tôi ngay hôm nay. Rất mong được đón nhận những hồ sơ tiềm năng và đồng hành cùng bạn trên hành trình xây dựng các giải pháp công nghệ ứng dụng trong ngành xây dựng.</p>
 </section>
 
 </div>
@@ -139,13 +143,13 @@
 
     <footer class="footer">
     <div class="footer-container">
-      <p>&copy; 2025 SmartBuild AI – Mọi quyền được bảo lưu.</p>
+      <p>&copy; 2025 AnomaBuild – Mọi quyền được bảo lưu.</p>
 
       <ul class="footer-links">      
         <li><a href="/">TRANG CHỦ</a></li>
         <li><a href="/intro">GIỚI THIỆU</a></li>
         <li><a href="/recruitment">TUYỂN DỤNG</a></li>
-        <li><a href="/contact">LIÊN HỆ</a></li>
+        <li><a href="/product">SẢN PHẨM</a></li>
       </ul>
     </div>
   </footer>
@@ -159,7 +163,7 @@
 <div id="chatbot-popup">
   <div class="chatbot-header">
    <div class="chatbot-title">
-    <span>SmartBuild AI Chatbot</span>
+    <span>AnomaBuild AI Chatbot</span>
     <button id="new-chat-btn" title="Cuộc trò chuyện mới">+</button>
   </div>
   <button id="chatbot-close">&times;</button>
@@ -185,7 +189,7 @@
   </form>
 </div>
 <script src="/static/js/chatbot.js"></script>
-  <script src="/static/js/contact.js"></script>
+  <script src="/static/js/recruitment.js"></script>
 
 </body>
 </html>
