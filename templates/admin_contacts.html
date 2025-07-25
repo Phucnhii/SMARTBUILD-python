@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quản lý Contact Submissions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: fixed;
+            width: 250px;
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .contact-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background-color: #cce5f0;
+            color: #004085;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .image-gallery {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .contact-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .contact-image:hover {
+            transform: scale(1.1);
+        }
+
+        .no-images {
+            color: #999;
+            font-style: italic;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-4">
+            <h4><i class="fas fa-tools"></i> Admin Panel</h4>
+        </div>
+        <nav class="nav flex-column">
+            <a class="nav-link text-white" href="/admin">
+                <i class="fas fa-dashboard"></i> Dashboard
+            </a>
+            <a class="nav-link text-white" href="/admin/cvs">
+                <i class="fas fa-file-pdf"></i> Quản lý CV
+            </a>
+            <a class="nav-link text-white active" href="/admin/contacts">
+                <i class="fas fa-envelope"></i> Quản lý Contact
+            </a>
+            <a class="nav-link text-white" href="/admin/stats">
+                <i class="fas fa-chart-bar"></i> Thống kê
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-envelope"></i> Quản lý Contact Submissions</h2>
+            <a href="/admin" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Về Dashboard
+            </a>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <form method="GET" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Lọc theo trạng thái:</label>
+                    <select name="status" class="form-select" onchange="this.form.submit()">
+                        <option value="all" {% if current_status=='all' %}selected{% endif %}>Tất cả</option>
+                        <option value="pending" {% if current_status=='pending' %}selected{% endif %}>Pending</option>
+                        <option value="processing" {% if current_status=='processing' %}selected{% endif %}>Processing
+                        </option>
+                        <option value="completed" {% if current_status=='completed' %}selected{% endif %}>Completed
+                        </option>
+                        <option value="rejected" {% if current_status=='rejected' %}selected{% endif %}>Rejected
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tổng số contact:</label>
+                    <p class="h5 text-primary">{{ contacts|length }} contact(s)</p>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">&nbsp;</label>
+                    <div>
+                        <button type="button" class="btn btn-danger w-100" id="bulkDeleteContactBtn"
+                            style="display: none;" onclick="bulkDeleteContacts()">
+                            <i class="fas fa-trash"></i> Xóa đã chọn
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Contacts List -->
+        {% if contacts %}
+        {% for contact in contacts %}
+        <div class="contact-card">
+            <div class="contact-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <input type="checkbox" class="form-check-input contact-checkbox" value="{{ contact._id }}"
+                                onchange="toggleBulkDeleteContactBtn()">
+                            <h5 class="mb-0">
+                                <i class="fas fa-user"></i>
+                                {{ contact.first_name }} {{ contact.last_name }}
+                            </h5>
+                        </div>
+                        <p class="mb-1">
+                            <i class="fas fa-envelope"></i> {{ contact.email }}
+                            {% if contact.phone %}
+                            | <i class="fas fa-phone"></i> {{ contact.phone }}
+                            {% endif %}
+                        </p>
+                        <p class="mb-1">
+                            <i class="fas fa-flag"></i> {{ contact.country }}
+                            | <i class="fas fa-calendar"></i> {{ contact.submitted_at.strftime('%d/%m/%Y %H:%M') if
+                            contact.submitted_at else 'N/A' }}
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <span class="status-badge status-{{ contact.status or 'pending' }}">
+                            {{ contact.status or 'pending' | title }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Vấn đề:</strong> {{ contact.problem or 'N/A' }}</p>
+                    <p><strong>Loại công trình:</strong> {{ contact.construction_type or 'N/A' }}</p>
+                    <p><strong>Loại yêu cầu:</strong> {{ contact.request_type or 'N/A' }}</p>
+
+                    {% if contact.problem_description %}
+                    <div class="mt-2">
+                        <strong>Mô tả chi tiết:</strong>
+                        <p class="text-muted">{{ contact.problem_description[:200] }}{% if
+                            contact.problem_description|length > 200 %}...{% endif %}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <strong>Hình ảnh ({{ contact.image_count or 0 }}):</strong>
+                            {% if contact.image_ids and contact.image_ids|length > 0 %}
+                            <div class="image-gallery">
+                                {% for image_id in contact.image_ids %}
+                                <img src="/contact/image/{{ image_id }}" class="contact-image"
+                                    alt="Contact Image {{ loop.index }}"
+                                    onclick="showImageModal('/contact/image/{{ image_id }}')"
+                                    title="Click để xem ảnh lớn">
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <p class="no-images">Không có ảnh</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Status Update Form -->
+                        <div style="min-width: 250px;">
+                            <div class="d-flex gap-2 mb-2">
+                                <form method="POST" action="/admin/contact/{{ contact._id }}/status"
+                                    class="d-flex gap-2 flex-grow-1">
+                                    <select name="status" class="form-select form-select-sm">
+                                        <option value="pending" {% if contact.status=='pending' %}selected{% endif %}>
+                                            Pending</option>
+                                        <option value="processing" {% if contact.status=='processing' %}selected{% endif
+                                            %}>
+                                            Processing</option>
+                                        <option value="completed" {% if contact.status=='completed' %}selected{% endif
+                                            %}>
+                                            Completed</option>
+                                        <option value="rejected" {% if contact.status=='rejected' %}selected{% endif %}>
+                                            Rejected</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- Delete Button -->
+                            <form method="POST" action="/admin/contact/{{ contact._id }}/delete"
+                                onsubmit="return confirm('Bạn có chắc chắn muốn xóa contact này không? Tất cả ảnh cũng sẽ bị xóa. Hành động này không thể hoàn tác.')">
+                                <button type="submit" class="btn btn-danger btn-sm w-100">
+                                    <i class="fas fa-trash"></i> Xóa Contact
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-2 text-muted small">
+                <i class="fas fa-globe"></i> IP: {{ contact.ip_address or 'N/A' }}
+                {% if contact.updated_at %}
+                | <i class="fas fa-clock"></i> Cập nhật: {{ contact.updated_at.strftime('%d/%m/%Y %H:%M') }}
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+            <h4 class="text-muted">Không có contact submission nào</h4>
+            <p class="text-muted">Hiện tại chưa có contact submission nào trong hệ thống.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xem ảnh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" class="modal-img" alt="Contact Image">
+                </div>
+                <div class="modal-footer">
+                    <a id="downloadLink" href="" download class="btn btn-primary">
+                        <i class="fas fa-download"></i> Tải xuống
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showImageModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('downloadLink').href = imageSrc.replace('/contact/image/', '/download/contact/image/');
+            new bootstrap.Modal(document.getElementById('imageModal')).show();
+        }
+
+        // Auto-refresh every 30 seconds if on pending status
+        var currentStatus = "{{ current_status }}";
+        if (currentStatus === "pending") {
+            setTimeout(() => {
+                location.reload();
+            }, 30000);
+        }
+    </script>
+</body>
+
+</html>

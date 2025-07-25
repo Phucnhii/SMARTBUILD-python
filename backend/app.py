@@ -23,8 +23,8 @@ FRIENDLYCAPTCHA_SECRET = os.getenv('FRIENDLYCAPTCHA_SECRET')
 # Kiểm tra kết nối MongoDB khi khởi động app
 try:
     db = get_database()
-    fs = GridFS(db)  # Khởi tạo GridFS global
-    # Test ping để đảm bảo kết nối thành công
+    fs_recruitment = GridFS(db, collection="cv_files")
+    fs_contact = GridFS(db, collection="contact_images")
     db.command('ping')
     logging.info("✅ MongoDB connection successful")
     print("✅ Connected to MongoDB Atlas - Database: SmartBuild_AI")
@@ -153,10 +153,44 @@ def api_chatbot():
 def send_static(path):
     return send_from_directory(app.static_folder, path)
 
+# Route để serve ảnh contact từ GridFS
+@app.route("/contact/image/<file_id>")
+def serve_contact_image(file_id):
+    try:
+        # Lấy file từ GridFS
+        grid_out = fs_contact.get(ObjectId(file_id))
+        
+        # Tạo response với đúng content type
+        response = make_response(grid_out.read())
+        response.headers['Content-Type'] = grid_out.content_type or 'image/jpeg'
+        response.headers['Content-Disposition'] = f'inline; filename="{grid_out.filename}"'
+        
+        return response
+    except Exception as e:
+        logging.error(f"Failed to serve contact image {file_id}: {str(e)}")
+        return jsonify({"error": "Image not found"}), 404
+
 # Page khác
 @app.route("/intro")
 def intro():
-    return render_template("intro.html") 
+    return render_template("intro.html")
+
+# API để lấy danh sách contact submissions (cho admin)
+@app.route("/api/contacts")
+def api_contacts():
+    try:
+        contacts = list(db.contact_submissions.find().sort("submitted_at", -1))
+        
+        # Convert ObjectId to string để JSON serialize được
+        for contact in contacts:
+            contact['_id'] = str(contact['_id'])
+            contact['image_ids'] = [str(img_id) for img_id in contact.get('image_ids', [])]
+            contact['submitted_at'] = contact['submitted_at'].isoformat()
+            
+        return jsonify(contacts)
+    except Exception as e:
+        logging.error(f"Failed to get contacts: {str(e)}")
+        return jsonify({"error": "Failed to get contacts"}), 500 
 
 @app.route("/recruitment", methods=["GET", "POST"])
 def recruitment():
@@ -171,10 +205,9 @@ def recruitment():
                 if file and allowed_cv_file(file.filename):
                     filename = secure_filename(file.filename)
                     try:
-                        fs = GridFS(db)  # khởi tạo GridFS
-
+                        # Sử dụng fs_recruitment đã khởi tạo sẵn
                         # Lưu file vào GridFS
-                        file_id = fs.put(file.stream, filename=filename, content_type=file.content_type)
+                        file_id = fs_recruitment.put(file.stream, filename=filename, content_type=file.content_type)
 
                         # Tạo metadata
                         cv_data = {
@@ -250,52 +283,75 @@ def contact():
                 'problem_description': request.form.get('problem_description')
             }
 
-            # Xử lý upload ảnh
+            # Xử lý upload ảnh vào GridFS
             images = request.files.getlist('construction_images')
             is_valid, message = validate_images(images)
             if not is_valid:
                 flash(message, 'error')
                 return redirect(url_for('contact'))
 
-            saved_images = []
+            # Lưu ảnh vào GridFS và lấy file IDs
+            image_ids = []
             for idx, image in enumerate(images[:5]):
                 if image and allowed_file(image.filename):
-                    # Đảm bảo tên file không chứa kí tự độc hại
-                    ext = image.filename.rsplit('.', 1)[1].lower()
-                    base_name = secure_filename(f"{form_data['email']}_{idx}")
-                    filename = f"{base_name}.{ext}"
-                    save_path = os.path.join(UPLOAD_CONTACT_FOLDER, filename)
-                    image.save(save_path)
-                    saved_images.append(save_path)
+                    try:
+                        # Tạo tên file duy nhất
+                        ext = image.filename.rsplit('.', 1)[1].lower()
+                        base_name = secure_filename(f"{form_data['email']}_{idx}")
+                        filename = f"{base_name}.{ext}"
+                        
+                        # Lưu vào GridFS với metadata
+                        file_id = fs_contact.put(
+                            image.stream,
+                            filename=filename,
+                            content_type=image.content_type,
+                            contact_email=form_data['email'],
+                            upload_index=idx
+                        )
+                        image_ids.append(file_id)
+                        logging.info(f"✅ Contact image uploaded to GridFS - ID: {file_id}")
+                        
+                    except Exception as e:
+                        logging.error(f"❌ Failed to upload contact image: {str(e)}")
+                        flash("Đã có lỗi xảy ra khi lưu ảnh.")
+                        return redirect(url_for("contact"))
                 else:
                     flash('Chỉ chấp nhận file ảnh (PNG, JPG, JPEG)', 'error')
                     return redirect(url_for('contact'))
-                import csv
 
-                # Lưu liên hệ về
-                UPLOAD_CONTACT_DATA = os.path.join(app.config["UPLOAD_FOLDER"], "contact_data")
-                os.makedirs(UPLOAD_CONTACT_DATA, exist_ok=True)
-                CONTACT_CSV = os.path.join(UPLOAD_CONTACT_DATA, "contact_submissions.csv")
-
-                # Sanitize email để dùng làm định danh (nếu cần)
-                safe_email = secure_filename(form_data['email']) if form_data['email'] else "unknown"
-
-                # Ghi vào file CSV
-                with open(CONTACT_CSV, "a", newline='', encoding='utf-8') as csvfile:
-                    writer = csv.writer(csvfile)
-                    writer.writerow([
-                        safe_email,
-                        form_data['last_name'],
-                        form_data['first_name'],
-                        form_data['phone'],
-                        form_data['country'],
-                        form_data['problem'],
-                        form_data['construction_type'],
-                        form_data['request_type'],
-                        form_data['problem_description'],
-                        ";".join(saved_images),  # Đường dẫn ảnh
-                        request.remote_addr       # IP người gửi
-            ])
+            # Lưu contact submission vào MongoDB
+            try:
+                contact_data = {
+                    'email': form_data['email'],
+                    'last_name': form_data['last_name'],
+                    'first_name': form_data['first_name'],
+                    'phone': form_data['phone'],
+                    'country': form_data['country'],
+                    'problem': form_data['problem'],
+                    'construction_type': form_data['construction_type'],
+                    'request_type': form_data['request_type'],
+                    'problem_description': form_data['problem_description'],
+                    'image_ids': image_ids,  # Array của GridFS file IDs
+                    'image_count': len(image_ids),  # Số lượng ảnh
+                    'ip_address': request.remote_addr,
+                    'submitted_at': datetime.utcnow(),
+                    'status': 'pending',
+                    'user_agent': request.headers.get('User-Agent', '')
+                }
+                
+                result = db.contact_submissions.insert_one(contact_data)
+                logging.info(f"✅ Contact submission saved to MongoDB - ID: {result.inserted_id}")
+                
+            except Exception as e:
+                logging.error(f"❌ Failed to save contact submission: {str(e)}")
+                # Nếu lưu MongoDB fail, xóa các ảnh đã upload
+                for file_id in image_ids:
+                    try:
+                        fs_contact.delete(file_id)
+                    except:
+                        pass
+                flash("Đã có lỗi xảy ra khi lưu thông tin liên hệ.")
+                return redirect(url_for("contact"))
 
             # Ghi log thông tin
             logging.info(
