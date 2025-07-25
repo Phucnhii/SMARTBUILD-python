@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmartBuild AI Demo - Giới thiệu</title>
+  <title>AnomaBuild - Giới thiệu</title>
   <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -15,7 +15,7 @@
 
 <nav class="navbar">  
   <div class="nav-container">
-    <div class="nav-logo">🦾 SmartBuild AI</div>
+    <div class="nav-logo">🦾AnomaBuild</div>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
     <label for="nav-toggle" class="nav-toggle-label">
@@ -26,7 +26,7 @@
       <li><a href="/">TRANG CHỦ</a></li>
       <li><a href="/intro" id="disable">GIỚI THIỆU</a></li>
       <li><a href="/recruitment">TUYỂN DỤNG</a></li>
-      <li><a href="/contact">LIÊN HỆ</a></li>
+      <li><a href="/product">SẢN PHẨM</a></li>
 
       <li class="lang-switch-mobile">
         <select id="languageSwitcherMobile" class="lang-switcher">
@@ -36,9 +36,13 @@
         </select>
       </li>
       <li><button id="darkModeButton" class="darkmode-btn">🌚</button></li>
+      <li class="login-mobile" id="login-mobile">
+        <a href="/login">Đăng nhập👤</a>
+      </li>
     </ul>
 
     <div class="other-button">
+      <a href="/login" class="login-desktop">Đăng nhập👤</a>
       <select id="languageSwitcherDesktop" class="lang-switcher-desktop">
         <option value="/index-vi">🇻🇳</option>
         <option value="/index-en">🇺🇸</option>
@@ -54,11 +58,11 @@
   <div class="banner-overlay">
     <div class="banner-flex">
       <div class="banner-text">
-        <h1>Welcome to SmartBuild AI</h1>
-        <p>Bạn đang tìm kiếm vật liệu xây dựng phù hợp cho công trình của mình? Liên hệ ngay với chúng tôi để được tư vấn và hỗ trợ chi tiết.</p>
+        <h1>Welcome to AnomaBuild</h1>
+        <p>Bạn đang tìm kiếm vật liệu xây dựng phù hợp cho công trình của mình? Hãy đến với các sản phẩm của chúng tôi 😍.</p>
       </div>
       <div class="banner-action">
-        <a href="/contact" class="banner-button">Contact</a>
+        <a href="/product" class="banner-button">Mua sắm</a>
       </div>
     </div>
   </div>
@@ -66,8 +70,7 @@
 
 
 <div class="container">
-  <h1>Giới thiệu về SmartBuild AI</h1>
-
+  <h1>Giới thiệu về AnomaBuild</h1>
   <section class="intro-section">
     <h2>Về chúng tôi</h2>
     <p>
@@ -88,12 +91,12 @@
   </section>
 
   <section class="intro-section">
-    <h2>Dự án SmartBuild AI</h2>
+    <h2>Dự án AnomaBuild</h2>
     <p>
-      Dự án <strong>SmartBuild AI</strong> tập trung phát triển nền tảng ứng dụng web tích hợp AI nhằm nhận diện các vấn đề trong công trình xây dựng, phát hiện các bất thường và đề xuất giải pháp khắc phục hiệu quả. Dựa trên công nghệ xử lý ảnh kết hợp với học máy, hệ thống có khả năng phân tích tình trạng công trình một cách chính xác, nhanh chóng và tiện lợi, giúp người dùng phát hiện kịp thời các hư hỏng như vết nứt, bong tróc hay dấu hiệu xuống cấp.
+      Dự án <strong>AnomaBuild</strong> tập trung phát triển nền tảng ứng dụng web tích hợp AI nhằm nhận diện các vấn đề trong công trình xây dựng, phát hiện các bất thường và đề xuất giải pháp khắc phục hiệu quả. Dựa trên công nghệ xử lý ảnh kết hợp với học máy, hệ thống có khả năng phân tích tình trạng công trình một cách chính xác, nhanh chóng và tiện lợi, giúp người dùng phát hiện kịp thời các hư hỏng như vết nứt, bong tróc hay dấu hiệu xuống cấp.
     </p>
     <p>
-      Bên cạnh chức năng nhận diện, SmartBuild AI còn cung cấp các gợi ý về vật liệu xây dựng phù hợp, tích hợp công cụ chatbot AI tư vấn tự động 24/7 và hỗ trợ qua hotline bán hàng, mang lại trải nghiệm toàn diện. Dự án sử dụng backend Flask (Python) để xử lý logic nghiệp vụ và cung cấp API cho giao diện người dùng, tích hợp mô hình thị giác máy tính YOLOv8 giả lập để nhận diện hình ảnh công trình, đồng thời được triển khai bằng Docker kết hợp với Nginx nhằm đảm bảo hiệu suất, tính bảo mật và khả năng mở rộng hệ thống.
+      Bên cạnh chức năng nhận diện, AnomaBuild còn cung cấp các gợi ý về vật liệu xây dựng phù hợp, tích hợp công cụ chatbot AI tư vấn tự động 24/7 và hỗ trợ qua hotline bán hàng, mang lại trải nghiệm toàn diện. Dự án sử dụng backend Flask (Python) để xử lý logic nghiệp vụ và cung cấp API cho giao diện người dùng, tích hợp mô hình thị giác máy tính YOLOv8 giả lập để nhận diện hình ảnh công trình, đồng thời được triển khai bằng Docker kết hợp với Nginx nhằm đảm bảo hiệu suất, tính bảo mật và khả năng mở rộng hệ thống.
     </p>
   </section>
 
@@ -168,7 +171,7 @@
 
   <section class="intro-section">
     <h2>Open Source</h2>
-    <p>SmartBuild AI tự hào chia sẻ dự án mã nguồn mở trên GitHub nhằm đóng góp cho cộng đồng lập trình và nghiên cứu. Chúng tôi hoan nghênh mọi sự hợp tác và khuyến khích các nhà phát triển khám phá, sử dụng và đóng góp vào dự án.
+    <p>AnomaBuild tự hào chia sẻ dự án mã nguồn mở trên GitHub nhằm đóng góp cho cộng đồng lập trình và nghiên cứu. Chúng tôi hoan nghênh mọi sự hợp tác và khuyến khích các nhà phát triển khám phá, sử dụng và đóng góp vào dự án.
     </p>
     <img src="/static/img/social_link.png" alt="Link GitHub" class="intro-image" />
 <ul class="social-links">
@@ -184,13 +187,13 @@
 
     <footer class="footer">
     <div class="footer-container">
-      <p>&copy; 2025 SmartBuild AI – Mọi quyền được bảo lưu.</p>
+      <p>&copy; 2025 AnomaBuild – Mọi quyền được bảo lưu.</p>
 
       <ul class="footer-links">      
         <li><a href="/">TRANG CHỦ</a></li>
         <li><a href="/intro">GIỚI THIỆU</a></li>
         <li><a href="/recruitment">TUYỂN DỤNG</a></li>
-        <li><a href="/contact">LIÊN HỆ</a></li>
+        <li><a href="/product">SẢN PHẨM</a></li>
       </ul>
     </div>
   </footer>
@@ -204,7 +207,7 @@
 <div id="chatbot-popup">
   <div class="chatbot-header">
   <div class="chatbot-title">
-    <span>SmartBuild AI Chatbot</span>
+    <span>AnomaBuild AI Chatbot</span>
     <button id="new-chat-btn" title="Cuộc trò chuyện mới">+</button>
   </div>
   <button id="chatbot-close">&times;</button>

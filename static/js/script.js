@@ -94,3 +94,10 @@ imageInput.addEventListener('change', function () {
   document.getElementById('languageSwitcherDesktop').addEventListener('change', function () {
     window.location.href = this.value;
   });
+
+  // Nút Liên hệ
+    document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("scrollButton").addEventListener("click", function () {
+      document.getElementById("contact-us").scrollIntoView({ behavior: 'smooth' });
+    });
+  });

@@ -28,10 +28,3 @@
     const savedTheme = localStorage.getItem('theme') || 'light';
     setDarkMode(savedTheme === 'dark');
   });
-
-  // Nút Let's go
-    document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("scrollButton").addEventListener("click", function () {
-      document.getElementById("contact-form").scrollIntoView({ behavior: 'smooth' });
-    });
-  });

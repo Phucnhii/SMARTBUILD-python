@@ -19,8 +19,8 @@ body {
 
 /* Container chính */
 .container {
-  width: 100%;
-  max-width: 1250px;
+  width: 85%;
+  /*max-width: 1250px;*/
   background-color: white;
   padding: 32px;
   /*border-radius: 16px;*/
@@ -140,6 +140,7 @@ button[type="submit"]:hover {
 
   .container {
     padding: 28px;
+    width: 100%;
   }
 
   h1 {
@@ -166,6 +167,7 @@ button[type="submit"]:hover {
 @media (max-width: 480px) {
   .container {
     padding: 20px;
+    width: 100%;
   }
 
   h1 {
@@ -269,38 +271,18 @@ button[type="submit"]:hover {
   transform: translateY(8px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #008c91;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
-    padding: 12px 16px;
-  }
-
-  .nav-toggle:checked + .nav-toggle-label + .nav-links {
-    display: flex;
-  }
-
-  .nav-toggle-label {
-    display: flex;
-  }
-}
-
 /*Darkmode responsive*/
 .nav-links li button.darkmode-btn {
-  background: none;
+  /*background: none;*/
   border: none;
   color: white;
   font-size: 24px;
   cursor: pointer;
-  width: 100%;
-  text-align: left;
-  padding: 0px 10px;
+  width: 55.6px;
+  text-align: center;
+  padding: 3.8px 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: -6px 0 -12px 0;
 }
 
 @media (min-width: 769px) {
@@ -318,14 +300,15 @@ button[type="submit"]:hover {
 
 /*Button tối/sáng*/
 .darkmode-btn {
-  background: none;
+  /*background: none;*/
   border: none;
   font-size: 24px;
   cursor: pointer;
   color: white;
-  padding: 6px 10px;
+  padding: 3.5px 10px;
   border-radius: 6px;
   transition: background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .darkmode-btn:hover {
@@ -474,7 +457,7 @@ body.dark-mode .footer-links li a:hover {
 /*Banner*/
 
 .banner-button {
-  width: 125px;
+  width: 150px;
   height: 56px;   
   margin-left: auto; 
   margin-right: auto; 
@@ -579,7 +562,7 @@ body.dark-mode .footer-links li a:hover {
 }
 
 .banner-button {
-  width: 100px;
+  width: 125px;
   height: 46.4px;    
   padding: 10px;
   font-size: 20px;
@@ -604,272 +587,16 @@ body.dark-mode .footer-links li a:hover {
 }
 
 .banner-button {
-  width: 90px; 
+  width: 100px; 
   height: 40px; 
   padding: 8px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   border-radius: 18px;
 }
 
 .banner-flex {
   gap: 20px;
-}
-}
-
-/*Liên hệ*/
-/* Contact */
-.contact-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.form-column {
-  flex: 1;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form-group label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #006f62;
-}
-
-.form-group.full-width {
-  width: 100%;
-}
-
-.required {
-  color: #e53935;
-}
-
-input, select, textarea {
-  padding: 12px 16px;
-  border: 1px solid #b2dfdb;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  background-color: #f5f5f5;
-  font-family: "Segoe UI", sans-serif;
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: #009688;
-  box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.2);
-}
-
-textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 16px;
-  font-size: 18px;
-  font-weight: 600;
-  color: white;
-  background: #009688;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-  background: #00897b;
-  transform: translateY(-2px);
-}
-
-.form-footer {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-}
-
-.form-footer.center {
-  flex-basis: 100%;
-  display: flex;
-  flex-direction: column;      /* Sắp xếp theo chiều dọc */
-  align-items: center;         /* Canh giữa ngang */
-  justify-content: center;
-  margin-top: 0;
-}
-
-.form-footer a {
-  color: #009688;
-  text-decoration: none;
-}
-
-.form-footer a:hover {
-  text-decoration: underline;
-}
-
-.upload-instruction {
-  background-color: #f5f5f5;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px dashed #b2dfdb;
-}
-
-.upload-instruction p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.image-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.image-preview img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-textarea::placeholder {
-  color: #666666;
-  font-family: "Segoe UI", sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 10px;
-  opacity: 1; 
-}
-
-/* Contact darkmode  */
-body.dark-mode .contact-form label {
-  color: #80dbe3;
-}
-
-body.dark-mode input, 
-body.dark-mode select, 
-body.dark-mode textarea {
-  background-color: #444;
-  color: #fff;
-  border-color: #555;
-}
-
-body.dark-mode textarea::placeholder {
-  color: #ccc; 
-}
-
-body.dark-mode .form-footer {
-  color: #aaa;
-}
-
-body.dark-mode .form-footer a {
-  color: #00bcd4;
-}
-
-body.dark-mode .upload-instruction {
-  background-color: #444;
-  border-color: #555;
-}
-
-body.dark-mode .upload-instruction p {
-  color: #ccc;
-}
-
-/* Contact Responsive */
-@media (max-width: 768px) {
-  .contact-form {
-    flex-direction: column;
-  }
-  
-  .form-column {
-    min-width: 100%;
-  }
-  
-  input, select, textarea {
-    padding: 10px 14px;
-    font-size: 14px;
-  }
-  
-  .submit-btn {
-    padding: 14px;
-    font-size: 16px;
-  }
-
-  .form-footer {
-    margin-top: 12px;
-  }
-
-  .hide-on-mobile {
-    display: none;
-  }
-}
-
-/*Thông báo*/
-.flash-msg {
-  list-style: none;
-  background-color: #dff0d8;
-  color: #3c763d;
-  padding: 10px 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-/*Capcha*/
-.frc-captcha {
-  transform: scale(0.75);      
-  transform-origin: top center;  
-  background-color: #e0f2f1;
-  border-radius: 8px;
-  /*margin-bottom: 10px; */   
-}
-
-/* Responsive */
-
-/* Dưới 768px: điện thoại */
-@media (max-width: 768px) {
-
-.frc-captcha {
-  transform: scale(0.65);  
-  transform-origin: center center;        
-}
-
-.form-footer p {
-  font-size: 12px;
-}
-
-.contact-form {
-  gap: 18px;
-}
-}
-
-/* Dưới 480px: điện thoại nhỏ */
-@media (max-width: 480px) {
-
-.frc-captcha {
-  transform: scale(0.55); 
-  transform-origin: center center;         
-}
-
-.form-footer p {
-  font-size: 10px;
-}
-
-.contact-form {
-  gap: 12px;
 }
 }
 
@@ -891,7 +618,7 @@ body.dark-mode .upload-instruction p {
 .other-button {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 /* Ẩn darkmode/lang trong menu khi desktop */
@@ -901,7 +628,7 @@ body.dark-mode .upload-instruction p {
 }
 
 /* --- Responsive --- */
-@media (max-width: 999px) {
+@media (max-width: 1200px) {
   /* Hamburger hiện ra */
   .nav-toggle-label {
     display: flex;
@@ -926,7 +653,7 @@ body.dark-mode .upload-instruction p {
     top: 50px;
     left: 0;
     right: 0;
-    padding: 12px 16px;
+    padding: 16px 16px 14px 16px;
   }
 
   .nav-toggle:checked + .nav-toggle-label + .nav-links {
@@ -953,13 +680,14 @@ body.dark-mode .upload-instruction p {
 .lang-switcher {
   font-size: 24px;
   cursor: pointer;
-  padding: 3px 10px;
+  padding: 3px 5px;
   border-radius: 6px;
   transition: all 0.3s ease;
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
   font-family: "Segoe UI", sans-serif;
   border: none;
+  margin: -6px 0 -12px 0;
 }
 
 .lang-switcher-desktop option {
@@ -1010,20 +738,132 @@ body.dark-mode .upload-instruction p {
 }
 
 /* Ẩn mobile khi desktop */
-@media (min-width: 1001px) {
+@media (min-width: 1201px) {
   .lang-switch-mobile {
     display: none;
   }
 }
 
 /* Ẩn desktop khi mobile */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .lang-switcher-desktop {
     display: none;
   }
+}
 
-  select {
-    padding: 10px 14px;
-    font-size: 14px;
+/*Login button*/
+
+/* Desktop */
+.login-desktop {
+  font-size: 20px;
+  font-weight:600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  border: none;
+  text-decoration: none;
+}
+
+.login-desktop:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile */
+
+#login-mobile {
+  font-size: 20px;
+  font-weight:600;
+  margin: 6px 0;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  border: none;
+}
+
+#login-mobile a {
+  cursor: pointer;
+  padding: 6px 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#login-mobile a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*Login Darkmode*/
+
+.dark-mode .login-desktop:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode #login-mobile a:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Ẩn mobile khi desktop */
+@media (min-width: 1201px) {
+  .login-mobile {
+    display: none;
   }
 }
+
+/* Ẩn desktop khi mobile */
+@media (max-width: 1200px) {
+  .login-desktop {
+    display: none;
+  }
+}
+
+/*Chỉnh lại font-weight login-mobile*/
+.nav-links .login-mobile a {
+  font-weight: 600;
+}
+
+/*Responsive menu hamburger quay ngang nhỏ hơn 400px*/
+@media (max-height: 500px), (max-width: 480px) {
+  /* Thu nhỏ navbar menu */
+  .nav-links {
+    padding: 12px 12px 8px 12px;
+    gap: 15px;
+  }
+
+  .nav-links a {
+    font-size: 16px;
+    padding: 5px 8px;
+  }
+
+  .nav-logo {
+    font-size: 24px;
+  }
+
+  .nav-toggle-label {
+    width: 24px;
+  }
+
+  .nav-toggle-label span,
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    height: 3px;
+    width: 24px;
+  }
+
+  #login-mobile a {
+    margin-top: -12px;
+  }
+
+  .nav-links li button.darkmode-btn {
+    margin: -3px 0 -13px 0;
+}
+
+ .lang-switcher {
+    margin: -4px 0 -10px 0;
+}
+}
+
+
+

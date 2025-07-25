@@ -99,7 +99,7 @@ def apply_security_headers(response):
     response.headers.update({
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
-        "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.friendlycaptcha.com; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://js.friendlycaptcha.com; worker-src blob:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+        "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.friendlycaptcha.com https://assets10.lottiefiles.com/packages/lf20_yd9yoprx.json; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://js.friendlycaptcha.com https://unpkg.com/lottie-web@5.10.2/build/player/lottie.min.js; worker-src blob:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
         "Referrer-Policy": "no-referrer",
     })
     return response
@@ -108,50 +108,6 @@ def apply_security_headers(response):
 def index():
     resp = make_response(render_template("index.html"))
     return resp
-
-@app.route("/api/analyze", methods=["POST"])
-def api_analyze():
-    if "image" not in request.files:
-        return jsonify({"error": "No file part"}), 400
-    file = request.files["image"]
-    if file.filename == "":
-        return jsonify({"error": "No selected file"}), 400
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        save_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        file.save(save_path)
-
-        logging.info(f"User uploaded file: {filename}, IP: {request.remote_addr}")
-
-        # Gọi model AI
-        result = analyze(save_path)
-        # Xoá file tạm
-        os.remove(save_path)
-
-        return jsonify(result)
-    return jsonify({"error": "File type not allowed"}), 400
-
-@app.route("/api/chatbot", methods=["POST"])
-def api_chatbot():
-    data = request.get_json()
-    if not data or "message" not in data:
-        return jsonify({"error": "No message provided"}), 400
-
-    user_message = data["message"]
-    logging.info(f"Chatbot message: {user_message}, IP: {request.remote_addr}")
-
-    try:
-        # Gọi Gemini API
-        bot_response = call_gemini(user_message)
-        return jsonify({"response": bot_response})
-    except Exception as e:
-        logging.error(f"Gemini API error: {str(e)}")
-        return jsonify({"error": "Failed to get response from Gemini API"}), 500
-
-# Serve static files (only dev – production nên qua nginx)
-@app.route("/static/<path:path>")
-def send_static(path):
-    return send_from_directory(app.static_folder, path)
 
 # Route để serve ảnh contact từ GridFS
 @app.route("/contact/image/<file_id>")
@@ -170,11 +126,6 @@ def serve_contact_image(file_id):
         logging.error(f"Failed to serve contact image {file_id}: {str(e)}")
         return jsonify({"error": "Image not found"}), 404
 
-# Page khác
-@app.route("/intro")
-def intro():
-    return render_template("intro.html")
-
 # API để lấy danh sách contact submissions (cho admin)
 @app.route("/api/contacts")
 def api_contacts():
@@ -192,61 +143,7 @@ def api_contacts():
         logging.error(f"Failed to get contacts: {str(e)}")
         return jsonify({"error": "Failed to get contacts"}), 500 
 
-@app.route("/recruitment", methods=["GET", "POST"])
-def recruitment():
-    if request.method == "POST":
-        for position in ['cv-devops', 'cv-ai', 'cv-frontend', 'cv-backend', 'cv-security']:
-            if position in request.files:
-                file = request.files[position]
-                if file.filename == "":
-                    flash("Vui lòng chọn file PDF.")
-                    return redirect(url_for("recruitment"))
-
-                if file and allowed_cv_file(file.filename):
-                    filename = secure_filename(file.filename)
-                    try:
-                        # Sử dụng fs_recruitment đã khởi tạo sẵn
-                        # Lưu file vào GridFS
-                        file_id = fs_recruitment.put(file.stream, filename=filename, content_type=file.content_type)
-
-                        # Tạo metadata
-                        cv_data = {
-                            'position': position,
-                            'original_filename': file.filename,
-                            'saved_filename': filename,
-                            'file_id': file_id,  # ID GridFS
-                            'file_size': file.content_length or 0,
-                            'ip_address': request.remote_addr,
-                            'submitted_at': datetime.utcnow(),
-                            'status': 'received',
-                            'user_agent': request.headers.get('User-Agent', ''),
-                        }
-
-                        result = db.cv_submissions.insert_one(cv_data)
-                        logging.info(f"✅ CV uploaded to GridFS - ID: {file_id}")
-                        logging.info(f"✅ CV metadata saved to MongoDB - ID: {result.inserted_id}")
-
-                    except Exception as e:
-                        logging.error(f"❌ Failed to upload CV: {str(e)}")
-                        flash("Đã có lỗi xảy ra khi lưu hồ sơ.")
-                        return redirect(url_for("recruitment"))
-
-                    flash(f"Đã nhận hồ sơ cho vị trí {position.replace('cv-', '').upper()}.")
-                    return redirect(url_for("recruitment"))
-
-                else:
-                    flash("Chỉ chấp nhận file PDF.")
-                    return redirect(url_for("recruitment"))
-
-    return render_template("recruitment.html")
-
-
-@app.errorhandler(RequestEntityTooLarge)
-def handle_file_too_large(e):
-    flash("Ảnh tải lên vượt quá giới hạn 2MB.", "error")
-    return redirect(url_for('contact'))
-
-@app.route("/contact", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         try:
@@ -369,7 +266,173 @@ def contact():
             flash('Đã có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại.', 'error')
             return redirect(url_for('contact'))
 
-    return render_template("contact.html")
+    return render_template("index.html")
+
+@app.route("/api/analyze", methods=["POST"])
+def api_analyze():
+    if "image" not in request.files:
+        return jsonify({"error": "No file part"}), 400
+    file = request.files["image"]
+    if file.filename == "":
+        return jsonify({"error": "No selected file"}), 400
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        save_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+        file.save(save_path)
+
+        logging.info(f"User uploaded file: {filename}, IP: {request.remote_addr}")
+
+        # Gọi model AI
+        result = analyze(save_path)
+        # Xoá file tạm
+        os.remove(save_path)
+
+        return jsonify(result)
+    return jsonify({"error": "File type not allowed"}), 400
+
+@app.route("/api/chatbot", methods=["POST"])
+def api_chatbot():
+    data = request.get_json()
+    if not data or "message" not in data:
+        return jsonify({"error": "No message provided"}), 400
+
+    user_message = data["message"]
+    logging.info(f"Chatbot message: {user_message}, IP: {request.remote_addr}")
+
+    try:
+        # Gọi Gemini API
+        bot_response = call_gemini(user_message)
+        return jsonify({"response": bot_response})
+    except Exception as e:
+        logging.error(f"Gemini API error: {str(e)}")
+        return jsonify({"error": "Failed to get response from Gemini API"}), 500
+
+# Serve static files (only dev – production nên qua nginx)
+@app.route("/static/<path:path>")
+def send_static(path):
+    return send_from_directory(app.static_folder, path)
+
+# Page khác
+@app.route("/intro")
+def intro():
+    return render_template("intro.html") 
+
+@app.route("/recruitment", methods=["GET", "POST"])
+def recruitment():
+    if request.method == "POST":
+        for position in ['cv-devops', 'cv-ai', 'cv-frontend', 'cv-backend', 'cv-security']:
+            if position in request.files:
+                file = request.files[position]
+                if file.filename == "":
+                    flash("Vui lòng chọn file PDF.")
+                    return redirect(url_for("recruitment"))
+
+                if file and allowed_cv_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    try:
+                        # Sử dụng fs_recruitment đã khởi tạo sẵn
+                        # Lưu file vào GridFS
+                        file_id = fs_recruitment.put(file.stream, filename=filename, content_type=file.content_type)
+
+                        # Tạo metadata
+                        cv_data = {
+                            'position': position,
+                            'original_filename': file.filename,
+                            'saved_filename': filename,
+                            'file_id': file_id,  # ID GridFS
+                            'file_size': file.content_length or 0,
+                            'ip_address': request.remote_addr,
+                            'submitted_at': datetime.utcnow(),
+                            'status': 'received',
+                            'user_agent': request.headers.get('User-Agent', ''),
+                        }
+
+                        result = db.cv_submissions.insert_one(cv_data)
+                        logging.info(f"✅ CV uploaded to GridFS - ID: {file_id}")
+                        logging.info(f"✅ CV metadata saved to MongoDB - ID: {result.inserted_id}")
+
+                    except Exception as e:
+                        logging.error(f"❌ Failed to upload CV: {str(e)}")
+                        flash("Đã có lỗi xảy ra khi lưu hồ sơ.")
+                        return redirect(url_for("recruitment"))
+
+                    flash(f"Đã nhận hồ sơ cho vị trí {position.replace('cv-', '').upper()}.")
+                    return redirect(url_for("recruitment"))
+
+                else:
+                    flash("Chỉ chấp nhận file PDF.")
+                    return redirect(url_for("recruitment"))
+
+    return render_template("recruitment.html")
+
+@app.route("/product")
+def product():
+    return render_template("product.html") 
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        try:
+            # Xác thực CAPTCHA
+            solution = request.form.get('frc-captcha-solution')
+            if not solution:
+                flash("Vui lòng hoàn thành CAPTCHA", "error")
+                return redirect(url_for("login"))
+
+            # Gửi request đến FriendlyCaptcha để xác thực
+            verify_response = requests.post(
+                'https://api.friendlycaptcha.com/api/v1/siteverify',
+                data={
+                    'secret': FRIENDLYCAPTCHA_SECRET,
+                    'solution': solution
+                }
+            )
+
+            verify_result = verify_response.json()
+            if not verify_result.get("success"):
+                flash("CAPTCHA không hợp lệ. Vui lòng thử lại.", "error")
+                return redirect(url_for("login"))
+            
+        except Exception as e:
+            flash(f"Lỗi hệ thống: {str(e)}", "error")
+            return redirect(url_for("login"))
+        
+    return render_template("login.html") 
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        try:
+            # Xác thực CAPTCHA
+            solution = request.form.get('frc-captcha-solution')
+            if not solution:
+                flash("Vui lòng hoàn thành CAPTCHA", "error")
+                return redirect(url_for("signup"))
+
+            # Gửi request đến FriendlyCaptcha để xác thực
+            verify_response = requests.post(
+                'https://api.friendlycaptcha.com/api/v1/siteverify',
+                data={
+                    'secret': FRIENDLYCAPTCHA_SECRET,
+                    'solution': solution
+                }
+            )
+
+            verify_result = verify_response.json()
+            if not verify_result.get("success"):
+                flash("CAPTCHA không hợp lệ. Vui lòng thử lại.", "error")
+                return redirect(url_for("signup"))
+            
+        except Exception as e:
+            flash(f"Lỗi hệ thống: {str(e)}", "error")
+            return redirect(url_for("signup"))
+        
+    return render_template("signup.html") 
+
+@app.errorhandler(RequestEntityTooLarge)
+def handle_file_too_large(e):
+    flash("Ảnh tải lên vượt quá giới hạn 2MB.", "error")
+    return redirect(url_for('contact'))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

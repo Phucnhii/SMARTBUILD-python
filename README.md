@@ -1,6 +1,6 @@
-# SmartBuild AI – Demo
+# AnomaBuild – Demo
 
-Demo hệ thống tư vấn vật liệu chống thấm bằng AI, bao gồm:
+Demo hệ thống nhận diện các bất thường trong xây dựng và tư vấn vật liệu bằng AI, bao gồm:
 * **Flask backend** (Python)
 * **Computer Vision mẫu** (YOLOv8 giả lập)
 * **MongoDB Atlas** - Lưu trữ CV và dữ liệu
