@@ -1083,7 +1083,6 @@ body.dark-mode .footer-links li a:hover {
 
     .btn-interest:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
     }
 
     .btn-interest.interested {
@@ -1219,6 +1218,14 @@ body.dark-mode .footer-links li a:hover {
     .login-prompt p {
       color: #666;
       margin-bottom: 20px;
+    }
+
+    body.dark-mode .login-prompt h3 {
+      color: #fff;
+    }
+
+    body.dark-mode .login-prompt p {
+      color: #e0e0e0;
     }
 
     .btn-login {
