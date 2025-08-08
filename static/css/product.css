@@ -865,5 +865,521 @@ body.dark-mode .footer-links li a:hover {
 }
 }
 
+/*Product*/
+    /* Bộ lọc sản phẩm */
+    .product-filter {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
 
+    .filter-btn {
+      padding: 12px 24px;
+      border: 2px solid #009688;
+      background: transparent;
+      color: #009688;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
+    body.dark-mode .filter-btn {
+      color: #00bcd4;
+      border: 2px solid #00bcd4;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #009688;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 150, 136, 0.3);
+    }
+
+    body.dark-mode .filter-btn:hover,  body.dark-mode .filter-btn.active {
+      background: #00bcd4;
+      color: white;
+    }
+
+    /* Grid sản phẩm */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    /* Card sản phẩm */
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      border: 1px solid #f0f0f0;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      height: 250px;
+      margin:auto;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #00bcd4;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .product-info {
+      padding: 25px;
+    }
+
+    .product-category {
+      color: #666;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    body.dark-mode .product-category {
+      color: #e0e0e0;
+    }
+
+    .product-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    body.dark-mode .product-title {
+      color: #fff;
+    }
+
+    .product-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    body.dark-mode .product-description {
+      color: #e0e0e0;
+    }
+
+    .product-specs {
+      background: #e0f2f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .product-specs h4 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    body.dark-mode .product-specs h4 {
+      color: #fff;
+    }
+
+    .spec-list {
+      list-style: none;
+      font-size: 13px;
+      color: #666;
+    }
+
+    body.dark-mode .spec-list {
+      color: #e0e0e0;
+    }
+
+    .spec-list li {
+      padding: 3px 0;
+      display: flex;
+      justify-content: left;
+    }
+
+    .spec-list li:before {
+      content: "•";
+      color: #009688;
+      margin-right: 8px;
+    }
+
+    body.dark-mode .spec-list li:before {
+      color: #00bcd4;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #009688;
+    }
+
+    body.dark-mode .product-price {
+      color: #00bcd4;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-interest {
+      padding: 6px 10px;
+      background: linear-gradient(135deg, #00bcd4, #009688);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-interest:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+    }
+
+    .btn-interest.interested {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+    }
+
+    .btn-info {
+      padding: 10px 16px;
+      background: transparent;
+      color: #666;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-info:hover {
+      border-color: #009688;
+      color: #009688;
+    }
+
+    body.dark-mode .btn-info {
+      color: #e0e0e0;
+      border: 1px solid #ddd;
+    }
+
+    body.dark-mode .btn-info:hover {
+      border-color: #00bcd4;
+      color: #00bcd4;
+    }
+
+    /* Modal chi tiết sản phẩm */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: #999;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: #333;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .modal-description {
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .modal-specs {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    /* Thông báo đăng nhập */
+    .login-prompt {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 1001;
+      display: none;
+    }
+
+    .login-prompt h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .login-prompt p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .btn-login {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #00bcd4, #009688);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background: #4caf50;
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 1000;
+      transform: translateX(400px);
+      transition: all 0.3s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.error {
+      background: #f44336;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dark mode */
+    body.dark-mode .product-card {
+      background: #3c3c3c;
+      border-color: #555;
+    }
+
+    body.dark-mode .product-title {
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .product-specs {
+      background: #555;
+    }
+
+    body.dark-mode .modal-content {
+      background: #2c2c2c;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .modal-specs {
+      background: #555;
+    }
+
+    body.dark-mode .login-prompt {
+      background: #2c2c2c;
+      color: #e0e0e0;
+    }
+
+    /* Responsive */
+    @media (min-width: 600px) {
+      .footer p {
+        flex: 1;
+        text-align: left;
+        margin: 0;
+      }
+
+      .footer-links {
+        justify-content: flex-end;
+        flex: 1;
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .nav-toggle-label {
+        display: flex;
+      }
+
+      .other-button {
+        display: none;
+      }
+
+      .lang-switch-mobile,
+      #darkModeButton {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #008c91;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        padding: 16px;
+      }
+
+      .nav-toggle:checked + .nav-toggle-label + .nav-links {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .product-filter {
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .product-actions {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .modal-content {
+        margin: 10% auto;
+        padding: 20px;
+        width: 95%;
+      }
+    }
+  
+
+    
