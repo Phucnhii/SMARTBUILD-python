@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AnomaBuild - Đăng ký</title>
-  <script src="https://unpkg.com/lottie-web@5.10.2/build/player/lottie.min.js"></script>
   <script src="https://unpkg.com/friendly-challenge@0.9.9/widget.min.js" async defer></script>
+  <script src="https://unpkg.com/lottie-web@5.10.2/build/player/lottie.min.js"></script>
   <link rel="stylesheet" href="/static/css/signup.css" />
 </head>
 <body>
@@ -21,46 +21,62 @@
       </div>
     </div>
 
-    <!-- Cột phải: Form login -->
-    <div class="login-form">
+    <!-- Cột phải: Form signup -->
+    <div class="signup-form">
       <div class="form-wrapper">
 
         <div class="form-actions">
-          <button id="closeBtn" class="close-btn">🗙</button>
+          <button id="closeBtn" class="close-btn" onclick="window.history.back()">🗙</button>
         </div>
 
-        <h2>Đăng nhập</h2>
-        <p class="welcome-msg">Chào mừng trở lại! Hãy đăng nhập để tiếp tục❤️</p>
+        <h2>Đăng ký</h2>
+        <p class="welcome-msg">Chào mừng bạn mới! Hãy đăng ký để tiếp tục ❤️</p>
 
-        <form method="POST" action="/login" class="login-input">
+        <form id="signupForm" method="POST" action="/signup" class="signup-input">
+          
+          <div class="name-group">
+            <div>
+              <label for="firstName">Họ</label>
+              <input type="text" id="firstName" name="firstName" required />
+            </div>
+            <div>
+              <label for="lastName">Tên</label>
+              <input type="text" id="lastName" name="lastName" required />
+            </div>
+          </div>
+
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required />
 
           <label for="password">Mật khẩu</label>
           <input type="password" id="password" name="password" required />
-
-          <div class="options">
-            <label><input type="checkbox" /> Ghi nhớ</label>
-            <a href="/forgot-password">Quên mật khẩu?</a>
+          <div class="password-strength">
+            <div class="password-strength-bar" id="strengthBar"></div>
           </div>
+          <div class="password-requirements">
+            Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số
+          </div>
+
+          <label for="confirmPassword">Xác nhận mật khẩu</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required />
 
           <!-- FriendlyCaptcha widget -->
           <div class="captcha-con">
-          <div class="frc-captcha" data-sitekey="FCMKTP5JABF9BL61"></div>
+            <div class="frc-captcha" data-sitekey="FCMKTP5JABF9BL61"></div>
           </div>
-          <button type="submit" class="login-btn">Đăng nhập</button>
+          
+          <button type="submit" class="signup-btn" id="submitBtn">Đăng ký</button>
         </form>
 
-          <!--FriendlyCaptcha-->
-          <p class="captcha-msg">Biểu mẫu được bảo vệ bởi <strong>FriendlyCaptcha</strong>, đồng thời <a href="https://friendlycaptcha.com/legal/privacy-end-users/" target="_blank" rel="noopener noreferrer">Chính sách quyền riêng tư</a> và <a href="https://friendlycaptcha.com/legal/terms/" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ</a> được áp dụng.</p>
+        <!--FriendlyCaptcha-->
+        <p class="captcha-msg">Biểu mẫu được bảo vệ bởi <strong>FriendlyCaptcha</strong>, đồng thời <a href="https://friendlycaptcha.com/legal/privacy-end-users/" target="_blank" rel="noopener noreferrer">Chính sách quyền riêng tư</a> và <a href="https://friendlycaptcha.com/legal/terms/" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ</a> được áp dụng.</p>
 
-        <p class="register-msg">
-          Chưa có tài khoản? <a href="/register">Đăng ký ngay</a>
+        <p class="login-msg">
+          Đã có tài khoản? <a href="/login">Đăng nhập ngay</a>
         </p>
       </div>
     </div>
   </div>
-
-<script src="/static/js/signup.js"></script>
+  <script src="/static/js/signup.js"></script>
 </body>
 </html>

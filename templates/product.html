@@ -66,8 +66,294 @@
 
 <div class="container">
   <h1>Sản phẩm của chúng tôi</h1>
+  <!-- Bộ lọc sản phẩm -->
+      <div class="product-filter">
+        <button class="filter-btn active" data-category="all">Tất cả</button>
+        <button class="filter-btn" data-category="materials">Vật liệu xây dựng</button>
+        <button class="filter-btn" data-category="equipment">Thiết bị</button>
+        <button class="filter-btn" data-category="smart">Giải pháp thông minh</button>
+        <button class="filter-btn" data-category="safety">An toàn lao động</button>
+      </div>
 
-</div>
+      <!-- Grid sản phẩm -->
+      <div class="products-grid" id="products">
+
+        <!-- Sản phẩm 1 -->
+        <div class="product-card" data-category="materials">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Xi măng Ngôi Sao">
+            <div class="product-badge">Hot</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Vật liệu</div>
+            <h3 class="product-title">Xi măng công nghệ Nano Đài Loan</h3>
+            <p class="product-description">Xi măng được sản xuất với công nghệ Nhật Bản tại Đài Loan với tiêu chuẩn Châu Âu.</p>
+            <div class="product-specs">
+              <h4>Thông số kỹ thuật:</h4>
+              <ul class="spec-list">
+                <li><span>Cường độ nén:</span> <span>42.5 MPa</span></li>
+                <li><span>Thời gian đông kết:</span> <span>45-90 phút</span></li>
+                <li><span>Độ mịn:</span> <span>≥ 350 m²/kg</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">Liên hệ báo giá</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="2">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(2)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 2 -->
+        <div class="product-card" data-category="equipment">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Máy trộn beton">
+            <div class="product-badge">Hot</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Thiết bị</div>
+            <h3 class="product-title">Máy trộn beton tự động JZC350</h3>
+            <p class="product-description">Máy trộn beton hiện đại, tự động hóa cao, tiết kiệm thời gian và nhân công.</p>
+            <div class="product-specs">
+              <h4>Thông số kỹ thuật:</h4>
+              <ul class="spec-list">
+                <li><span>Dung tích:</span> <span>350L</span></li>
+                <li><span>Công suất:</span> <span>18.5 kW</span></li>
+                <li><span>Năng suất:</span> <span>14 m³/h</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">85.000.000đ</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="2">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(2)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 3 -->
+        <div class="product-card" data-category="smart">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Hệ thống IoT">
+            <div class="product-badge">Smart</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Giải pháp thông minh</div>
+            <h3 class="product-title">Hệ thống IoT giám sát công trình</h3>
+            <p class="product-description">Giải pháp IoT thông minh giám sát và quản lý công trình xây dựng 24/7.</p>
+            <div class="product-specs">
+              <h4>Tính năng chính:</h4>
+              <ul class="spec-list">
+                <li><span>Giám sát thời gian thực</span></li>
+                <li><span>Cảnh báo tự động</span></li>
+                <li><span>Báo cáo chi tiết</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">Từ 25.000.000đ</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="3">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(3)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 4 -->
+        <div class="product-card" data-category="materials">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Gạch không nung">
+          </div>
+          <div class="product-info">
+            <div class="product-category">Vật liệu xây dựng</div>
+            <h3 class="product-title">Gạch không nung siêu nhẹ</h3>
+            <p class="product-description">Gạch không nung thân thiện với môi trường, cách nhiệt tốt, trọng lượng nhẹ.</p>
+            <div class="product-specs">
+              <h4>Thông số kỹ thuật:</h4>
+              <ul class="spec-list">
+                <li><span>Kích thước:</span> <span>200x100x60mm</span></li>
+                <li><span>Cường độ nén:</span> <span>≥ 4.0 MPa</span></li>
+                <li><span>Khối lượng riêng:</span> <span>≤ 1400 kg/m³</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">3.500đ/viên</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="4">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(4)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 5 -->
+        <div class="product-card" data-category="safety">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Thiết bị an toàn">
+            <div class="product-badge">Safe</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">An toàn lao động</div>
+            <h3 class="product-title">Bộ thiết bị bảo hộ lao động</h3>
+            <p class="product-description">Bộ thiết bị bảo hộ lao động đầy đủ, đạt tiêu chuẩn quốc tế, bảo vệ tối đa người lao động.</p>
+            <div class="product-specs">
+              <h4>Bao gồm:</h4>
+              <ul class="spec-list">
+                <li><span>Mũ bảo hiểm</span></li>
+                <li><span>Giày bảo hộ</span></li>
+                <li><span>Găng tay chống trượt</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">1.200.000đ/bộ</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="5">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(5)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 6 -->
+        <div class="product-card" data-category="equipment">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Cần cẩu tháp">
+          </div>
+          <div class="product-info">
+            <div class="product-category">Thiết bị</div>
+            <h3 class="product-title">Cần cẩu tháp QTZ80</h3>
+            <p class="product-description">Cần cẩu tháp hiện đại, tải trọng lớn, phù hợp cho các công trình cao tầng.</p>
+            <div class="product-specs">
+              <h4>Thông số kỹ thuật:</h4>
+              <ul class="spec-list">
+                <li><span>Tải trọng max:</span> <span>8 tấn</span></li>
+                <li><span>Tầm với max:</span> <span>56m</span></li>
+                <li><span>Chiều cao max:</span> <span>180m</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">Liên hệ báo giá</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="6">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(6)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 7 -->
+        <div class="product-card" data-category="smart">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Drone khảo sát">
+            <div class="product-badge">Tech</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Giải pháp thông minh</div>
+            <h3 class="product-title">Drone khảo sát địa hình 4K</h3>
+            <p class="product-description">Drone chuyên dụng khảo sát địa hình và giám sát tiến độ công trình với camera 4K.</p>
+            <div class="product-specs">
+              <h4>Tính năng:</h4>
+              <ul class="spec-list">
+                <li><span>Camera 4K</span></li>
+                <li><span>Bay 45 phút</span></li>
+                <li><span>Chống nước IP43</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">45.000.000đ</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="7">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(7)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 8 -->
+        <div class="product-card" data-category="materials">
+          <div class="product-image">
+            <img src="/static/img/index2.jpg" alt="Thép không gỉ">
+          </div>
+          <div class="product-info">
+            <div class="product-category">Vật liệu xây dựng</div>
+            <h3 class="product-title">Thép không gỉ SUS304</h3>
+            <p class="product-description">Thép không gỉ chất lượng cao, chống ăn mòn tốt, phù hợp cho môi trường khắc nghiệt.</p>
+            <div class="product-specs">
+              <h4>Thông số kỹ thuật:</h4>
+              <ul class="spec-list">
+                <li><span>Độ dày:</span> <span>1-20mm</span></li>
+                <li><span>Chất lượng:</span> <span>SUS304</span></li>
+                <li><span>Kích thước:</span> <span>Theo yêu cầu</span></li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">Từ 85.000đ/kg</div>
+              <div class="product-actions">
+                <button class="btn-interest" data-product="8">
+                  <span>❤️</span>
+                  <span class="interest-text">Quan tâm</span>
+                </button>
+                <button class="btn-info" onclick="showProductDetails(8)">Chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal chi tiết sản phẩm -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img id="modalImage" class="modal-image" src="" alt="">
+      <h2 id="modalTitle" class="modal-title"></h2>
+      <p id="modalDescription" class="modal-description"></p>
+      <div id="modalSpecs" class="modal-specs"></div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="btn-interest" id="modalInterestBtn">
+          <span>❤️</span>
+          <span class="interest-text">Quan tâm</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thông báo đăng nhập -->
+  <div id="loginPrompt" class="login-prompt">
+    <h3>Cần đăng nhập</h3>
+    <p>Vui lòng đăng nhập để quan tâm sản phẩm</p>
+    <a href="/login" class="btn-login">Đăng nhập</a>
+    <button onclick="closeLoginPrompt()" style="margin-left: 10px; background: #ddd; color: #333;" class="btn-login">Hủy</button>
+  </div>
+
+  <!-- Notification -->
+  <div id="notification" class="notification"></div>
+</body>
 
     <footer class="footer">
     <div class="footer-container">
@@ -117,7 +403,7 @@
   </form>
 </div>
 <script src="/static/js/chatbot.js"></script>
-  <script src="/static/js/product.js"></script>
+<script src="/static/js/product.js"></script>
 
 </body>
 </html>
