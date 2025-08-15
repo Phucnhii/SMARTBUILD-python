@@ -39,9 +39,9 @@
     // Dữ liệu sản phẩm chi tiết
     const productDetails = {
       1: {
-        title: "Xi măng Portland cao cấp",
-        image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=400&fit=crop",
-        description: "Xi măng Portland cao cấp được sản xuất theo công nghệ hiện đại, đảm bảo chất lượng vượt trội cho mọi công trình. Sản phẩm có độ bền cao, thời gian đông kết ổn định và khả năng chống thấm tốt.",
+        title: "Xi măng công nghệ nano Đài Loan",
+        image: "/static/img/index2.jpg",
+        description: "Xi măng Đài Loan cao cấp được sản xuất theo công nghệ hiện đại, đảm bảo chất lượng vượt trội cho mọi công trình. Sản phẩm có độ bền cao, thời gian đông kết ổn định và khả năng chống thấm tốt.",
         specs: `
           <h4>Thông số kỹ thuật chi tiết:</h4>
           <ul class="spec-list">
@@ -56,23 +56,23 @@
       },
       2: {
         title: "Máy trộn beton tự động JZC350",
-        image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
+        image: "/static/img/index2.jpg",
         description: "Máy trộn beton JZC350 là thiết bị không thể thiếu trong các công trình xây dựng. Với công nghệ tự động hóa cao, máy đảm bảo chất lượng beton đồng nhất và tiết kiệm thời gian thi công.",
         specs: `
           <h4>Thông số kỹ thuật chi tiết:</h4>
           <ul class="spec-list">
-            <li><span>Dung tích trộn:</span> <span>350L</span></li>
-            <li><span>Dung tích nạp liệu:</span> <span>560L</span></li>
-            <li><span>Công suất động cơ:</span> <span>18.5 kW</span></li>
-            <li><span>Năng suất lý thuyết:</span> <span>14 m³/h</span></li>
-            <li><span>Tốc độ quay thùng trộn:</span> <span>23 vòng/phút</span></li>
-            <li><span>Kích thước:</span> <span>3100×2200×3200mm</span></li>
+            <li><span>Dung tích trộn: </span> <span>350L</span></li>
+            <li><span>Dung tích nạp liệu: </span> <span>560L</span></li>
+            <li><span>Công suất động cơ: </span> <span>18.5 kW</span></li>
+            <li><span>Năng suất lý thuyết: </span> <span>14 m³/h</span></li>
+            <li><span>Tốc độ quay thùng trộn: </span> <span>23 vòng/phút</span></li>
+            <li><span>Kích thước: </span> <span>3100×2200×3200mm</span></li>
           </ul>
         `
       },
       3: {
         title: "Hệ thống IoT giám sát công trình",
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
+        image: "/static/img/index2.jpg",
         description: "Hệ thống IoT thông minh giúp giám sát và quản lý công trình 24/7. Tích hợp cảm biến hiện đại, cung cấp dữ liệu thời gian thực về tình trạng công trình.",
         specs: `
           <h4>Tính năng chi tiết:</h4>
@@ -88,23 +88,23 @@
       },
       4: {
         title: "Gạch không nung siêu nhẹ",
-        image: "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&h=400&fit=crop",
+        image: "/static/img/index2.jpg",
         description: "Gạch không nung thân thiện với môi trường, được sản xuất từ tro bay và vôi. Sản phẩm có trọng lượng nhẹ, cách nhiệt tốt và dễ thi công.",
         specs: `
           <h4>Thông số kỹ thuật chi tiết:</h4>
           <ul class="spec-list">
-            <li><span>Kích thước tiêu chuẩn:</span> <span>200×100×60mm</span></li>
-            <li><span>Cường độ nén:</span> <span>≥ 4.0 MPa</span></li>
-            <li><span>Khối lượng riêng khô:</span> <span>≤ 1400 kg/m³</span></li>
-            <li><span>Hệ số dẫn nhiệt:</span> <span>≤ 0.18 W/m.K</span></li>
-            <li><span>Độ hút nước:</span> <span>≤ 20%</span></li>
-            <li><span>Độ co ngót khô:</span> <span>≤ 0.5 mm/m</span></li>
+            <li><span>Kích thước tiêu chuẩn: </span> <span>200×100×60mm</span></li>
+            <li><span>Cường độ nén: </span> <span>≥ 4.0 MPa</span></li>
+            <li><span>Khối lượng riêng khô: </span> <span>≤ 1400 kg/m³</span></li>
+            <li><span>Hệ số dẫn nhiệt: </span> <span>≤ 0.18 W/m.K</span></li>
+            <li><span>Độ hút nước: </span> <span>≤ 20%</span></li>
+            <li><span>Độ co ngót khô: </span> <span>≤ 0.5 mm/m</span></li>
           </ul>
         `
       },
       5: {
         title: "Bộ thiết bị bảo hộ lao động",
-        image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop",
+        image: "/static/img/index2.jpg",
         description: "Bộ thiết bị bảo hộ lao động đầy đủ đạt tiêu chuẩn quốc tế, đảm bảo an toàn tối đa cho người lao động trong môi trường xây dựng.",
         specs: `
           <h4>Bao gồm các sản phẩm:</h4>
@@ -120,23 +120,23 @@
       },
       6: {
         title: "Cần cẩu tháp QTZ80",
-        image: "https://images.unsplash.com/photo-1581094289951-c4908b17d367?w=600&h=400&fit=crop",
+        image: "/static/img/index2.jpg",
         description: "Cần cẩu tháp QTZ80 với thiết kế hiện đại, khả năng nâng hạ mạnh mẽ, phù hợp cho các công trình cao tầng và công trình lớn.",
         specs: `
           <h4>Thông số kỹ thuật chi tiết:</h4>
           <ul class="spec-list">
-            <li><span>Tải trọng định mức:</span> <span>8000 kg</span></li>
-            <li><span>Tầm với tối đa:</span> <span>56m</span></li>
-            <li><span>Chiều cao nâng tối đa:</span> <span>180m</span></li>
-            <li><span>Tốc độ nâng:</span> <span>0-80 m/phút</span></li>
-            <li><span>Tốc độ quay:</span> <span>0-0.8 vòng/phút</span></li>
-            <li><span>Công suất động cơ:</span> <span>45 kW</span></li>
+            <li><span>Tải trọng định mức: </span> <span>8000 kg</span></li>
+            <li><span>Tầm với tối đa: </span> <span>56m</span></li>
+            <li><span>Chiều cao nâng tối đa: </span> <span>180m</span></li>
+            <li><span>Tốc độ nâng: </span> <span>0-80 m/phút</span></li>
+            <li><span>Tốc độ quay: </span> <span>0-0.8 vòng/phút</span></li>
+            <li><span>Công suất động cơ: </span> <span>45 kW</span></li>
           </ul>
         `
       },
       7: {
         title: "Drone khảo sát địa hình 4K",
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=400&fit=crop",
+        image: "/static/img/index2.jpg",
         description: "Drone chuyên dụng cho khảo sát địa hình và giám sát tiến độ công trình với camera 4K, GPS chính xác và thời gian bay dài.",
         specs: `
           <h4>Tính năng chi tiết:</h4>
@@ -152,17 +152,17 @@
       },
       8: {
         title: "Thép không gỉ SUS304",
-        image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&h=400&fit=crop",
+        image: "/static/img/index2.jpg",
         description: "Thép không gỉ SUS304 chất lượng cao, chống ăn mòn tốt, phù hợp cho các công trình trong môi trường khắc nghiệt và ven biển.",
         specs: `
           <h4>Thông số kỹ thuật chi tiết:</h4>
           <ul class="spec-list">
-            <li><span>Thành phần:</span> <span>18% Cr, 8% Ni</span></li>
-            <li><span>Cường độ chịu kéo:</span> <span>≥ 520 MPa</span></li>
-            <li><span>Giới hạn chảy:</span> <span>≥ 205 MPa</span></li>
-            <li><span>Độ giãn dài:</span> <span>≥ 40%</span></li>
-            <li><span>Độ cứng:</span> <span>≤ 200 HB</span></li>
-            <li><span>Nhiệt độ làm việc:</span> <span>-196°C đến +800°C</span></li>
+            <li><span>Thành phần: </span> <span>18% Cr, 8% Ni</span></li>
+            <li><span>Cường độ chịu kéo: </span> <span>≥ 520 MPa</span></li>
+            <li><span>Giới hạn chảy: </span> <span>≥ 205 MPa</span></li>
+            <li><span>Độ giãn dài: </span> <span>≥ 40%</span></li>
+            <li><span>Độ cứng: </span> <span>≤ 200 HB</span></li>
+            <li><span>Nhiệt độ làm việc: </span> <span>-196°C đến +800°C</span></li>
           </ul>
         `
       }
@@ -222,36 +222,50 @@
       });
     });
 
-    // Hiển thị modal chi tiết sản phẩm
-    function showProductDetails(productId) {
-      const product = productDetails[productId];
-      if (!product) return;
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".btn-info");
 
-      document.getElementById('modalImage').src = product.image;
-      document.getElementById('modalTitle').textContent = product.title;
-      document.getElementById('modalDescription').textContent = product.description;
-      document.getElementById('modalSpecs').innerHTML = product.specs;
-      
-      // Cập nhật nút quan tâm trong modal
-      const modalBtn = document.getElementById('modalInterestBtn');
-      modalBtn.setAttribute('data-product', productId);
-      
-      if (interestedProducts.has(productId)) {
-        modalBtn.classList.add('interested');
-        modalBtn.querySelector('.interest-text').textContent = 'Đã quan tâm';
-      } else {
-        modalBtn.classList.remove('interested');
-        modalBtn.querySelector('.interest-text').textContent = 'Quan tâm';
-      }
+  buttons.forEach(btn => {
+    btn.addEventListener("click", function () {
+      const productId = parseInt(this.getAttribute("data-product-id"), 10);
+      showProductDetails(productId);
+    });
+  });
+});
 
-      document.getElementById('productModal').style.display = 'block';
-    }
+function showProductDetails(productId) {
+  const product = productDetails[productId];
+  if (!product) return;
+
+  document.getElementById('modalImage').src = product.image;
+  document.getElementById('modalTitle').textContent = product.title;
+  document.getElementById('modalDescription').textContent = product.description;
+  document.getElementById('modalSpecs').innerHTML = product.specs;
+  
+  const modalBtn = document.getElementById('modalInterestBtn');
+  modalBtn.setAttribute('data-product', productId);
+
+  if (interestedProducts.has(productId)) {
+    modalBtn.classList.add('interested');
+    modalBtn.querySelector('.interest-text').textContent = 'Đã quan tâm';
+  } else {
+    modalBtn.classList.remove('interested');
+    modalBtn.querySelector('.interest-text').textContent = 'Quan tâm';
+  }
+
+  document.getElementById('productModal').style.display = 'block';
+}
+
 
     // Đóng modal
-    function closeModal() {
-      document.getElementById('productModal').style.display = 'none';
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
+  const productModal = document.getElementById("productModal");
 
+  modalCloseBtn.addEventListener("click", function () {
+    productModal.style.display = "none";
+  });
+});
     // Xử lý nút quan tâm trong modal
     document.getElementById('modalInterestBtn').addEventListener('click', (e) => {
       const productId = e.target.closest('button').getAttribute('data-product');
@@ -293,17 +307,21 @@
     }
 
     // Đóng modal khi click bên ngoài
-    window.addEventListener('click', (e) => {
-      const modal = document.getElementById('productModal');
-      if (e.target === modal) {
-        closeModal();
-      }
-      
-      const loginPrompt = document.getElementById('loginPrompt');
-      if (e.target === loginPrompt) {
-        closeLoginPrompt();
-      }
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("productModal");
+  const loginPrompt = document.getElementById("loginPrompt");
+
+  // Đóng modal khi click ra ngoài
+  window.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+    if (e.target === loginPrompt) {
+      loginPrompt.style.display = "none";
+    }
+  });
+});
+
 
     // Xử lý smooth scroll cho banner button
     document.querySelector('.banner-button').addEventListener('click', (e) => {
@@ -382,3 +400,19 @@
         });
       }
     }
+
+// Ẩn pop up khi bấm hủy
+document.addEventListener("DOMContentLoaded", function () {
+  const loginPrompt = document.getElementById("loginPrompt");
+  const cancelBtn = document.getElementById("cancelLogin");
+
+  function closeLoginPrompt() {
+    loginPrompt.style.display = "none";
+  }
+
+  cancelBtn.addEventListener("click", closeLoginPrompt);
+
+  // Nếu muốn test mở popup
+  // setTimeout(showLoginPrompt, 500);
+});
+

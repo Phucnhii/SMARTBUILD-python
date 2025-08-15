@@ -103,7 +103,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(2)">Chi tiết</button>
+                <button class="btn-info" data-product-id="1">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(2)">Chi tiết</button>
+                <button class="btn-info" data-product-id="2">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -165,7 +165,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(3)">Chi tiết</button>
+                <button class="btn-info" data-product-id="3">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -195,7 +195,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(4)">Chi tiết</button>
+                <button class="btn-info" data-product-id="4">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(5)">Chi tiết</button>
+                <button class="btn-info" data-product-id="5">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -256,7 +256,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(6)">Chi tiết</button>
+                <button class="btn-info" data-product-id="6">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -287,7 +287,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(7)">Chi tiết</button>
+                <button class="btn-info" data-product-id="7">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -317,7 +317,7 @@
                   <span>❤️</span>
                   <span class="interest-text">Quan tâm</span>
                 </button>
-                <button class="btn-info" onclick="showProductDetails(8)">Chi tiết</button>
+                <button class="btn-info" data-product-id="8">Chi tiết</button>
               </div>
             </div>
           </div>
@@ -329,7 +329,7 @@
   <!-- Modal chi tiết sản phẩm -->
   <div id="productModal" class="modal">
     <div class="modal-content">
-      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <span class="modal-close" id="modalCloseBtn">&times;</span>
       <img id="modalImage" class="modal-image" src="" alt="">
       <h2 id="modalTitle" class="modal-title"></h2>
       <p id="modalDescription" class="modal-description"></p>
@@ -348,7 +348,7 @@
     <h3>Cần đăng nhập</h3>
     <p>Vui lòng đăng nhập để quan tâm sản phẩm</p>
     <a href="/login" class="btn-login">Đăng nhập</a>
-    <button onclick="closeLoginPrompt()" style="margin-left: 10px; background: #ddd; color: #333;" class="btn-login">Hủy</button>
+    <button id="cancelLogin" style="background: #ddd; color: #333;" class="btn-login">Hủy</button>
   </div>
 
   <!-- Notification -->
