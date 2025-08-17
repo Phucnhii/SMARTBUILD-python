@@ -2,19 +2,17 @@ from flask import Flask, render_template, request, jsonify, make_response, send_
 from werkzeug.utils import secure_filename
 import os
 from datetime import timedelta, datetime
-import cv2
 from model import analyze
 import logging
 from werkzeug.exceptions import RequestEntityTooLarge
-import csv
 from gemini_api import call_gemini 
 import requests
 from dotenv import load_dotenv
 from connect_database import get_database
 from gridfs import GridFS
 from bson import ObjectId
-import io
 from admin import admin_bp, setup_download_routes
+from Auth.users import auth_bp
 
 load_dotenv()
 # Lấy biến môi trường FRIENDLYCAPTCHA_SECRET
@@ -46,6 +44,7 @@ app.config["MAX_CONTENT_LENGTH"] = MAX_CONTENT_LENGTH
 
 # Đăng ký Blueprint admin
 app.register_blueprint(admin_bp)
+app.register_blueprint(auth_bp)
 
 # Setup download routes
 setup_download_routes(app)

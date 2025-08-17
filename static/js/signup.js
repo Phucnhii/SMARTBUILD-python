@@ -94,18 +94,44 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('agreeTerms').addEventListener('change', validateForm);
 
     // Form submission
-    document.getElementById('signupForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
-      
-      // Here you would normally send the data to your server
-      console.log('Signup data:', data);
-      
-      // Show success message
-      alert('Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.');
+document.getElementById("signupForm").addEventListener("submit", async function (e) {
+  e.preventDefault(); // Ngăn reload trang
+
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password
+      })
     });
 
-    // Initialize form validation
-    validateForm();
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Registration successful");
+      window.location.href = "/"; // chuyển sang login
+    } else {
+      alert("Fail" + data.error);
+    }
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Something went wrong. Please try again later.");
+  }
+});
