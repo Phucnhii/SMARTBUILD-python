@@ -7,3 +7,4 @@ ultralytics==8.1.16
 google-generativeai
 pymongo==4.13
 python-dotenv
+bcrypt==4.2.0
