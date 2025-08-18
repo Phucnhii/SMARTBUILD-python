@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const chatbotMessages = document.getElementById('chatbot-messages');
   const newChatBtn = document.getElementById('new-chat-btn');
 
-  
+
   let canChat = false; // Ràng buộc ban đầu: chưa được phép chat
-  chatbotInput.disabled = true; // Khóa ô nhập lúc đầu
+  chatbotInput.disabled = true; //  Khóa ô nhập lúc đầu
 
   function appendMessage(sender, text) {
     const msgDiv = document.createElement('div');
@@ -87,18 +87,18 @@ document.addEventListener('DOMContentLoaded', function () {
       chatbotInput.disabled = false;
     });
 
-  document.getElementById('reconnect-no').addEventListener('click', function() {
-    localStorage.removeItem('chatHistory');
-    reconnectDiv.style.display = 'none';
+    document.getElementById('reconnect-no').addEventListener('click', function () {
+      localStorage.removeItem('smartbuild_chatHistory');
+      reconnectDiv.style.display = 'none';
+      appendMessage('AI', 'Xin chào! Tôi có thể hỗ trợ gì cho bạn hôm nay?');
+      canChat = true; // Cho phép chat
+      chatbotInput.disabled = false;
+    });
+  } else {
     appendMessage('AI', 'Xin chào! Tôi có thể hỗ trợ gì cho bạn hôm nay?');
-    canChat = true; //  Cho phép chat
+    canChat = true;
     chatbotInput.disabled = false;
-  });
-} else {
-  appendMessage('AI', 'Xin chào! Tôi có thể hỗ trợ gì cho bạn hôm nay?');
-  canChat = true;
-  chatbotInput.disabled = false;
-}
+  }
 
 
   if (chatbotIcon && chatbotPopup && chatbotClose) {
@@ -162,11 +162,20 @@ document.addEventListener('DOMContentLoaded', function () {
         appendMessage('AI', 'Lỗi: ' + err.message);
       }
     });
+
+
+
+
   }
 
   //  Nút New Chat xóa history
   if (newChatBtn) {
     newChatBtn.addEventListener('click', function () {
+        const reconnectDiv = document.getElementById('reconnect-confirm');
+  if (reconnectDiv && reconnectDiv.style.display === 'block') {
+    // Nếu popup reconnect đang hiển thị thì không cho mở new chat confirm
+    return;
+  }
       document.getElementById('new-chat-confirm').style.display = 'block';
       chatbotInput.disabled = true;
       canChat = false;
